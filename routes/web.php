@@ -23,36 +23,35 @@ use App\Http\Controllers\Backend\KaryaController;
 */
 
 Route::get('/', [HomeController::class, 'index'])->name('home.index');
+Route::get('/admin/login', [AdminController::class, 'adminLogin'])->name('admin.login');
+require __DIR__.'/auth.php';
 
+
+// Role untuk user
 Route::middleware(['auth', 'role:user'])->group(function () {
     Route::get('/dashboard', [UserController::class, 'index'])->name('user.index');
     Route::post('/user/profile/update', [UserController::class, 'userProfileUpdate'])->name('user.profile.update');
     Route::get('/user/logout', [UserController::class, 'userLogout'])->name('user.logout');
     Route::post('/user/update-password', [UserController::class, 'userUpdatePasswordt'])->name('user.updatePassword');
-});
 
-Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
 
-require __DIR__.'/auth.php';
 
 
-// Admin Dashboard
-Route::middleware(['auth', 'role:admin'])->group(function () {
+// Role untuk semua admin
+Route::group(['middleware' => ['auth', 'role:admin,kurator,sekolah']], function () {
     Route::get('/admin/dashboard',[AdminController::class,'adminDashboard'])->name('admin.dashboard');
     Route::get('/admin/logout',[AdminController::class,'adminLogout'])->name('admin.logout');
     Route::get('/admin/profile',[AdminController::class,'adminProfile'])->name('admin.profile');
     Route::post('/admin/profile/update',[AdminController::class,'adminProfileUpdate'])->name('admin.profile.update');
     Route::post('/admin/profile/update-password',[AdminController::class,'adminProfileUpdatepassword'])->name('admin.profile.updatePassword');
+});
 
-    // Route::controller(BrandController::class)->group(function () {
-    //     Route::get('/admin/brand', 'index')->name('brand.index');
-    //     Route::get('/admin/brand/tambah', 'create')->name('brand.tambah');
-    //     Route::post('/admin/brand/store', 'store')->name('brand.store');
-    // });
+// Role untuk admin
+Route::group(['middleware' => ['auth', 'role:admin']], function () {
 
     Route::resource('/admin/brand', BrandController::class);
     Route::get('/admin/brand/destroy/{id}', [BrandController::class, 'destroy'])->name('brand.destroy');
@@ -62,23 +61,9 @@ Route::middleware(['auth', 'role:admin'])->group(function () {
 
     Route::resource('/admin/subcategory', SubCategoryController::class);
     Route::get('/admin/subcategory/destroy/{id}', [SubCategoryController::class, 'destroy'])->name('subcategory.destroy');
+});
 
+// Role untuk admin dan sekolah
+Route::group(['middleware' => ['auth', 'role:admin,sekolah']], function () {
     Route::resource('/admin/karya', KaryaController::class);
 });
-
-// Sekolah Dashboard
-Route::middleware(['auth', 'role:sekolah'])->group(function () {
-    Route::get('/sekolah/dashboard',[SekolahController::class,'sekolahDashboard'])->name('sekolah.dashboard');
-    Route::get('/sekolah/logout',[SekolahController::class,'sekolahLogout'])->name('sekolah.logout');
-    Route::get('/sekolah/profile',[SekolahController::class,'sekolahProfile'])->name('sekolah.profile');
-    Route::post('/sekolah/profile/update',[SekolahController::class,'sekolahProfileUpdate'])->name('sekolah.profile.update');
-    Route::post('/sekolah/profile/update-password',[SekolahController::class,'sekolahProfileUpdatepassword'])->name('sekolah.profile.updatePassword');
-
-});
-
-Route::get('/admin/login', [AdminController::class, 'adminLogin'])->name('admin.login');
-Route::get('/sekolah/login', [SekolahController::class, 'sekolahLogin'])->name('sekolah.login');
-
-
-
-

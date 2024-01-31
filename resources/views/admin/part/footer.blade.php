@@ -1,3 +1,3 @@
 <footer class="page-footer">
-    <p class="mb-0">Copyright © 2023. Mini Coding School.</p>
+    <p class="mb-0">Copyright © {{ date('Y') }}. Mini Coding School - TEFA RPL SMKN 4 PAYAKUMBUH</p>
 </footer>

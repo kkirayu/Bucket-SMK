@@ -72,9 +72,11 @@
                         <form action="#">
                             <select class="select-active">
                                 <option>All Categories</option>
+                                @php
+                                    $categoris = App\Models\Category::all();
+                                @endphp
                                 @foreach ($categoris as $category)
-
-                                <option>{{ $category->category_nama }}</option>
+                                    <option>{{ $category->category_nama }}</option>
                                 @endforeach
                             </select>
                             <input type="text" placeholder="Search for items..." />
@@ -104,65 +106,65 @@
                             </div> --}}
 
                             @auth
-                            <div class="header-action-icon-2">
-                                <a href="shop-wishlist.html">
-                                    <img class="svgInject" alt="Nest"
-                                        src="{{ asset('frontend/assets/imgs/theme/icons/icon-heart.svg') }}" />
-                                    <span class="pro-count blue">6</span>
-                                </a>
-                                <a href="shop-wishlist.html"><span class="lable">Wishlist</span></a>
-                            </div>
-                            <div class="header-action-icon-2">
-                                <a class="mini-cart-icon" href="shop-cart.html">
-                                    <img alt="Nest"
-                                        src="{{ asset('frontend/assets/imgs/theme/icons/icon-cart.svg') }}" />
-                                    <span class="pro-count blue">2</span>
-                                </a>
-                                <a href="shop-cart.html"><span class="lable">Cart</span></a>
-                                <div class="cart-dropdown-wrap cart-dropdown-hm2">
-                                    <ul>
-                                        <li>
-                                            <div class="shopping-cart-img">
-                                                <a href="shop-product-right.html"><img alt="Nest"
-                                                        src="{{ asset('frontend/assets/imgs/shop/thumbnail-3.jpg') }}" /></a>
+                                <div class="header-action-icon-2">
+                                    <a href="shop-wishlist.html">
+                                        <img class="svgInject" alt="Nest"
+                                            src="{{ asset('frontend/assets/imgs/theme/icons/icon-heart.svg') }}" />
+                                        <span class="pro-count blue">6</span>
+                                    </a>
+                                    <a href="shop-wishlist.html"><span class="lable">Wishlist</span></a>
+                                </div>
+                                <div class="header-action-icon-2">
+                                    <a class="mini-cart-icon" href="shop-cart.html">
+                                        <img alt="Nest"
+                                            src="{{ asset('frontend/assets/imgs/theme/icons/icon-cart.svg') }}" />
+                                        <span class="pro-count blue">2</span>
+                                    </a>
+                                    <a href="shop-cart.html"><span class="lable">Cart</span></a>
+                                    <div class="cart-dropdown-wrap cart-dropdown-hm2">
+                                        <ul>
+                                            <li>
+                                                <div class="shopping-cart-img">
+                                                    <a href="shop-product-right.html"><img alt="Nest"
+                                                            src="{{ asset('frontend/assets/imgs/shop/thumbnail-3.jpg') }}" /></a>
+                                                </div>
+                                                <div class="shopping-cart-title">
+                                                    <h4><a href="shop-product-right.html">Daisy Casual Bag</a></h4>
+                                                    <h4><span>1 × </span>$800.00</h4>
+                                                </div>
+                                                <div class="shopping-cart-delete">
+                                                    <a href="#"><i class="fi-rs-cross-small"></i></a>
+                                                </div>
+                                            </li>
+                                            <li>
+                                                <div class="shopping-cart-img">
+                                                    <a href="shop-product-right.html"><img alt="Nest"
+                                                            src="{{ asset('frontend/assets/imgs/shop/thumbnail-2.jpg') }}" /></a>
+                                                </div>
+                                                <div class="shopping-cart-title">
+                                                    <h4><a href="shop-product-right.html">Corduroy Shirts</a></h4>
+                                                    <h4><span>1 × </span>$3200.00</h4>
+                                                </div>
+                                                <div class="shopping-cart-delete">
+                                                    <a href="#"><i class="fi-rs-cross-small"></i></a>
+                                                </div>
+                                            </li>
+                                        </ul>
+                                        <div class="shopping-cart-footer">
+                                            <div class="shopping-cart-total">
+                                                <h4>Total <span>$4000.00</span></h4>
                                             </div>
-                                            <div class="shopping-cart-title">
-                                                <h4><a href="shop-product-right.html">Daisy Casual Bag</a></h4>
-                                                <h4><span>1 × </span>$800.00</h4>
+                                            <div class="shopping-cart-button">
+                                                <a href="shop-cart.html" class="outline">View cart</a>
+                                                <a href="shop-checkout.html">Checkout</a>
                                             </div>
-                                            <div class="shopping-cart-delete">
-                                                <a href="#"><i class="fi-rs-cross-small"></i></a>
-                                            </div>
-                                        </li>
-                                        <li>
-                                            <div class="shopping-cart-img">
-                                                <a href="shop-product-right.html"><img alt="Nest"
-                                                        src="{{ asset('frontend/assets/imgs/shop/thumbnail-2.jpg') }}" /></a>
-                                            </div>
-                                            <div class="shopping-cart-title">
-                                                <h4><a href="shop-product-right.html">Corduroy Shirts</a></h4>
-                                                <h4><span>1 × </span>$3200.00</h4>
-                                            </div>
-                                            <div class="shopping-cart-delete">
-                                                <a href="#"><i class="fi-rs-cross-small"></i></a>
-                                            </div>
-                                        </li>
-                                    </ul>
-                                    <div class="shopping-cart-footer">
-                                        <div class="shopping-cart-total">
-                                            <h4>Total <span>$4000.00</span></h4>
-                                        </div>
-                                        <div class="shopping-cart-button">
-                                            <a href="shop-cart.html" class="outline">View cart</a>
-                                            <a href="shop-checkout.html">Checkout</a>
                                         </div>
                                     </div>
                                 </div>
-                            </div>
 
                             @endauth
                             <div class="header-action-icon-2">
-                                <a href="page-account.html">
+                                <a href="#">
                                     <img class="svgInject" alt="Nest"
                                         src="{{ asset('frontend/assets/imgs/theme/icons/icon-user.svg') }}" />
                                 </a>
@@ -190,23 +192,34 @@
                                                 <a href="{{ route('user.index') }}"><i
                                                         class="fi fi-rs-settings-sliders mr-10"></i>Setting</a>
                                             </li>
-                                            <li>
-                                                <a href="{{ route('user.logout') }}"><i class="fi fi-rs-sign-out mr-10"></i>Logout</a>
-                                            </li>
+                                            @if (Auth::user()->role == 'user')
+                                                <li>
+                                                    <a href="{{ route('user.logout') }}"><i
+                                                            class="fi fi-rs-sign-out mr-10"></i>Logout</a>
+                                                </li>
+                                            @else
+                                                <li>
+                                                    <a href="{{ route('admin.dashboard') }}"><i
+                                                            class="fi fi-rs-sign-in mr-10"></i>Dashboard Admin</a>
+                                                </li>
+                                            @endif
                                         @else
                                             <li>
-                                                <a href="{{ route('login') }}"><i class="fi fi-rs-sign-in mr-10"></i>Login</a>
+                                                <a href="{{ route('login') }}"><i
+                                                        class="fi fi-rs-sign-in mr-10"></i>Login</a>
                                             </li>
                                             <li>
-                                                <a href="{{ route('register') }}"><i class="fi fi-rs-user-add mr-10"></i>Register</a>
+                                                <a href="{{ route('register') }}"><i
+                                                        class="fi fi-rs-user-add mr-10"></i>Register</a>
                                             </li>
                                             <hr>
                                             <li>
-                                                <a href="{{ route('admin.login') }}"><i class="fi fi-rs-sign-out mr-10"></i>Halaman Admin</a>
+                                                <a href="{{ route('admin.login') }}"><i
+                                                        class="fi fi-rs-sign-out mr-10"></i>Halaman Admin</a>
                                             </li>
-                                            <li>
-                                                <a href="{{ route('sekolah.login') }}"><i class="fi fi-rs-sign-out mr-10"></i>Halaman Sekolah</a>
-                                            </li>
+                                            {{-- <li>
+                                                    <a href="{{ route('sekolah.login') }}"><i class="fi fi-rs-sign-out mr-10"></i>Halaman Sekolah</a>
+                                                </li> --}}
                                         @endauth
                                     </ul>
                                 </div>
@@ -242,11 +255,9 @@
                             <div class="d-flex categori-dropdown-inner">
                                 <ul>
                                     @foreach ($categoris as $category)
-
                                         <li>
-                                            <a href="#"> <img
-                                                src="{{ asset($category->category_photo) }}"
-                                                alt="" />{{ $category->category_nama }}</a>
+                                            <a href="#"> <img src="{{ asset($category->category_photo) }}"
+                                                    alt="" />{{ $category->category_nama }}</a>
                                         </li>
                                     @endforeach
 
