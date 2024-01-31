@@ -37,15 +37,20 @@
                                 <div class="border p-4 rounded">
                                     <div class="text-center">
                                         <h3 class="">Admin Sign in</h3>
-                                        
+                                        @error('username')
+                                            <span style="color: red">Maaf Username atau Password salah</span>
+                                        @enderror
+
                                     </div>
                                     <div class="form-body">
+
                                         <form class="row g-3" method="POST" action="{{ route('login') }}">
                                             @csrf
                                             <div class="col-12">
-                                                <label for="email" class="form-label">Email Address</label>
-                                                <input type="email" name="email" class="form-control" id="email"
-                                                    placeholder="Email Address">
+                                                <label for="username" class="form-label">Username / NPSN</label>
+                                                <input type="text" name="username" class="form-control" id="username"
+                                                    placeholder="Username">
+
                                             </div>
                                             <div class="col-12">
                                                 <label for="password" class="form-label">Enter
