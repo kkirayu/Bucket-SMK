@@ -21,7 +21,8 @@ return new class extends Migration
             $table->string('photo');
             $table->string('video_produk');
             $table->text('nama_tim');
-            $table->text('jurusan');
+            $table->unsignedBigInteger('jurusan');
+            $table->foreign('jurusan')->references('id')->on('jurusans')->onDelete('cascade');
             $table->text('material');
             $table->integer('harga');
             $table->date('tahun_produksi');
