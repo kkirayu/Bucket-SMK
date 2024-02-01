@@ -10,6 +10,8 @@ use App\Http\Controllers\Backend\CategoryController;
 use App\Http\Controllers\Backend\SubCategoryController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\Backend\KaryaController;
+use App\Http\Controllers\JurusanController;
+use App\Http\Controllers\ProdukController;
 
 /*
 |--------------------------------------------------------------------------
@@ -61,6 +63,11 @@ Route::group(['middleware' => ['auth', 'role:admin']], function () {
 
     Route::resource('/admin/subcategory', SubCategoryController::class);
     Route::get('/admin/subcategory/destroy/{id}', [SubCategoryController::class, 'destroy'])->name('subcategory.destroy');
+    Route::resource('/admin/jurusan', JurusanController::class);
+    Route::get('/admin/jurusan/destroy/{id}', [JurusanController::class, 'destroy'])->name('jurusan.destroy');
+
+    Route::resource('/admin/produk', ProdukController::class);
+    Route::get('/admin/produk/destroy/{id}', [JurusanController::class, 'destroy'])->name('produk.destroy');
 });
 
 // Role untuk admin dan sekolah

@@ -59,6 +59,32 @@
                     </li>
                 </ul>
             </li>
+            <li>
+                <a href="javascript:;" class="has-arrow">
+                    <div class="parent-icon"><i class="bx bx-category"></i>
+                    </div>
+                    <div class="menu-title">Jurusan</div>
+                </a>
+                <ul>
+                    <li > <a href="{{ route('jurusan.index') }}"><i class="bx bx-radio-circle"></i>Semua Jurusan</a>
+                    </li>
+                    <li> <a href="{{ route('jurusan.create') }}"><i class="bx bx-radio-circle"></i>Tambah Jurusan</a>
+                    </li>
+                </ul>
+            </li>
+            <li>
+                <a href="javascript:;" class="has-arrow">
+                    <div class="parent-icon"><i class="bx bx-category"></i>
+                    </div>
+                    <div class="menu-title">Produk</div>
+                </a>
+                <ul>
+                    <li > <a href="{{ route('produk.index') }}"><i class="bx bx-radio-circle"></i>Semua Produk</a>
+                    </li>
+                    <li> <a href="{{ route('produk.create') }}"><i class="bx bx-radio-circle"></i>Tambah Produk</a>
+                    </li>
+                </ul>
+            </li>
         @endif
         @if (Auth::user()->role == 'admin' || Auth::user()->role == 'sekolah')
             <li>
