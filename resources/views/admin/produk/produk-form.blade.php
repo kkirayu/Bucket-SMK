@@ -1,6 +1,8 @@
 @extends('admin.admin-dashboard')
 
 @section('content')
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+
     <div class="page-content">
         <!--breadcrumb-->
         <div class="page-breadcrumb d-none d-sm-flex align-items-center mb-3">
@@ -97,7 +99,7 @@
                                             <h6 class="mb-0">Photo</h6>
                                         </div>
                                         <div class="col-sm-9 text-secondary">
-                                            <input type="file" name="photo" class="form-control" id="photo" />
+                                            <input type="file" name="photo" class="form-control" id="photo1" />
                                         </div>
                                     </div>
                                     <div class="row mb-3">
@@ -105,7 +107,7 @@
                                             <h6 class="mb-0"></h6>
                                         </div>
                                         <div class="col-sm-9 text-secondary">
-                                            <img id="showPhoto"
+                                            <img id="showPhoto1"
                                                 src="{{ isset($edit) ? asset($edit->photo) : asset('upload/no_image.jpg') }}"
                                                 style="width: 100px; height: 100px;">
                                         </div>
@@ -255,6 +257,18 @@
 
     <script type="text/javascript">
         $(document).ready(function() {
+            $('#photo1').change(function(e) {
+                var reader = new FileReader();
+                reader.onload = function(e) {
+                    $('#showPhoto1').attr('src', e.target.result);
+                }
+                reader.readAsDataURL(e.target.files['0']);
+            });
+        });
+    </script>
+
+    <script type="text/javascript">
+        $(document).ready(function() {
             $('#myForm').validate({
                 rules: {
                     nama: {
@@ -333,4 +347,6 @@
             });
         });
     </script>
+
+
 @endsection

@@ -24,7 +24,8 @@ use App\Http\Controllers\ProdukController;
 |
 */
 
-Route::get('/', [HomeController::class, 'index'])->name('home.index');
+// Route::get('/', [HomeController::class, 'index'])->name('home.index');
+Route::get('/', [AdminController::class, 'adminLogin'])->name('home.index');
 Route::get('/admin/login', [AdminController::class, 'adminLogin'])->name('admin.login');
 require __DIR__.'/auth.php';
 
