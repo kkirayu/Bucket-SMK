@@ -27,9 +27,9 @@ return new class extends Migration
             $table->integer('harga');
             $table->date('tahun_produksi');
             $table->string('merk_dagang');
-            $table->text('sertifikasi_haki');
-            $table->text('sertifikasi_halal');
-            $table->text('sni');
+            $table->string('sertifikasi_haki');
+            $table->string('sertifikasi_halal');
+            $table->string('sni');
 
             $table->timestamps();
         });

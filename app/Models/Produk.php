@@ -26,4 +26,14 @@ class Produk extends Model
         'sertifikasi_halal',
         'sni',
     ];
+
+    // public function jurusans()
+    // {
+    //     return $this->belongsToMany(Jurusan::class);
+    // }
+
+    public function jurusans()
+    {
+        return $this->belongsTo(Jurusan::class);
+    }
 }

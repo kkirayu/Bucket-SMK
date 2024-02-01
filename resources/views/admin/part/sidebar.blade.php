@@ -11,7 +11,7 @@
     </div>
     <!--navigation-->
     <ul class="metismenu" id="menu">
-        <li >
+        <li>
             <a href="{{ route('admin.dashboard') }}">
                 <div class="parent-icon"><i class='bx bx-cookie'></i>
                 </div>
@@ -40,7 +40,7 @@
                     <div class="menu-title">Category</div>
                 </a>
                 <ul>
-                    <li > <a href="{{ route('category.index') }}"><i class="bx bx-radio-circle"></i>Semua Category</a>
+                    <li> <a href="{{ route('category.index') }}"><i class="bx bx-radio-circle"></i>Semua Category</a>
                     </li>
                     <li> <a href="{{ route('category.create') }}"><i class="bx bx-radio-circle"></i>Tambah Category</a>
                     </li>
@@ -53,35 +53,11 @@
                     <div class="menu-title">Sub-Category</div>
                 </a>
                 <ul>
-                    <li> <a href="{{ route('subcategory.index') }}"><i class="bx bx-radio-circle"></i>Semua Sub-Category</a>
+                    <li> <a href="{{ route('subcategory.index') }}"><i class="bx bx-radio-circle"></i>Semua
+                            Sub-Category</a>
                     </li>
-                    <li> <a href="{{ route('subcategory.create') }}"><i class="bx bx-radio-circle"></i>Tambah Sub-Category</a>
-                    </li>
-                </ul>
-            </li>
-            <li>
-                <a href="javascript:;" class="has-arrow">
-                    <div class="parent-icon"><i class="bx bx-category"></i>
-                    </div>
-                    <div class="menu-title">Jurusan</div>
-                </a>
-                <ul>
-                    <li > <a href="{{ route('jurusan.index') }}"><i class="bx bx-radio-circle"></i>Semua Jurusan</a>
-                    </li>
-                    <li> <a href="{{ route('jurusan.create') }}"><i class="bx bx-radio-circle"></i>Tambah Jurusan</a>
-                    </li>
-                </ul>
-            </li>
-            <li>
-                <a href="javascript:;" class="has-arrow">
-                    <div class="parent-icon"><i class="bx bx-category"></i>
-                    </div>
-                    <div class="menu-title">Produk</div>
-                </a>
-                <ul>
-                    <li > <a href="{{ route('produk.index') }}"><i class="bx bx-radio-circle"></i>Semua Produk</a>
-                    </li>
-                    <li> <a href="{{ route('produk.create') }}"><i class="bx bx-radio-circle"></i>Tambah Produk</a>
+                    <li> <a href="{{ route('subcategory.create') }}"><i class="bx bx-radio-circle"></i>Tambah
+                            Sub-Category</a>
                     </li>
                 </ul>
             </li>
@@ -94,14 +70,42 @@
                     <div class="menu-title">Karya Master</div>
                 </a>
                 <ul>
-                    <li class="{{ Request::is('admin/karya/*') && !Request::is('admin/karya/create') ? 'mm-active' :'' }}"> <a href="{{ route('karya.index') }}"><i class="bx bx-radio-circle"></i>Semua Karya</a>
+                    <li
+                        class="{{ Request::is('admin/karya/*') && !Request::is('admin/karya/create') ? 'mm-active' : '' }}">
+                        <a href="{{ route('karya.index') }}"><i class="bx bx-radio-circle"></i>Semua Karya</a>
                     </li>
                     <li> <a href="{{ route('karya.create') }}"><i class="bx bx-radio-circle"></i>Tambah Karya</a>
+                    </li>
+                </ul>
+            </li>
+            <li>
+                <a href="javascript:;" class="has-arrow">
+                    <div class="parent-icon"><i class="bx bx-category"></i>
+                    </div>
+                    <div class="menu-title">Jurusan</div>
+                </a>
+                <ul>
+                    <li> <a href="{{ route('jurusan.index') }}"><i class="bx bx-radio-circle"></i>Semua Jurusan</a>
+                    </li>
+                    <li> <a href="{{ route('jurusan.create') }}"><i class="bx bx-radio-circle"></i>Tambah Jurusan</a>
+                    </li>
+                </ul>
+            </li>
+            <li>
+                <a href="javascript:;" class="has-arrow">
+                    <div class="parent-icon"><i class="bx bx-category"></i>
+                    </div>
+                    <div class="menu-title">Produk</div>
+                </a>
+                <ul>
+                    <li> <a href="{{ route('produk.index') }}"><i class="bx bx-radio-circle"></i>Semua Produk</a>
+                    </li>
+                    <li> <a href="{{ route('produk.create') }}"><i class="bx bx-radio-circle"></i>Tambah Produk</a>
                     </li>
                 </ul>
             </li>
         @endif
 
 
-    <!--end navigation-->
+        <!--end navigation-->
 </div>

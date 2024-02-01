@@ -48,14 +48,6 @@
                             </tr>
                         @endforeach
                     </tbody>
-                    {{-- <tfoot>
-                        <tr>
-                            <th>#</th>
-                            <th>Jurusan</th>
-                            <th>Deskripsi</th>
-                            <th>Aksi</th>
-                        </tr>
-                    </tfoot> --}}
                 </table>
             </div>
         </div>

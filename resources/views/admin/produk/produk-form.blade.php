@@ -9,7 +9,8 @@
                 <nav aria-label="breadcrumb">
                     <ol class="breadcrumb mb-0 p-0">
                         <li class="breadcrumb-item"><a href="javascript:;"><i class="bx bx-basket"></i></a></li>
-                        <li class="breadcrumb-item active" aria-current="page">{{ isset($edit) ? 'Edit Produk' : 'Tambah Produk' }}</li>
+                        <li class="breadcrumb-item active" aria-current="page">
+                            {{ isset($edit) ? 'Edit Produk' : 'Tambah Produk' }}</li>
                     </ol>
                 </nav>
             </div>
@@ -24,7 +25,9 @@
                                 <h4>Form {{ isset($edit) ? 'Edit' : 'Tambah' }} Produk</h4>
                             </div>
                             <div class="card-body">
-                                <form id="myForm" action="{{ isset($edit) ? route('produk.update', $edit->id) : route('produk.store') }}" method="POST" enctype="multipart/form-data">
+                                <form id="myForm"
+                                    action="{{ isset($edit) ? route('produk.update', $edit->id) : route('produk.store') }}"
+                                    method="POST" enctype="multipart/form-data">
                                     @csrf
                                     @if (isset($edit))
                                         @method('PATCH')
@@ -35,7 +38,9 @@
                                             <h6 class="mb-0">Nama Produk</h6>
                                         </div>
                                         <div class="form-group col-sm-9 text-secondary">
-                                            <input type="text" name="nama" class="form-control" value="{{ old('nama', isset($edit) ? $edit->nama : '') }}" placeholder="Nama Produk"/>
+                                            <input type="text" name="nama" class="form-control"
+                                                value="{{ old('nama', isset($edit) ? $edit->nama : '') }}"
+                                                placeholder="Nama Produk" />
                                         </div>
                                     </div>
                                     <div class="row mb-3">
@@ -43,12 +48,24 @@
                                             <h6 class="mb-0">Kategori</h6>
                                         </div>
                                         <div class="form-group col-sm-9 text-secondary">
-                                            <select name="kategori" class="form-control">
-                                                <option value="atm" {{ old('kategori', isset($edit) && $edit->kategori == 'atm' ? 'selected' : '') }}>ATM</option>
-                                                <option value="original" {{ old('kategori', isset($edit) && $edit->kategori == 'original' ? 'selected' : '') }}>Original</option>
-                                            </select>
+                                            <div class="form-check">
+                                                <input class="form-check-input" type="radio" name="kategori"
+                                                    id="kategori" value="atm"
+                                                    {{ old('kategori', isset($edit) && $edit->kategori == 'atm' ? 'checked' : '') }}>
+                                                <label class="form-check-label" for="kategori">
+                                                    ATM
+                                                </label>
+                                            </div>
+                                            <div class="form-check">
+                                                <input class="form-check-input" type="radio" name="kategori"
+                                                    id="kategori" value="original"
+                                                    {{ old('kategori', isset($edit) && $edit->kategori == 'original' ? 'checked' : '') }}>
+                                                <label class="form-check-label" for="kategori">
+                                                    Original
+                                                </label>
+                                            </div>
                                         </div>
-                                    </div>                                    
+                                    </div>
                                     <div class="row mb-3">
                                         <div class="col-sm-3">
                                             <h6 class="mb-0">Deskripsi</h6>
@@ -70,7 +87,9 @@
                                             <h6 class="mb-0">Sekolah</h6>
                                         </div>
                                         <div class="form-group col-sm-9 text-secondary">
-                                            <input type="text" name="sekolah" class="form-control" value="{{ old('sekolah', isset($edit) ? $edit->sekolah : '') }}" placeholder="sekolah"/>
+                                            <input type="text" name="sekolah" class="form-control"
+                                                value="{{ old('sekolah', isset($edit) ? $edit->sekolah : '') }}"
+                                                placeholder="sekolah" />
                                         </div>
                                     </div>
                                     <div class="row mb-3">
@@ -93,6 +112,16 @@
                                     </div>
                                     <div class="row mb-3">
                                         <div class="col-sm-3">
+                                            <h6 class="mb-0">Vidio Product</h6>
+                                        </div>
+                                        <div class="form-group col-sm-9 text-secondary">
+                                            <input type="text" name="vidio_produk" class="form-control"
+                                                value="{{ old('vidio_produk', isset($edit) ? $edit->vidio_produk : '') }}"
+                                                placeholder="Link vidio produk" />
+                                        </div>
+                                    </div>
+                                    <div class="row mb-3">
+                                        <div class="col-sm-3">
                                             <h6 class="mb-0">Nama Tim</h6>
                                         </div>
                                         <div class="form-group col-sm-9 text-secondary">
@@ -104,7 +133,13 @@
                                             <h6 class="mb-0">Jurusan</h6>
                                         </div>
                                         <div class="form-group col-sm-9 text-secondary">
-                                            <textarea name="jurusan" class="form-control" placeholder="jurusan">{{ old('jurusan', isset($edit) ? $edit->jurusan : '') }}</textarea>
+                                            <select name="jurusan" class="form-control">
+                                                <option value="" selected disabled>Pilih Jurusan</option>
+                                                @foreach ($jurusans as $jurusan)
+                                                    <option value="{{ $jurusan->id }}">{{ $jurusan->nama_jurusan }}
+                                                    </option>
+                                                @endforeach
+                                            </select>
                                         </div>
                                     </div>
                                     <div class="row mb-3">
@@ -120,7 +155,9 @@
                                             <h6 class="mb-0">Harga</h6>
                                         </div>
                                         <div class="form-group col-sm-9 text-secondary">
-                                            <input type="number" name="harga" class="form-control" value="{{ old('harga', isset($edit) ? $edit->harga : '') }}" placeholder="harga"/>
+                                            <input type="number" name="harga" class="form-control"
+                                                value="{{ old('harga', isset($edit) ? $edit->harga : '') }}"
+                                                placeholder="harga" />
                                         </div>
                                     </div>
                                     <div class="row mb-3">
@@ -128,7 +165,9 @@
                                             <h6 class="mb-0">Tahun Produksi</h6>
                                         </div>
                                         <div class="form-group col-sm-9 text-secondary">
-                                            <input type="date" name="tahun_produksi" class="form-control" value="{{ old('tahun_produksi', isset($edit) ? $edit->tahun_produksi : '') }}" placeholder="tahun_produksi"/>
+                                            <input type="date" name="tahun_produksi" class="form-control"
+                                                value="{{ old('tahun_produksi', isset($edit) ? $edit->tahun_produksi : '') }}"
+                                                placeholder="tahun_produksi" />
                                         </div>
                                     </div>
                                     <div class="row mb-3">
@@ -136,46 +175,73 @@
                                             <h6 class="mb-0">Merk Dagang</h6>
                                         </div>
                                         <div class="form-group col-sm-9 text-secondary">
-                                            <input type="text" name="merk_dagang" class="form-control" value="{{ old('merk_dagang', isset($edit) ? $edit->merk_dagang : '') }}" placeholder="merk dagang"/>
+                                            <input type="text" name="merk_dagang" class="form-control"
+                                                value="{{ old('merk_dagang', isset($edit) ? $edit->merk_dagang : '') }}"
+                                                placeholder="merk dagang" />
                                         </div>
                                     </div>
                                     <div class="row mb-3">
                                         <div class="col-sm-3">
-                                            <h6 class="mb-0">Sertifikasi Haki</h6>
+                                            <h6 class="mb-0">Photo HAKI</h6>
                                         </div>
-                                        <div class="form-group col-sm-9 text-secondary">
-                                            <textarea name="sertifikasi_haki" class="form-control" placeholder="sertifikasi_haki">{{ old('sertifikasi_haki', isset($edit) ? $edit->sertifikasi_haki : '') }}</textarea>
-                                        </div>
-                                    </div>
-                                    <div class="row mb-3">
-                                        <div class="col-sm-3">
-                                            <h6 class="mb-0">Sertifikasi Halal</h6>
-                                        </div>
-                                        <div class="form-group col-sm-9 text-secondary">
-                                            <textarea name="sertifikasi_halal" class="form-control" placeholder="sertifikasi_halal">{{ old('sertifikasi_halal', isset($edit) ? $edit->sertifikasi_halal : '') }}</textarea>
+                                        <div class="col-sm-9 text-secondary">
+                                            <input type="file" name="sertifikasi_haki" class="form-control"
+                                                id="photo" />
                                         </div>
                                     </div>
                                     <div class="row mb-3">
                                         <div class="col-sm-3">
-                                            <h6 class="mb-0">Sertifikasi Halal</h6>
+                                            <h6 class="mb-0"></h6>
                                         </div>
-                                        <div class="form-group col-sm-9 text-secondary">
-                                            <textarea name="sertifikasi_halal" class="form-control" placeholder="sertifikasi_halal">{{ old('sertifikasi_halal', isset($edit) ? $edit->sertifikasi_halal : '') }}</textarea>
+                                        <div class="col-sm-9 text-secondary">
+                                            <img id="showPhoto"
+                                                src="{{ isset($edit) ? asset($edit->sertifikasi_haki) : asset('upload/no_image.jpg') }}"
+                                                style="width: 100px; height: 100px;">
                                         </div>
                                     </div>
                                     <div class="row mb-3">
                                         <div class="col-sm-3">
-                                            <h6 class="mb-0">SNI</h6>
+                                            <h6 class="mb-0">Photo Halal</h6>
                                         </div>
-                                        <div class="form-group col-sm-9 text-secondary">
-                                            <textarea name="sni" class="form-control" placeholder="sni">{{ old('sni', isset($edit) ? $edit->sni : '') }}</textarea>
+                                        <div class="col-sm-9 text-secondary">
+                                            <input type="file" name="sertifikasi_halal" class="form-control"
+                                                id="photo" />
                                         </div>
                                     </div>
-                                    
+                                    <div class="row mb-3">
+                                        <div class="col-sm-3">
+                                            <h6 class="mb-0"></h6>
+                                        </div>
+                                        <div class="col-sm-9 text-secondary">
+                                            <img id="showPhoto"
+                                                src="{{ isset($edit) ? asset($edit->sertifikasi_halal) : asset('upload/no_image.jpg') }}"
+                                                style="width: 100px; height: 100px;">
+                                        </div>
+                                    </div>
+                                    <div class="row mb-3">
+                                        <div class="col-sm-3">
+                                            <h6 class="mb-0">Photo SNI</h6>
+                                        </div>
+                                        <div class="col-sm-9 text-secondary">
+                                            <input type="file" name="sni" class="form-control" id="photo" />
+                                        </div>
+                                    </div>
+                                    <div class="row mb-3">
+                                        <div class="col-sm-3">
+                                            <h6 class="mb-0"></h6>
+                                        </div>
+                                        <div class="col-sm-9 text-secondary">
+                                            <img id="showPhoto"
+                                                src="{{ isset($edit) ? asset($edit->sni) : asset('upload/no_image.jpg') }}"
+                                                style="width: 100px; height: 100px;">
+                                        </div>
+                                    </div>
+
                                     <div class="row">
                                         <div class="col-sm-3"></div>
                                         <div class="col-sm-9 text-secondary">
-                                            <input type="submit" class="btn btn-success px-4" value="{{ isset($edit) ? 'Ubah Produk' : 'Tambah Produk' }}" />
+                                            <input type="submit" class="btn btn-success px-4"
+                                                value="{{ isset($edit) ? 'Ubah Produk' : 'Tambah Produk' }}" />
                                         </div>
                                     </div>
                                 </form>
@@ -188,79 +254,80 @@
     </div>
 
     <script type="text/javascript">
-        $(document).ready(function(){
+        $(document).ready(function() {
             $('#myForm').validate({
                 rules: {
                     nama: {
-                        required : true,
+                        required: true,
                     },
                     kategori: {
-                        required : true,
+                        required: true,
                     },
                     descripsi: {
-                        required : true,
+                        required: true,
                     },
                     inovasi: {
-                        required : true,
+                        required: true,
                     },
                     sekolah: {
-                        required : true,
+                        required: true,
                     },
                     photo: {
-                        required : true,
+                        required: true,
                     },
                     nama_tim: {
-                        required : true,
+                        required: true,
                     },
                     jurusan: {
-                        required : true,
+                        required: true,
                     },
                     material: {
-                        required : true,
+                        required: true,
                     },
                     harga: {
-                        required : true,
+                        required: true,
                     },
                     video_produk: {
-                        required : false,
+                        required: false,
                     },
                     tahun_produksi: {
-                        required : true,
+                        required: true,
                     },
                     merk_dagang: {
-                        required : true,
+                        required: true,
                     },
                     sertifikasi_haki: {
-                        required : true,
+                        required: true,
                     },
                     sertifikasi_halal: {
-                        required : false,
+                        required: false,
                     },
                     sni: {
-                        required : false,
+                        required: false,
                     },
                     ..
                 },
                 messages: {
                     nama: {
-                        required : 'Masukkan Nama Produk',
+                        required: 'Masukkan Nama Produk',
                     },
                     kategori: {
-                        required : 'Masukkan Kategori',
+                        required: 'Masukkan Kategori',
                     },
                     descripsi: {
-                        required : 'Masukkan Deskripsi',
-                    },.
+                        required: 'Masukkan Deskripsi',
+                    },
+                    .
                 },
                 errorElement: 'span',
-                errorPlacement: function(error,element){
+                errorPlacement: function(error, element) {
                     error.addClass('invalid-feedback');
                     element.closest('.form-group').append(error);
                 },
-                highlight: function(element, errorClass, validClass){
+                highlight: function(element, errorClass, validClass) {
                     $(element).addClass('is-invalid');
                 },
-                unhighlight: function(element, errorClass, validClass){
+                unhighlight: function(element, errorClass, validClass) {
                     $(element).removeClass('is-invalid');
                 },
             });
