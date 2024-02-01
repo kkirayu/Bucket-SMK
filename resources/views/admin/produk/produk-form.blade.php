@@ -43,9 +43,12 @@
                                             <h6 class="mb-0">Kategori</h6>
                                         </div>
                                         <div class="form-group col-sm-9 text-secondary">
-                                            <input type="text" name="kategori" class="form-control" value="{{ old('kategori', isset($edit) ? $edit->kategori : '') }}" placeholder="Kategori"/>
+                                            <select name="kategori" class="form-control">
+                                                <option value="atm" {{ old('kategori', isset($edit) && $edit->kategori == 'atm' ? 'selected' : '') }}>ATM</option>
+                                                <option value="original" {{ old('kategori', isset($edit) && $edit->kategori == 'original' ? 'selected' : '') }}>Original</option>
+                                            </select>
                                         </div>
-                                    </div>
+                                    </div>                                    
                                     <div class="row mb-3">
                                         <div class="col-sm-3">
                                             <h6 class="mb-0">Deskripsi</h6>
