@@ -44,8 +44,7 @@
                                     <td>{{ $user->username }}</td>
                                     <td>{{ $user->alamat }}</td>
                                     <td>
-                                        <a href="{{ route('list.edit', encrypt($user->id)) }}"
-                                            class="btn btn-info">Edit</a>
+                                        <a href="{{ route('list.edit', encrypt($user->id)) }}" class="btn btn-info">Edit</a>
                                         <a href="{{ route('list.destroy', encrypt($user->id)) }}" class="btn btn-danger"
                                             id="delete">Delete</a>
                                     </td>

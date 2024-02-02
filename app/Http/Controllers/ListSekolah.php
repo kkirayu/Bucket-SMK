@@ -2,9 +2,12 @@
 
 namespace App\Http\Controllers;
 
+use App\Imports\UsersImport;
 use App\Models\User;
+use Illuminate\Contracts\Session\Session;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
+use Maatwebsite\Excel\Facades\Excel;
 
 class ListSekolah extends Controller
 {
@@ -157,5 +160,17 @@ class ListSekolah extends Controller
             'alert-type' => 'success'
         );
         return redirect()->back()->with($notif);
+    }
+
+    public function import_excel(Request $request)
+    {
+        $this->validate($request, [
+            'file' => 'required|mimes:csv,xls,xlsx'
+        ]);
+        $file = $request->file('file');
+        $nama_file = rand() . $file->getClientOriginalName();
+        $file->move('userfile', $nama_file);
+        Excel::import(new UsersImport, public_path('/userfile/' . $nama_file));
+        return redirect()->route('list.index');
     }
 }

@@ -75,6 +75,8 @@ Route::group(['middleware' => ['auth', 'role:admin']], function () {
     Route::resource('/admin/dinas', ListDinas::class);
     Route::resource('/admin/user', ListUser::class);
     Route::get('/admin/user/destroy/{id}', [ListSekolah::class, 'destroy'])->name('list.destroy');
+
+    Route::post('/admin/import_excel', [ListSekolah::class, 'import_excel'])->name('import.excel');
 });
 
 // Role untuk admin dan sekolah

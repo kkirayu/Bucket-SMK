@@ -21,7 +21,7 @@ return new class extends Migration
             $table->string('photo')->nullable();
             $table->string('phone')->nullable();
             $table->text('alamat')->nullable();
-            $table->enum('role',['admin','dinas','sekolah','user'])->default('user');
+            $table->enum('role',['admin','kurator','sekolah','user'])->default('user');
             $table->enum('status',['aktif','nonaktif'])->default('aktif');
             $table->string('sekolah_join_date')->nullable();
             $table->string('sekolah_info')->nullable();
