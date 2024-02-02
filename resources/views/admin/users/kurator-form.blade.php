@@ -26,7 +26,7 @@
                             </div>
                             <div class="card-body">
                                 <form id="myForm"
-                                    action="{{ isset($edit) ? route('user.update', $edit->id) : route('user.store') }}"
+                                    action="{{ isset($edit) ? route('kurator.update', $edit->id) : route('kurator.store') }}"
                                     method="POST" enctype="multipart/form-data">
                                     @csrf
                                     @if (isset($edit))
@@ -77,7 +77,7 @@
                                             <h6 class="mb-0">Role</h6>
                                         </div>
                                         <div class="form-group col-sm-9 text-secondary">
-                                            <input type="text" class="form-control" name="role" value="user" readonly>
+                                            <input type="text" class="form-control" name="role" value="kurator" readonly>
                                         </div>
                                     </div>
 

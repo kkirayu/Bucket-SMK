@@ -44,4 +44,12 @@ class User extends Authenticatable
     {
         return $this->hasMany(Karya::class);
     }
+    protected $fillable = [
+        'name',
+        'username',
+        'email',
+        'password',
+        'role',
+        'status',
+    ];
 }

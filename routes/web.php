@@ -72,7 +72,7 @@ Route::group(['middleware' => ['auth', 'role:admin']], function () {
     Route::get('/admin/jurusan/destroy/{id}', [JurusanController::class, 'destroy'])->name('jurusan.destroy');
 
     Route::resource('/admin/list', ListSekolah::class);
-    Route::resource('/admin/dinas', ListDinas::class);
+    Route::resource('/admin/kurator', ListDinas::class);
     Route::resource('/admin/user', ListUser::class);
     Route::get('/admin/user/destroy/{id}', [ListSekolah::class, 'destroy'])->name('list.destroy');
 

@@ -39,35 +39,15 @@ class ListSekolah extends Controller
             'username' => 'nullable|string|max:255',
             'email' => 'required|email|unique:users,email',
             'password' => 'required|string|min:8',
-            'photo' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048', // Ubah sesuai kebutuhan
-            'phone' => 'nullable|string|max:20',
-            'alamat' => 'nullable|string',
             'role' => 'required|in:admin,dinas,sekolah,user',
-            'status' => 'required|in:aktif,nonaktif',
-            'sekolah_info' => 'nullable|string',
         ]);
-
-        // Proses penyimpanan foto
-        if ($request->hasFile('photo')) {
-            $photo = $request->file('photo');
-            $genNama = hexdec(uniqid()) . '.' . $photo->getClientOriginalExtension();
-            $photo->move('upload/users/', $genNama);
-            $save_url = 'upload/users/' . $genNama;
-        } else {
-            $save_url = '';
-        }
 
         $user = new User();
         $user->name = $validatedData['name'];
         $user->username = $validatedData['username'];
         $user->email = $validatedData['email'];
         $user->password = Hash::make($validatedData['password']);
-        $user->photo = $save_url;
-        $user->phone = $validatedData['phone'];
-        $user->alamat = $validatedData['alamat'];
         $user->role = $validatedData['role'];
-        $user->status = $validatedData['status'];
-        $user->sekolah_info = $validatedData['sekolah_info'];
 
         $user->save();
 

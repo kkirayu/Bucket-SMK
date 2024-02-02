@@ -55,11 +55,9 @@
                 <ul>
                     <li> <a href="{{ route('user.index') }}"><i class="bx bx-radio-circle"></i>Semua Users</a>
                     </li>
-                    <li> <a href="{{ route('dinas.index') }}"><i class="bx bx-radio-circle"></i>Semua Dinas</a>
+                    <li> <a href="{{ route('kurator.index') }}"><i class="bx bx-radio-circle"></i>Semua Kurator</a>
                     </li>
                     <li> <a href="{{ route('list.index') }}"><i class="bx bx-radio-circle"></i>Semua Sekolah</a>
-                    </li>
-                    <li> <a href="{{ route('list.create') }}"><i class="bx bx-radio-circle"></i>Tambah Data</a>
                     </li>
                 </ul>
             </li>

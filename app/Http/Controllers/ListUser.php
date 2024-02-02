@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Hash;
 
 class ListUser extends Controller
 {
@@ -28,7 +29,25 @@ class ListUser extends Controller
      */
     public function store(Request $request)
     {
-        //
+        // Validasi data yang masuk
+        $validatedData = $request->validate([
+            'name' => 'required|string|max:255',
+            'username' => 'nullable|string|max:255',
+            'email' => 'required|email|unique:users,email',
+            'password' => 'required|string|min:8',
+            'role' => 'required|in:admin,dinas,sekolah,user',
+        ]);
+
+        $user = new User();
+        $user->name = $validatedData['name'];
+        $user->username = $validatedData['username'];
+        $user->email = $validatedData['email'];
+        $user->password = Hash::make($validatedData['password']);
+        $user->role = $validatedData['role'];
+
+        $user->save();
+
+        return redirect()->route('user.index')->with('success', 'User created successfully');
     }
 
     /**
