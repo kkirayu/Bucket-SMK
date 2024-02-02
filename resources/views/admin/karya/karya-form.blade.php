@@ -100,7 +100,7 @@
                                     </div>
                                     <div class="row">
                                         <div class="col-sm-3"></div>
-                                        <div class="col-sm-9 text-secondary">
+                                        <div class="col-sm-9 text-secondary" style="text-align: right;">
                                             <input type="submit" class="btn btn-success px-4" value="{{ isset($edit) ? 'Ubah Karya' : 'Tambah Karya' }}" />
                                         </div>
                                     </div>

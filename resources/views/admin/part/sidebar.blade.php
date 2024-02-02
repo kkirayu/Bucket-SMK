@@ -20,7 +20,7 @@
         </li>
 
         @if (Auth::user()->role == 'admin')
-            <li>
+            {{-- <li>
                 <a href="javascript:;" class="has-arrow">
                     <div class="parent-icon"><i class='bx bx-at'></i>
                     </div>
@@ -32,7 +32,7 @@
                     <li> <a href="{{ route('brand.create') }}"><i class="bx bx-radio-circle"></i>Tambah Brand</a>
                     </li>
                 </ul>
-            </li>
+            </li> --}}
             <li>
                 <a href="javascript:;" class="has-arrow">
                     <div class="parent-icon"><i class="bx bx-category"></i>
@@ -46,7 +46,7 @@
                     </li>
                 </ul>
             </li>
-            <li>
+            {{-- <li>
                 <a href="javascript:;" class="has-arrow">
                     <div class="parent-icon"><i class="bx bx-category-alt"></i>
                     </div>
@@ -60,7 +60,7 @@
                             Sub-Category</a>
                     </li>
                 </ul>
-            </li>
+            </li> --}}
         @endif
         @if (Auth::user()->role == 'admin' || Auth::user()->role == 'sekolah')
             <li>
@@ -80,7 +80,7 @@
             </li>
             <li>
                 <a href="javascript:;" class="has-arrow">
-                    <div class="parent-icon"><i class="bx bx-category"></i>
+                    <div class="parent-icon"><i class="bx bx-dna"></i>
                     </div>
                     <div class="menu-title">Jurusan</div>
                 </a>
@@ -93,7 +93,7 @@
             </li>
             <li>
                 <a href="javascript:;" class="has-arrow">
-                    <div class="parent-icon"><i class="bx bx-category"></i>
+                    <div class="parent-icon"><i class="bx bx-barcode"></i>
                     </div>
                     <div class="menu-title">Produk</div>
                 </a>

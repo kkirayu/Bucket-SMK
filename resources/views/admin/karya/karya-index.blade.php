@@ -127,10 +127,16 @@
                             <td>{{ $r->user->name }}</td>
                             <td>
                                 <div class="d-flex order-actions">
-                                    <a href="{{ route('karya.show', encrypt($r->id)) }}" class="ms-1" data-toggle="tooltip" title="Detail"><i class="bx bx-info-circle"></i></a>
+                                    <a href="{{ route('karya.show', encrypt($r->id)) }}"
+                                        class="ms-1 text-white" style="background: #0d6efd" data-toggle="tooltip"
+                                            title="Info"><i class="bx bx-info-circle"></i></a>
                                     @if (Auth::user()->role == 'admin')
-                                        <a href="{{ route('karya.edit', encrypt($r->id)) }}" class="ms-1" data-toggle="tooltip" title="Edit"><i class="bx bx-edit"></i></a>
-                                        <a href="{{ route('karya.destroy', encrypt($r->id)) }}" class="ms-1" data-toggle="tooltip" title="Hapus"><i class="bx bx-trash"></i></a>
+                                        <a href="{{ route('karya.edit', encrypt($r->id)) }}"
+                                            class="ms-1 text-white" style="background: #0d6efd" data-toggle="tooltip"
+                                            title="Edit"><i class="bx bx-edit"></i></a>
+                                        <a href="{{ route('karya.destroy', encrypt($r->id)) }}"
+                                            class="ms-1 text-white" style="background: #0d6efd" data-toggle="tooltip"
+                                            title="Delete"><i class="bx bx-trash"></i></a>
                                     @endif
                                 </div>
                             </td>

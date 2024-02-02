@@ -3,17 +3,8 @@
 @section('content')
     <div class="page-content">
         <!--breadcrumb-->
-        <div class="page-breadcrumb d-none d-sm-flex align-items-center mb-3">
-            <div class="breadcrumb-title pe-3">Jurusan</div>
-            <div class="ps-3">
-                <nav aria-label="breadcrumb">
-                    <ol class="breadcrumb mb-0 p-0">
-                        <li class="breadcrumb-item"><a href="javascript:;"><i class="bx bx-basket"></i></a></li>
-                        <li class="breadcrumb-item active" aria-current="page">{{ isset($edit) ? 'Edit Jurusan' : 'Tambah Jurusan' }}</li>
-                    </ol>
-                </nav>
-            </div>
-        </div>
+        <x-breadcrumb sub="Jurusan" icon="bx bx-dna" subsub="{{ isset($edit) ? 'Edit' : 'Tambah' }}" />
+
         <!--end breadcrumb-->
         <div class="container">
             <div class="main-body">
@@ -56,7 +47,7 @@
                                     </div>
                                     <div class="row">
                                         <div class="col-sm-3"></div>
-                                        <div class="col-sm-9 text-secondary">
+                                        <div class="col-sm-9 text-secondary" style="text-align: right;">
                                             <input type="submit" class="btn btn-success px-4" value="{{ isset($edit) ? 'Ubah Jurusan' : 'Tambah Jurusan' }}" />
                                         </div>
                                     </div>
