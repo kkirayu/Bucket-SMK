@@ -25,7 +25,7 @@ class ListSekolah extends Controller
      */
     public function create()
     {
-        return view('admin.users.users-form');
+        return view('admin.users.ssekolah-form');
     }
 
     /**

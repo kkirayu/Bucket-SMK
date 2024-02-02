@@ -20,7 +20,7 @@ class ListUser extends Controller
      */
     public function create()
     {
-        //
+        return view('admin.users.users-form');
     }
 
     /**
