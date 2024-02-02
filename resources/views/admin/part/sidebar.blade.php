@@ -46,6 +46,23 @@
                     </li>
                 </ul>
             </li>
+            <li>
+                <a href="javascript:;" class="has-arrow">
+                    <div class="parent-icon"><i class="bx bx-category"></i>
+                    </div>
+                    <div class="menu-title">Users</div>
+                </a>
+                <ul>
+                    <li> <a href="{{ route('user.index') }}"><i class="bx bx-radio-circle"></i>Semua Users</a>
+                    </li>
+                    <li> <a href="{{ route('dinas.index') }}"><i class="bx bx-radio-circle"></i>Semua Dinas</a>
+                    </li>
+                    <li> <a href="{{ route('list.index') }}"><i class="bx bx-radio-circle"></i>Semua Sekolah</a>
+                    </li>
+                    <li> <a href="{{ route('list.create') }}"><i class="bx bx-radio-circle"></i>Tambah Data</a>
+                    </li>
+                </ul>
+            </li>
             {{-- <li>
                 <a href="javascript:;" class="has-arrow">
                     <div class="parent-icon"><i class="bx bx-category-alt"></i>

@@ -1,5 +1,8 @@
 <?php
 
+use App\Http\Controllers\ListDinas;
+use App\Http\Controllers\ListSekolah;
+use App\Http\Controllers\ListUser;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\AdminController;
@@ -68,6 +71,10 @@ Route::group(['middleware' => ['auth', 'role:admin']], function () {
     Route::resource('/admin/jurusan', JurusanController::class);
     Route::get('/admin/jurusan/destroy/{id}', [JurusanController::class, 'destroy'])->name('jurusan.destroy');
 
+    Route::resource('/admin/list', ListSekolah::class);
+    Route::resource('/admin/dinas', ListDinas::class);
+    Route::resource('/admin/user', ListUser::class);
+    Route::get('/admin/user/destroy/{id}', [ListSekolah::class, 'destroy'])->name('list.destroy');
 });
 
 // Role untuk admin dan sekolah
@@ -75,5 +82,5 @@ Route::group(['middleware' => ['auth', 'role:admin,sekolah']], function () {
     Route::resource('/admin/karya', KaryaController::class);
     
     Route::resource('/admin/produk', ProdukController::class);
-    Route::get('/admin/produk/destroy/{id}', [JurusanController::class, 'destroy'])->name('produk.destroy');
+    Route::get('/admin/produk/destroy/{id}', [ProdukController::class, 'destroy'])->name('produk.destroy');
 });
