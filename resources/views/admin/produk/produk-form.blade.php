@@ -1,23 +1,10 @@
 @extends('admin.admin-dashboard')
 
 @section('content')
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
-
-    <div class="page-content">
+<div class="page-content">
         <!--breadcrumb-->
-        <div class="page-breadcrumb d-none d-sm-flex align-items-center mb-3">
-            <div class="breadcrumb-title pe-3">Produk</div>
-            <div class="ps-3">
-                <nav aria-label="breadcrumb">
-                    <ol class="breadcrumb mb-0 p-0">
-                        <li class="breadcrumb-item"><a href="javascript:;"><i class="bx bx-basket"></i></a></li>
-                        <li class="breadcrumb-item active" aria-current="page">
-                            {{ isset($edit) ? 'Edit Produk' : 'Tambah Produk' }}</li>
-                    </ol>
-                </nav>
-            </div>
-        </div>
-        <!--end breadcrumb-->
+        <x-breadcrumb sub="Produk" icon="bx bx-barcode" subsub="{{ isset($edit) ? 'Edit' : 'Tambah' }}" />
+
         <div class="container">
             <div class="main-body">
                 <div class="row">
@@ -188,7 +175,7 @@
                                         </div>
                                         <div class="col-sm-9 text-secondary">
                                             <input type="file" name="sertifikasi_haki" class="form-control"
-                                                id="photo" />
+                                                id="photoHaki" />
                                         </div>
                                     </div>
                                     <div class="row mb-3">
@@ -196,7 +183,7 @@
                                             <h6 class="mb-0"></h6>
                                         </div>
                                         <div class="col-sm-9 text-secondary">
-                                            <img id="showPhoto"
+                                            <img id="showPhotoHaki"
                                                 src="{{ isset($edit) ? asset($edit->sertifikasi_haki) : asset('upload/no_image.jpg') }}"
                                                 style="width: 100px; height: 100px;">
                                         </div>
@@ -207,7 +194,7 @@
                                         </div>
                                         <div class="col-sm-9 text-secondary">
                                             <input type="file" name="sertifikasi_halal" class="form-control"
-                                                id="photo" />
+                                                id="photoHalal" />
                                         </div>
                                     </div>
                                     <div class="row mb-3">
@@ -215,7 +202,7 @@
                                             <h6 class="mb-0"></h6>
                                         </div>
                                         <div class="col-sm-9 text-secondary">
-                                            <img id="showPhoto"
+                                            <img id="showPhotoHalal"
                                                 src="{{ isset($edit) ? asset($edit->sertifikasi_halal) : asset('upload/no_image.jpg') }}"
                                                 style="width: 100px; height: 100px;">
                                         </div>
@@ -225,7 +212,7 @@
                                             <h6 class="mb-0">Photo SNI</h6>
                                         </div>
                                         <div class="col-sm-9 text-secondary">
-                                            <input type="file" name="sni" class="form-control" id="photo" />
+                                            <input type="file" name="sni" class="form-control" id="photoSNI" />
                                         </div>
                                     </div>
                                     <div class="row mb-3">
@@ -233,7 +220,7 @@
                                             <h6 class="mb-0"></h6>
                                         </div>
                                         <div class="col-sm-9 text-secondary">
-                                            <img id="showPhoto"
+                                            <img id="showPhotoSNI"
                                                 src="{{ isset($edit) ? asset($edit->sni) : asset('upload/no_image.jpg') }}"
                                                 style="width: 100px; height: 100px;">
                                         </div>
@@ -241,7 +228,7 @@
 
                                     <div class="row">
                                         <div class="col-sm-3"></div>
-                                        <div class="col-sm-9 text-secondary">
+                                        <div class="col-sm-9 text-secondary" style="text-align: right;">
                                             <input type="submit" class="btn btn-success px-4"
                                                 value="{{ isset($edit) ? 'Ubah Produk' : 'Tambah Produk' }}" />
                                         </div>
@@ -261,6 +248,33 @@
                 var reader = new FileReader();
                 reader.onload = function(e) {
                     $('#showPhoto1').attr('src', e.target.result);
+                }
+                reader.readAsDataURL(e.target.files['0']);
+            });
+        });
+        $(document).ready(function() {
+            $('#photoHaki').change(function(e) {
+                var reader = new FileReader();
+                reader.onload = function(e) {
+                    $('#showPhotoHaki').attr('src', e.target.result);
+                }
+                reader.readAsDataURL(e.target.files['0']);
+            });
+        });
+        $(document).ready(function() {
+            $('#photoSNI').change(function(e) {
+                var reader = new FileReader();
+                reader.onload = function(e) {
+                    $('#showPhotoSNI').attr('src', e.target.result);
+                }
+                reader.readAsDataURL(e.target.files['0']);
+            });
+        });
+        $(document).ready(function() {
+            $('#photoHalal').change(function(e) {
+                var reader = new FileReader();
+                reader.onload = function(e) {
+                    $('#showPhotoHalal').attr('src', e.target.result);
                 }
                 reader.readAsDataURL(e.target.files['0']);
             });

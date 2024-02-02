@@ -30,6 +30,7 @@
 
     <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.css">
 
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
     <title>Bucket SMK - Mini Coding School</title>
 </head>
 
@@ -91,6 +92,7 @@
     <!--app JS-->
     <script src="{{ asset('backadmin/assets/js/app.js') }}"></script>
     <script src="{{ asset('backadmin/assets/js/validate.min.js') }}"></script>
+
 
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
 

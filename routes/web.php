@@ -56,22 +56,24 @@ Route::group(['middleware' => ['auth', 'role:admin,kurator,sekolah']], function 
 // Role untuk admin
 Route::group(['middleware' => ['auth', 'role:admin']], function () {
 
-    Route::resource('/admin/brand', BrandController::class);
-    Route::get('/admin/brand/destroy/{id}', [BrandController::class, 'destroy'])->name('brand.destroy');
+    // Route::resource('/admin/brand', BrandController::class);
+    // Route::get('/admin/brand/destroy/{id}', [BrandController::class, 'destroy'])->name('brand.destroy');
 
     Route::resource('/admin/category', CategoryController::class);
     Route::get('/admin/category/destroy/{id}', [CategoryController::class, 'destroy'])->name('category.destroy');
 
-    Route::resource('/admin/subcategory', SubCategoryController::class);
-    Route::get('/admin/subcategory/destroy/{id}', [SubCategoryController::class, 'destroy'])->name('subcategory.destroy');
+    // Route::resource('/admin/subcategory', SubCategoryController::class);
+    // Route::get('/admin/subcategory/destroy/{id}', [SubCategoryController::class, 'destroy'])->name('subcategory.destroy');
+
     Route::resource('/admin/jurusan', JurusanController::class);
     Route::get('/admin/jurusan/destroy/{id}', [JurusanController::class, 'destroy'])->name('jurusan.destroy');
 
-    Route::resource('/admin/produk', ProdukController::class);
-    Route::get('/admin/produk/destroy/{id}', [JurusanController::class, 'destroy'])->name('produk.destroy');
 });
 
 // Role untuk admin dan sekolah
 Route::group(['middleware' => ['auth', 'role:admin,sekolah']], function () {
     Route::resource('/admin/karya', KaryaController::class);
+    
+    Route::resource('/admin/produk', ProdukController::class);
+    Route::get('/admin/produk/destroy/{id}', [JurusanController::class, 'destroy'])->name('produk.destroy');
 });

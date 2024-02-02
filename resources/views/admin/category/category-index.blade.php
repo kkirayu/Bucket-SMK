@@ -1,64 +1,63 @@
 @extends('admin.admin-dashboard')
 
 @section('content')
-<div class="page-content">
-    <!--breadcrumb-->
-    <div class="page-breadcrumb d-none d-sm-flex align-items-center mb-3">
-        <div class="breadcrumb-title pe-3">Category</div>
-        <div class="ps-3">
-            <nav aria-label="breadcrumb">
-                <ol class="breadcrumb mb-0 p-0">
-                    <li class="breadcrumb-item"><a href="javascript:;"><i class="bx bx-category"></i></a>
-                    </li>
-                    <li class="breadcrumb-item active" aria-current="page">Semua Category</li>
-                </ol>
-            </nav>
-        </div>
-        <div class="ms-auto">
-            <div class="btn-group">
-                <a href="{{ route('category.create') }}" class="btn btn-primary">Tambah Category</a>
-            </div>
-        </div>
-    </div>
-    <!--end breadcrumb-->
-    <h4 class="mb-0 text-uppercase">Data Semua Category</h4>
-    <hr/>
-    <div class="card">
-        <div class="card-body">
-            <div class="table-responsive">
-                <table id="example" class="table table-striped table-bordered" style="width:100%">
-                    <thead>
-                        <tr>
-                            <th>#</th>
-                            <th>Nama Category</th>
-                            <th>Photo</th>
-                            <th>Aksi</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        @foreach ($getCategory as $index => $category)
+    <div class="page-content">
+        <!--breadcrumb-->
+        <x-breadcrumb sub="Kategori" icon="bx bx-category" subsub="Index" />
+        <!--end breadcrumb-->
+        <div class="card radius-10">
+            <div class="card-body">
+                <div class="d-flex align-items-center">
+                    <div>
+                        <h5 class="mb-0">List Kategori</h5>
+                    </div>
+                    <div class="font-22 ms-auto">
+                        <div class="btn-group">
+                            <button type="button" onclick="window.location.href='{{ route('category.create') }}'"
+                                class="btn btn-primary">Tambah Kategori</button>
+                        </div>
+                    </div>
+                </div>
+                <hr>
+                <div class="table-responsive">
+                    <table id="example" class="table table-striped table-bordered" width="100%">
+                        <thead class="table-light">
                             <tr>
-                                <td>{{ $index+1 }}</td>
-                                <td>{{ $category->category_nama }}</td>
-                                <td><img src="{{ asset($category->category_photo) }}" style="width: 40px; height: 40px;"></td>
-                                <td>
-                                    <a href="{{ route('category.edit', encrypt($category->id)) }}" class="btn btn-info">Edit</a>
-                                    <a href="{{ route('category.destroy', encrypt($category->id)) }}" class="btn btn-danger" id="delete">Delete</a>
-                                </td>
+                                <th>#</th>
+                                <th>Nama Category</th>
+                                <th>Aksi</th>
                             </tr>
-                        @endforeach
-                    </tbody>
-                    <tfoot>
-                        <tr>
-                            <th>#</th>
-                            <th>Nama Category</th>
-                            <th>Photo</th>
-                            <th>Aksi</th>
-                        </tr>
-                    </tfoot>
-                </table>
+                        </thead>
+                        <tbod>
+                            @foreach ($getCategory as $index => $category)
+                                <tr>
+                                    <td width="5%">{{ $index + 1 }}</td>
+                                    <td width="70%">
+                                        <div class="d-flex align-items-center">
+                                            <div class="recent-product-img">
+                                                <img src="{{ asset($category->category_photo) }}" alt="">
+                                            </div>
+                                            <div class="ms-2">
+                                                <h6 class="mb-1 font-14">{{ $category->category_nama }}</h6>
+                                            </div>
+                                        </div>
+                                    </td>
+                                    <td width="10%">
+                                        <div class="d-flex order-actions">
+                                            <a href="{{ route('category.edit', encrypt($category->id)) }}"
+                                                class="ms-1 text-white" style="background: #0d6efd" data-toggle="tooltip"
+                                                title="Edit"><i class="bx bx-edit"></i></a>
+                                            <a href="{{ route('category.destroy', encrypt($category->id)) }}"
+                                                class="ms-1 text-white" style="background: #0d6efd" data-toggle="tooltip"
+                                                title="Delete"><i class="bx bx-trash"></i></a>
+                                        </div>
+                                    </td>
+                                </tr>
+                            @endforeach
+                        </tbod y>
+                    </table>
+                </div>
             </div>
         </div>
     </div>
-</div>
 @endsection

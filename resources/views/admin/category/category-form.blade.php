@@ -1,20 +1,11 @@
 @extends('admin.admin-dashboard')
 
 @section('content')
+
     <div class="page-content">
         <!--breadcrumb-->
-        <div class="page-breadcrumb d-none d-sm-flex align-items-center mb-3">
-            <div class="breadcrumb-title pe-3">Category</div>
-            <div class="ps-3">
-                <nav aria-label="breadcrumb">
-                    <ol class="breadcrumb mb-0 p-0">
-                        <li class="breadcrumb-item"><a href="javascript:;"><i class="bx bx-basket"></i></a>
-                        </li>
-                        <li class="breadcrumb-item active" aria-current="page">{{ isset($edit) ? 'Edit Category' : 'Tambah Category' }}</li>
-                    </ol>
-                </nav>
-            </div>
-        </div>
+        <x-breadcrumb sub="Kategori" icon="bx bx-category" subsub="{{ isset($edit) ? 'Edit' : 'Tambah' }}" />
+
         <!--end breadcrumb-->
         <div class="container">
             <div class="main-body">
@@ -46,7 +37,7 @@
                                             <h6 class="mb-0">Photo Category</h6>
                                         </div>
                                         <div class="col-sm-9 text-secondary">
-                                            <input type="file" name="photo" class="form-control" id="photo" />
+                                            <input type="file" name="photo" class="form-control" id="photoCat" />
                                         </div>
                                     </div>
                                     <div class="row mb-3">
@@ -54,14 +45,14 @@
                                             <h6 class="mb-0"></h6>
                                         </div>
                                         <div class="col-sm-9 text-secondary">
-                                            <img id="showPhoto"
+                                            <img id="showPhotoCat"
                                                 src="{{ isset($edit) ? asset($edit->category_photo) : asset('upload/no_image.jpg') }}"
                                                 style="width: 100px; height: 100px;">
                                         </div>
                                     </div>
                                     <div class="row">
                                         <div class="col-sm-3"></div>
-                                        <div class="col-sm-9 text-secondary">
+                                        <div class="col-sm-9 text-secondary" style="text-align: right;">
                                             <input type="submit" class="btn btn-success px-4" value="{{ isset($edit) ? 'Ubah Category' : 'Tambah Category' }}" />
                                         </div>
                                     </div>
@@ -105,10 +96,10 @@
 
     <script type="text/javascript">
         $(document).ready(function() {
-            $('#photo').change(function(e) {
+            $('#photoCat').change(function(e) {
                 var reader = new FileReader();
                 reader.onload = function(e) {
-                    $('#showPhoto').attr('src', e.target.result);
+                    $('#showPhotoCat').attr('src', e.target.result);
                 }
                 reader.readAsDataURL(e.target.files['0']);
             });
