@@ -2,10 +2,13 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Jurusan;
+use App\Models\User;
 use App\Models\Produk;
+use App\Models\Jurusan;
+use App\Models\Komentar;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Auth;
 use Intervention\Image\Facades\Image;
 
 class ProdukController extends Controller
@@ -15,7 +18,12 @@ class ProdukController extends Controller
      */
     public function index()
     {
-        $produk = Produk::all();
+        if (Auth::user()->role == 'admin') {
+            $produk = Produk::all();
+        } elseif (Auth::user()->role == 'sekolah') {
+            $getUser = Auth::user()->id;
+            $produk = Produk::where('user_id', $getUser)->where('status', '!=', 0)->get();
+        }
         return view('admin.produk.produk-index', compact('produk'));
     }
 
@@ -25,7 +33,8 @@ class ProdukController extends Controller
     public function create()
     {
         $jurusans = Jurusan::all();
-        return view('admin.produk.produk-form', compact('jurusans'));
+        $sekolah = User::where('role', 'sekolah')->get();
+        return view('admin.produk.produk-form', compact('jurusans','sekolah'));
     }
 
     /**
@@ -33,10 +42,10 @@ class ProdukController extends Controller
      */
     public function store(Request $request)
     {
-        $photo = $request->file('photo');
-        $genNama = hexdec(uniqid()) . '.' . $photo->getClientOriginalExtension();
-        Image::make($photo)->resize(300, 300)->save('upload/produk/' . $genNama);
-        $save_url = 'upload/produk/' . $genNama;
+            $photo = $request->file('photo');
+            $genNama = hexdec(uniqid()) . '.' . $photo->getClientOriginalExtension();
+            Image::make($photo)->resize(300, 300)->save('upload/produk/' . $genNama);
+            $save_url = 'upload/produk/' . $genNama;
 
         if ($request->file('sertifikasi_haki')) {
             $sertifikasi_haki = $request->file('sertifikasi_haki');
@@ -70,21 +79,21 @@ class ProdukController extends Controller
             'kategori' => $request->kategori,
             'descripsi' => $request->descripsi,
             'inovasi' => $request->inovasi,
-            'sekolah' => $request->sekolah,
+            'user_id' => $request->sekolah,
             'photo' => $save_url,
-            'vidio_produk' => $request->vidio_produk,
+            'video_produk' => $request->vidio_produk,
             'nama_tim' => $request->nama_tim,
-            'jurusan' => $request->jurusan,
+            'jurusan_id' => $request->jurusan,
             'material' => $request->material,
             'harga' => $request->harga,
             'tahun_produksi' => $request->tahun_produksi,
             'merk_dagang' => $request->merk_dagang,
             'sertifikasi_haki' => $save_urlhaki,
             'sertifikasi_halal' => $save_urlhalal,
-            'sni' => $save_urlsni,
+            'sertifikasi_sni' => $save_urlsni,
         ]);
         $notif = array(
-            'message' => 'Category Berhasil Ditambah',
+            'message' => 'Produk Berhasil Ditambah',
             'alert-type' => 'success'
         );
         return redirect()->route('produk.index')->with($notif);
@@ -94,9 +103,12 @@ class ProdukController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(Produk $produk)
+    public function show($id)
     {
-        //
+        $dId = decrypt($id);
+        $show = Produk::findOrFail($dId);
+        $komentars = Komentar::where('produk_id', $dId)->get();
+        return view('admin.produk.produk-detail', compact('show','komentars'));
     }
 
     /**
@@ -107,7 +119,8 @@ class ProdukController extends Controller
         $jurusans = Jurusan::all();
         $dId = decrypt($id);
         $edit = Produk::findOrFail($dId);
-        return view('admin.produk.produk-form', compact('edit', 'jurusans'));
+        $sekolah = User::where('role', 'sekolah')->get();
+        return view('admin.produk.produk-form', compact('edit', 'jurusans', 'sekolah'));
     }
 
     /**
@@ -117,43 +130,48 @@ class ProdukController extends Controller
     {
         $produkId = $request->id;
         $photoLama = $request->photoLama;
+        $photoHaki = $request->photoHaki;
+        $photoHalal = $request->photoHalal;
+        $photoSni = $request->photoSni;
 
-        $save_urlhaki = null;
-        $save_urlhalal = null;
-        $save_urlsni = null;
-
-        if ($request->file('photo')) {
-            $photo = $request->file('photo');
+        if ($request->file('photos')) {
+            $photo = $request->file('photos');
             @unlink(public_path($photoLama));
             $genNama = hexdec(uniqid()) . '.' . $photo->getClientOriginalExtension();
             Image::make($photo)->resize(300, 300)->save('upload/produk/' . $genNama);
             $save_url = 'upload/produk/' . $genNama;
+        } else {
+            $save_url = $photoLama;
         }
 
         if ($request->file('sertifikasi_haki')) {
-            $photo = $request->file('sertifikasi_haki');
-            @unlink(public_path($photoLama));
-            $genNama = hexdec(uniqid()) . '.' . $photo->getClientOriginalExtension();
-            Image::make($photo)->resize(300, 300)->save('upload/produk/' . $genNama);
-            $save_urlhaki = 'upload/produk/' . $genNama;
+            $photo_haki = $request->file('sertifikasi_haki');
+            @unlink(public_path($photoHaki));
+            $genNama_haki = hexdec(uniqid()) . '.' . $photo_haki->getClientOriginalExtension();
+            Image::make($photo_haki)->resize(300, 300)->save('upload/produk/' . $genNama_haki);
+            $save_urlhaki = 'upload/produk/' . $genNama_haki;
+        } else {
+            $save_urlhaki = $photoHaki;
         }
-
 
         if ($request->file('sertifikasi_halal')) {
-            $photo = $request->file('sertifikasi_halal');
-            @unlink(public_path($photoLama));
-            $genNama = hexdec(uniqid()) . '.' . $photo->getClientOriginalExtension();
-            Image::make($photo)->resize(300, 300)->save('upload/produk/' . $genNama);
-            $save_urlhalal = 'upload/produk/' . $genNama;
+            $photo_halal = $request->file('sertifikasi_halal');
+            @unlink(public_path($photoHalal));
+            $genNama_halal = hexdec(uniqid()) . '.' . $photo_halal->getClientOriginalExtension();
+            Image::make($photo_halal)->resize(300, 300)->save('upload/produk/' . $genNama_halal);
+            $save_urlhalal = 'upload/produk/' . $genNama_halal;
+        } else {
+            $save_urlhalal = $photoHalal;
         }
 
-
         if ($request->file('sni')) {
-            $photo = $request->file('sni');
-            @unlink(public_path($photoLama));
-            $genNama = hexdec(uniqid()) . '.' . $photo->getClientOriginalExtension();
-            Image::make($photo)->resize(300, 300)->save('upload/category/' . $genNama);
-            $save_urlsni = 'upload/produk/' . $genNama;
+            $photo_sni = $request->file('sni');
+            @unlink(public_path($photoSni));
+            $genNama_sni = hexdec(uniqid()) . '.' . $photo_sni->getClientOriginalExtension();
+            Image::make($photo_sni)->resize(300, 300)->save('upload/category/' . $genNama_sni);
+            $save_urlsni = 'upload/produk/' . $genNama_sni;
+        } else {
+            $save_urlsni = $photoSni;
         }
 
         Produk::findOrFail($produkId)->update([
@@ -161,21 +179,21 @@ class ProdukController extends Controller
             'kategori' => $request->kategori,
             'descripsi' => $request->descripsi,
             'inovasi' => $request->inovasi,
-            'sekolah' => $request->sekolah,
+            'user_id' => $request->sekolah,
             'photo' => $save_url,
             'vidio_produk' => $request->vidio_produk,
             'nama_tim' => $request->nama_tim,
-            'jurusan' => $request->jurusan,
+            'jurusan_id' => $request->jurusan,
             'material' => $request->material,
             'harga' => $request->harga,
             'tahun_produksi' => $request->tahun_produksi,
             'merk_dagang' => $request->merk_dagang,
             'sertifikasi_haki' => $save_urlhaki,
             'sertifikasi_halal' => $save_urlhalal,
-            'sni' => $save_urlsni,
+            'sertifikasi_sni' => $save_urlsni,
         ]);
         $notif = array(
-            'message' => 'Category Berhasil Ditambah',
+            'message' => 'Produk Berhasil Diubah',
             'alert-type' => 'success'
         );
         return redirect()->route('produk.index')->with($notif);
@@ -189,21 +207,16 @@ class ProdukController extends Controller
     public function destroy($id)
     {
         $dId = decrypt($id);
-        $produk = Produk::findOrFail($dId);
-        $img = $produk->photo;
-        $imghaki = $produk->sertifikasi_haki;
-        $imghalal = $produk->sertifikasi_halal;
-        $imgsni = $produk->sni;
+        $destroy = Produk::findOrFail($dId);
 
-        @unlink(public_path($img));
-        @unlink(public_path($imghaki));
-        @unlink(public_path($imghalal));
-        @unlink(public_path($imgsni));
-
-        $produk->delete();
+        if($destroy->status == 1 || $destroy->status == 2){
+            $destroy->update([
+                'status' => 0
+            ]);
+        }
 
         $notif = array(
-            'message' => 'Category Telah Berhasil Dihapus',
+            'message' => 'Produk Berhasil Dihapus',
             'alert-type' => 'success'
         );
         return redirect()->back()->with($notif);

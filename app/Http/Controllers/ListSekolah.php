@@ -68,7 +68,7 @@ class ListSekolah extends Controller
 
         $user->save();
 
-        return redirect()->route('list.index')->with('success', 'User created successfully');
+        return redirect()->route('users-user.index')->with('success', 'User created successfully');
     }
 
 

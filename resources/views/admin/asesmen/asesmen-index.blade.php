@@ -8,19 +8,13 @@
 </style>
     <div class="page-content">
         <!--breadcrumb-->
-        <x-breadcrumb sub="Produk" icon="bx bx-barcode" subsub="Index" />
+        <x-breadcrumb sub="Asesmen Produk" icon="bx bx-list-check" subsub="Index" />
 
         <div class="card radius-10">
             <div class="card-body">
                 <div class="d-flex align-items-center">
                     <div>
-                        <h5 class="mb-0">List Produk</h5>
-                    </div>
-                    <div class="font-22 ms-auto">
-                        <div class="btn-group">
-                            <button type="button" onclick="window.location.href='{{ route('produk.create') }}'"
-                                class="btn btn-primary">Tambah Produk</button>
-                        </div>
+                        <h5 class="mb-0">List Produk {{ $judul }}</h5>
                     </div>
                 </div>
                 <hr>
@@ -40,7 +34,7 @@
                             </tr>
                         </thead>
                         <tbody>
-                            @foreach ($produk as $index => $produk)
+                            @foreach ($show as $index => $produk)
                                 <tr>
                                     <td width="2%">{{ $index + 1 }}</td>
                                     <td width="3%">{{ $produk->kategori }}</td>
@@ -69,15 +63,9 @@
                                     </td>
                                     <td width="5%">
                                         <div class="d-flex order-actions">
-                                            <a href="{{ route('produk.show', encrypt($produk->id)) }}"
-                                                class="ms-1 text-white" style="background: #0d6efd" data-toggle="tooltip"
+                                            <a href="{{ route('asesmen.show', encrypt($produk->id)) }}"
+                                                class="ms-1 text-white" style="background: #0d6efd;" data-toggle="tooltip"
                                                 title="Detail"><i class="bx bx-info-circle"></i></a>
-                                            <a href="{{ route('produk.edit', encrypt($produk->id)) }}"
-                                                class="ms-1 text-white" style="background: #0d6efd" data-toggle="tooltip"
-                                                title="Edit"><i class="bx bx-edit"></i></a>
-                                            <a href="{{ route('produk.destroy', encrypt($produk->id)) }}"
-                                                class="ms-1 text-white" style="background: #0d6efd" data-toggle="tooltip"
-                                                    title="Delete"><i class="bx bx-trash"></i></a>
                                         </div>
                                     </td>
                                 </tr>

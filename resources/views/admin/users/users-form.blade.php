@@ -26,7 +26,7 @@
                             </div>
                             <div class="card-body">
                                 <form id="myForm"
-                                    action="{{ isset($edit) ? route('list.update', $edit->id) : route('list.store') }}"
+                                    action="{{ isset($edit) ? route('users-sekolah.update', $edit->id) : route('users-sekolah.store') }}"
                                     method="POST" enctype="multipart/form-data">
                                     @csrf
                                     @if (isset($edit))
@@ -111,7 +111,7 @@
                                         <div class="form-group col-sm-9 text-secondary">
                                             <textarea name="sekolah_info" class="form-control" placeholder="Sekolah Info"></textarea>
                                         </div>
-                                    </div>                                    
+                                    </div>
                                     <div class="row mb-3">
                                         <div class="col-sm-3">
                                             <h6 class="mb-0">Status</h6>

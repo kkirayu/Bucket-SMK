@@ -1,68 +1,6 @@
 @extends('admin.admin-dashboard')
 
 @section('content')
-{{-- <div class="page-content">
-    <!--breadcrumb-->
-    <div class="page-breadcrumb d-none d-sm-flex align-items-center mb-3">
-        <div class="breadcrumb-title pe-3">Karya</div>
-        <div class="ps-3">
-            <nav aria-label="breadcrumb">
-                <ol class="breadcrumb mb-0 p-0">
-                    <li class="breadcrumb-item"><a href="javascript:;"><i class="bx bx-right-arrow-alt"></i></a>
-                    </li>
-                    <li class="breadcrumb-item active" aria-current="page">Semua Karya</li>
-                </ol>
-            </nav>
-        </div>
-        <div class="ms-auto">
-            <div class="btn-group">
-                <a href="{{ route('karya.create') }}" class="btn btn-primary">Tambah Karya</a>
-            </div>
-        </div>
-    </div>
-    <!--end breadcrumb-->
-    <h4 class="mb-0 text-uppercase">Data Semua Karya</h4>
-    <hr/>
-    <div class="card">
-        <div class="card-body">
-            <div class="table-responsive">
-                <table id="example" class="table table-striped table-bordered" style="width:100%">
-                    <thead>
-                        <tr>
-                            <th>#</th>
-                            <th>Photo</th>
-                            <th>Nama Karya</th>
-                            <th>Kategori</th>
-                            <th>Inovasi</th>
-                            <th>Deskripsi</th>
-                            <th>Harga</th>
-                            <th>Komentar</th>
-                            <th>Uploaded</th>
-                            <th>Aksi</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        @foreach ($karya as $index => $r)
-                            <td>{{ $index+1 }}</td>
-                            <td><img src="{{ asset($r->photo) }}" style="width: 40px; height: 40px;"></td>
-                            <td>{{ $r->nama }}</td>
-                            <td>{{ $r->category_id }}</td>
-                            <td>{{ $r->inovasi }}</td>
-                            <td>{{ $r->descripsi }}</td>
-                            <td>{{ $r->harga }}</td>
-                            <td>{{ $r->komentar }}</td>
-                            <td>{{ $r->uploaded }}</td>
-                            <td>
-                                <a href="{{ route('karya.edit', encrypt($r->id)) }}" class="btn btn-info">Edit</a>
-                                <a href="{{ route('karya.destroy', encrypt($r->id)) }}" class="btn btn-danger" id="delete">Delete</a>
-                            </td>
-                        @endforeach
-                    </tbody>
-                </table>
-            </div>
-        </div>
-    </div>
-</div> --}}
 
 <div class="page-content">
     <div class="page-breadcrumb d-none d-sm-flex align-items-center mb-3">

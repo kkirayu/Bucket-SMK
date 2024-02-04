@@ -17,20 +17,21 @@ return new class extends Migration
             $table->string('kategori');
             $table->text('descripsi');
             $table->text('inovasi');
-            $table->string('sekolah');
+            $table->unsignedBigInteger('user_id');
+            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
             $table->string('photo');
             $table->string('video_produk');
             $table->text('nama_tim');
-            $table->unsignedBigInteger('jurusan');
-            $table->foreign('jurusan')->references('id')->on('jurusans')->onDelete('cascade');
+            $table->unsignedBigInteger('jurusan_id');
+            $table->foreign('jurusan_id')->references('id')->on('jurusans')->onDelete('cascade');
             $table->text('material');
             $table->integer('harga');
             $table->date('tahun_produksi');
             $table->string('merk_dagang');
             $table->string('sertifikasi_haki');
             $table->string('sertifikasi_halal');
-            $table->string('sni');
-
+            $table->string('sertifikasi_sni');
+            $table->tinyInteger('status')->default(1)->comment('0=tidak aktif; 1=asesmen; 2=acc');
             $table->timestamps();
         });
     }

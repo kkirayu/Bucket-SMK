@@ -2,8 +2,10 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class Produk extends Model
 {
@@ -14,17 +16,18 @@ class Produk extends Model
         'kategori',
         'descripsi',
         'inovasi',
-        'sekolah',
+        'user_id',
         'photo',
         'nama_tim',
-        'jurusan',
+        'jurusan_id',
         'material',
         'harga',
         'tahun_produksi',
         'merk_dagang',
         'sertifikasi_haki',
         'sertifikasi_halal',
-        'sni',
+        'sertifikasi_sni',
+        'status'
     ];
 
     // public function jurusans()
@@ -32,8 +35,16 @@ class Produk extends Model
     //     return $this->belongsToMany(Jurusan::class);
     // }
 
-    public function jurusans()
+    public function jurusan()
     {
         return $this->belongsTo(Jurusan::class);
+    }
+    public function user(): BelongsTo
+    {
+        return $this->belongsTo(User::class);
+    }
+    public function komentar(): HasMany
+    {
+        return $this->hasMany(Komentar::class);
     }
 }
