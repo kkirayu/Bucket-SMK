@@ -2,9 +2,12 @@
 
 namespace App\Http\Controllers;
 
+use App\Imports\UsersImport;
 use App\Models\User;
+use Illuminate\Contracts\Session\Session;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
+use Maatwebsite\Excel\Facades\Excel;
 
 class ListSekolah extends Controller
 {
@@ -22,7 +25,7 @@ class ListSekolah extends Controller
      */
     public function create()
     {
-        return view('admin.users.users-form');
+        return view('admin.users.ssekolah-form');
     }
 
     /**
@@ -36,35 +39,15 @@ class ListSekolah extends Controller
             'username' => 'nullable|string|max:255',
             'email' => 'required|email|unique:users,email',
             'password' => 'required|string|min:8',
-            'photo' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048', // Ubah sesuai kebutuhan
-            'phone' => 'nullable|string|max:20',
-            'alamat' => 'nullable|string',
             'role' => 'required|in:admin,dinas,sekolah,user',
-            'status' => 'required|in:aktif,nonaktif',
-            'sekolah_info' => 'nullable|string',
         ]);
-
-        // Proses penyimpanan foto
-        if ($request->hasFile('photo')) {
-            $photo = $request->file('photo');
-            $genNama = hexdec(uniqid()) . '.' . $photo->getClientOriginalExtension();
-            $photo->move('upload/users/', $genNama);
-            $save_url = 'upload/users/' . $genNama;
-        } else {
-            $save_url = '';
-        }
 
         $user = new User();
         $user->name = $validatedData['name'];
         $user->username = $validatedData['username'];
         $user->email = $validatedData['email'];
         $user->password = Hash::make($validatedData['password']);
-        $user->photo = $save_url;
-        $user->phone = $validatedData['phone'];
-        $user->alamat = $validatedData['alamat'];
         $user->role = $validatedData['role'];
-        $user->status = $validatedData['status'];
-        $user->sekolah_info = $validatedData['sekolah_info'];
 
         $user->save();
 
@@ -157,5 +140,17 @@ class ListSekolah extends Controller
             'alert-type' => 'success'
         );
         return redirect()->back()->with($notif);
+    }
+
+    public function import_excel(Request $request)
+    {
+        $this->validate($request, [
+            'file' => 'required|mimes:csv,xls,xlsx'
+        ]);
+        $file = $request->file('file');
+        $nama_file = rand() . $file->getClientOriginalName();
+        $file->move('userfile', $nama_file);
+        Excel::import(new UsersImport, public_path('/userfile/' . $nama_file));
+        return redirect()->route('list.index');
     }
 }

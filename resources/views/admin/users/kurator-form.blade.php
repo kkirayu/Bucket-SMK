@@ -26,8 +26,7 @@
                             </div>
                             <div class="card-body">
                                 <form id="myForm"
-                                    action="{{ isset($edit) ? route('users-sekolah.update', $edit->id) : route('users-sekolah.store') }}"
-
+                                    action="{{ isset($edit) ? route('kurator.update', $edit->id) : route('kurator.store') }}"
                                     method="POST" enctype="multipart/form-data">
                                     @csrf
                                     @if (isset($edit))
@@ -78,58 +77,7 @@
                                             <h6 class="mb-0">Role</h6>
                                         </div>
                                         <div class="form-group col-sm-9 text-secondary">
-                                            <select name="role" class="form-control">
-                                                <option value="admin" {{ old('role', isset($edit) && $edit->role == 'admin' ? 'selected' : '') }}>Admin</option>
-                                                <option value="dinas" {{ old('role', isset($edit) && $edit->role == 'dinas' ? 'selected' : '') }}>Dinas</option>
-                                                <option value="sekolah" {{ old('role', isset($edit) && $edit->role == 'sekolah' ? 'selected' : '') }}>Sekolah</option>
-                                                <option value="user" {{ old('role', isset($edit) && $edit->role == 'user' ? 'selected' : '') }}>User</option>
-                                            </select>
-                                        </div>
-                                    </div>
-                                    <div class="row mb-3">
-                                        <div class="col-sm-3">
-                                            <h6 class="mb-0">Alamat</h6>
-                                        </div>
-                                        <div class="form-group col-sm-9 text-secondary">
-                                            <input type="text" name="alamat" class="form-control"
-                                                placeholder="Alamat" />
-                                        </div>
-                                    </div>
-                                    <div class="row mb-3">
-                                        <div class="col-sm-3">
-                                            <h6 class="mb-0">Sekolah Info</h6>
-                                        </div>
-                                        <div class="form-group col-sm-9 text-secondary">
-                                            <textarea name="sekolah_info" class="form-control" placeholder="Sekolah Info"></textarea>
-                                        </div>
-                                    </div>
-                                    <div class="row mb-3">
-                                        <div class="col-sm-3">
-                                            <h6 class="mb-0">Status</h6>
-                                        </div>
-                                        <div class="form-group col-sm-9 text-secondary">
-                                            <select name="status" class="form-control">
-                                                <option value="aktif" {{ old('status', isset($edit) && $edit->status == 'aktif' ? 'selected' : '') }}>Aktif</option>
-                                                <option value="nonaktif" {{ old('status', isset($edit) && $edit->status == 'nonaktif' ? 'selected' : '') }}>Nonaktif</option>
-                                            </select>
-                                        </div>
-                                    </div>
-                                    <div class="row mb-3">
-                                        <div class="col-sm-3">
-                                            <h6 class="mb-0">Foto Profil</h6>
-                                        </div>
-                                        <div class="col-sm-9 text-secondary">
-                                            <input type="file" name="photo" class="form-control" id="photo" />
-                                        </div>
-                                    </div>
-                                    <div class="row mb-3">
-                                        <div class="col-sm-3">
-                                            <h6 class="mb-0"></h6>
-                                        </div>
-                                        <div class="col-sm-9 text-secondary">
-                                            <img id="showPhoto"
-                                                src="{{ isset($edit) ? asset($edit->photo) : asset('upload/no_image.jpg') }}"
-                                                style="width: 100px; height: 100px;">
+                                            <input type="text" class="form-control" name="role" value="kurator" readonly>
                                         </div>
                                     </div>
 

@@ -18,6 +18,40 @@
                 <div class="btn-group">
                     <a href="{{ route('users-sekolah.create') }}" class="btn btn-primary">Tambah Users</a>
                 </div>
+                <div class="btn-group">
+                    <button type="button" class="btn btn-primary" id="importButton">
+                        Import Excel
+                    </button>
+                
+                    <form method="post" action="{{ route('import.excel') }}" enctype="multipart/form-data" style="display: none;" id="importForm">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="exampleModalLabel">Import Excel</h5>
+                            </div>
+                            <div class="modal-body">
+                                {{ csrf_field() }}
+                                <label for="fileInput">Pilih file excel</label>
+                                <div class="form-group">
+                                    <input type="file" name="file" id="fileInput" required="required">
+                                </div>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-dismiss="modal" onclick="resetFileInput()">Close</button>
+                                <button type="submit" class="btn btn-primary">Import</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+                
+                <script>
+                    document.getElementById('importButton').addEventListener('click', function () {
+                        document.getElementById('fileInput').click();
+                    });
+                
+                    function resetFileInput() {
+                        document.getElementById('importForm').reset();
+                    }
+                </script>
             </div>
         </div>
         <!--end breadcrumb-->
@@ -47,6 +81,7 @@
                                         <a href="{{ route('users-sekolah.edit', encrypt($user->id)) }}"
                                             class="btn btn-info">Edit</a>
                                         <a href="{{ route('users-sekolah.destroy', encrypt($user->id)) }}" class="btn btn-danger"
+
                                             id="delete">Delete</a>
                                     </td>
                                 </tr>

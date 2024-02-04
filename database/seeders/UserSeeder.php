@@ -35,6 +35,7 @@ class UserSeeder extends Seeder
                 'role' => 'sekolah'
             ],
             [
+
                 'name' => 'Kurator Dinas Pendidikan',
                 'username' => 'kurator',
                 'email' => 'kurator@gmail.com',

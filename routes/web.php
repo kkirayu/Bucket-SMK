@@ -73,10 +73,14 @@ Route::group(['middleware' => ['auth', 'role:admin']], function () {
     Route::resource('/admin/jurusan', JurusanController::class);
     Route::get('/admin/jurusan/destroy/{id}', [JurusanController::class, 'destroy'])->name('jurusan.destroy');
 
+
     Route::resource('/admin/users-sekolah', ListSekolah::class);
     Route::resource('/admin/users-kurator', ListDinas::class);
     Route::resource('/admin/users-user', ListUser::class);
     Route::get('/admin/users/destroy/{id}', [ListSekolah::class, 'destroy'])->name('list.destroy');
+
+    Route::post('/admin/import_excel', [ListSekolah::class, 'import_excel'])->name('import.excel');
+
 });
 
 // Role untuk admin dan sekolah

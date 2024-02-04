@@ -44,6 +44,7 @@ class User extends Authenticatable
     {
         return $this->hasMany(Karya::class);
     }
+
     public function produk(): HasMany
     {
         return $this->hasMany(Produk::class);
@@ -52,4 +53,13 @@ class User extends Authenticatable
     {
         return $this->hasMany(Komentar::class);
     }
+
+    protected $fillable = [
+        'name',
+        'username',
+        'email',
+        'password',
+        'role',
+        'status',
+    ];
 }
