@@ -365,6 +365,8 @@
                             <p class="designattion mb-0">Akun Admin</p>
                         @elseif (Auth::user()->role == 'sekolah')
                             <p class="designattion mb-0">Akun Sekolah</p>
+                        @elseif (Auth::user()->role == 'kurator')
+                            <p class="designattion mb-0">Akun Kurator</p>
                         @endif
                     </div>
                 </a>

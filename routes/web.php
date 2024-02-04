@@ -6,6 +6,7 @@ use App\Http\Controllers\ListUser;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\AdminController;
+use App\Http\Controllers\AsesmenController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\SekolahController;
 use App\Http\Controllers\Backend\BrandController;
@@ -14,6 +15,7 @@ use App\Http\Controllers\Backend\SubCategoryController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\Backend\KaryaController;
 use App\Http\Controllers\JurusanController;
+use App\Http\Controllers\KomentarController;
 use App\Http\Controllers\ProdukController;
 
 /*
@@ -71,18 +73,28 @@ Route::group(['middleware' => ['auth', 'role:admin']], function () {
     Route::resource('/admin/jurusan', JurusanController::class);
     Route::get('/admin/jurusan/destroy/{id}', [JurusanController::class, 'destroy'])->name('jurusan.destroy');
 
-    Route::resource('/admin/list', ListSekolah::class);
-    Route::resource('/admin/kurator', ListDinas::class);
-    Route::resource('/admin/user', ListUser::class);
-    Route::get('/admin/user/destroy/{id}', [ListSekolah::class, 'destroy'])->name('list.destroy');
+
+    Route::resource('/admin/users-sekolah', ListSekolah::class);
+    Route::resource('/admin/users-kurator', ListDinas::class);
+    Route::resource('/admin/users-user', ListUser::class);
+    Route::get('/admin/users/destroy/{id}', [ListSekolah::class, 'destroy'])->name('list.destroy');
 
     Route::post('/admin/import_excel', [ListSekolah::class, 'import_excel'])->name('import.excel');
+
 });
 
 // Role untuk admin dan sekolah
 Route::group(['middleware' => ['auth', 'role:admin,sekolah']], function () {
     Route::resource('/admin/karya', KaryaController::class);
-    
+
     Route::resource('/admin/produk', ProdukController::class);
     Route::get('/admin/produk/destroy/{id}', [ProdukController::class, 'destroy'])->name('produk.destroy');
+});
+
+// Role untuk admin dan kurator
+Route::group(['middleware' => ['auth', 'role:admin,kurator']], function () {
+    Route::resource('/admin/asesmen', AsesmenController::class);
+    Route::get('/admin/asesmen-{id}', [AsesmenController::class, 'indexAsesmen'])->name('index.asesmen');
+    Route::get('/admin/asesmen-approve/{id}', [AsesmenController::class, 'approveAsesmen'])->name('approve.asesmen');
+    Route::resource('/admin/komentar', KomentarController::class);
 });

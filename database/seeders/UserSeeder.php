@@ -35,10 +35,11 @@ class UserSeeder extends Seeder
                 'role' => 'sekolah'
             ],
             [
-                'name' => 'Dinas Pendidikan Provinsi',
-                'username' => 'dinasprov',
-                'email' => 'dinas@gmail.com',
-                'password' => Hash::make('dinas123'),
+
+                'name' => 'Kurator Dinas Pendidikan',
+                'username' => 'kurator',
+                'email' => 'kurator@gmail.com',
+                'password' => Hash::make('kurator123'),
                 'role' => 'kurator'
             ],
             [

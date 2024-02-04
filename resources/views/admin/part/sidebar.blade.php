@@ -11,7 +11,7 @@
     </div>
     <!--navigation-->
     <ul class="metismenu" id="menu">
-        <li>
+        <li class="{{ Request::is('admin/dashboard*') ? 'mm-active' :'' }}">
             <a href="{{ route('admin.dashboard') }}">
                 <div class="parent-icon"><i class='bx bx-cookie'></i>
                 </div>
@@ -33,31 +33,35 @@
                     </li>
                 </ul>
             </li> --}}
-            <li>
+            <li class="{{ Request::is('admin/category*') ? 'mm-active' :'' }}">
                 <a href="javascript:;" class="has-arrow">
                     <div class="parent-icon"><i class="bx bx-category"></i>
                     </div>
                     <div class="menu-title">Category</div>
                 </a>
                 <ul>
-                    <li> <a href="{{ route('category.index') }}"><i class="bx bx-radio-circle"></i>Semua Category</a>
+                    <li class="{{ Request::is('admin/category') ? 'mm-active' :'' }}"> <a href="{{ route('category.index') }}"><i class="bx bx-radio-circle"></i>Semua Category</a>
                     </li>
-                    <li> <a href="{{ route('category.create') }}"><i class="bx bx-radio-circle"></i>Tambah Category</a>
+                    <li class="{{ Request::is('admin/category/create') ? 'mm-active' :'' }}"> <a href="{{ route('category.create') }}"><i class="bx bx-radio-circle"></i>Tambah Category</a>
                     </li>
                 </ul>
             </li>
-            <li>
+            <li class="{{ Request::is('admin/users*') ? 'mm-active' :'' }}">
                 <a href="javascript:;" class="has-arrow">
-                    <div class="parent-icon"><i class="bx bx-category"></i>
+                    <div class="parent-icon"><i class="bx bx-group"></i>
                     </div>
                     <div class="menu-title">Users</div>
                 </a>
                 <ul>
-                    <li> <a href="{{ route('user.index') }}"><i class="bx bx-radio-circle"></i>Semua Users</a>
+                    <li class="{{ Request::is('admin/users-user') ? 'mm-active' :'' }}"> <a href="{{ route('users-user.index') }}"><i class="bx bx-radio-circle"></i>Semua Users</a>
                     </li>
-                    <li> <a href="{{ route('kurator.index') }}"><i class="bx bx-radio-circle"></i>Semua Kurator</a>
+
+                    <li class="{{ Request::is('admin/users-kurator') ? 'mm-active' :'' }}"> <a href="{{ route('users-kurator.index') }}"><i class="bx bx-radio-circle"></i>Semua Dinas</a>
                     </li>
-                    <li> <a href="{{ route('list.index') }}"><i class="bx bx-radio-circle"></i>Semua Sekolah</a>
+                    <li class="{{ Request::is('admin/users-sekolah') ? 'mm-active' :'' }}"> <a href="{{ route('users-sekolah.index') }}"><i class="bx bx-radio-circle"></i>Semua Sekolah</a>
+                    </li>
+
+                    <li class="{{ Request::is('admin/users-sekolah/create') ? 'mm-active' :'' }}"> <a href="{{ route('users-sekolah.create') }}"><i class="bx bx-radio-circle"></i>Tambah Data</a>
                     </li>
                 </ul>
             </li>
@@ -76,9 +80,22 @@
                     </li>
                 </ul>
             </li> --}}
+            <li class="{{ Request::is('admin/jurusan*') ? 'mm-active' :'' }}">
+                <a href="javascript:;" class="has-arrow">
+                    <div class="parent-icon"><i class="bx bx-dna"></i>
+                    </div>
+                    <div class="menu-title">Jurusan</div>
+                </a>
+                <ul>
+                    <li class="{{ Request::is('admin/jurusan') ? 'mm-active' :'' }}"> <a href="{{ route('jurusan.index') }}"><i class="bx bx-radio-circle"></i>Semua Jurusan</a>
+                    </li>
+                    <li  class="{{ Request::is('admin/jurusan/create') ? 'mm-active' :'' }}"> <a href="{{ route('jurusan.create') }}"><i class="bx bx-radio-circle"></i>Tambah Jurusan</a>
+                    </li>
+                </ul>
+            </li>
         @endif
         @if (Auth::user()->role == 'admin' || Auth::user()->role == 'sekolah')
-            <li>
+            {{-- <li>
                 <a href="javascript:;" class="has-arrow">
                     <div class="parent-icon"><i class="bx bx-basket"></i>
                     </div>
@@ -92,30 +109,32 @@
                     <li> <a href="{{ route('karya.create') }}"><i class="bx bx-radio-circle"></i>Tambah Karya</a>
                     </li>
                 </ul>
-            </li>
-            <li>
-                <a href="javascript:;" class="has-arrow">
-                    <div class="parent-icon"><i class="bx bx-dna"></i>
-                    </div>
-                    <div class="menu-title">Jurusan</div>
-                </a>
-                <ul>
-                    <li> <a href="{{ route('jurusan.index') }}"><i class="bx bx-radio-circle"></i>Semua Jurusan</a>
-                    </li>
-                    <li> <a href="{{ route('jurusan.create') }}"><i class="bx bx-radio-circle"></i>Tambah Jurusan</a>
-                    </li>
-                </ul>
-            </li>
-            <li>
+            </li> --}}
+            <li class="{{ Request::is('admin/produk*') ? 'mm-active' :'' }}">
                 <a href="javascript:;" class="has-arrow">
                     <div class="parent-icon"><i class="bx bx-barcode"></i>
                     </div>
                     <div class="menu-title">Produk</div>
                 </a>
                 <ul>
-                    <li> <a href="{{ route('produk.index') }}"><i class="bx bx-radio-circle"></i>Semua Produk</a>
+                    <li  class="{{ Request::is('admin/produk') ? 'mm-active' :'' }}"> <a href="{{ route('produk.index') }}"><i class="bx bx-radio-circle"></i>Semua Produk</a>
                     </li>
-                    <li> <a href="{{ route('produk.create') }}"><i class="bx bx-radio-circle"></i>Tambah Produk</a>
+                    <li  class="{{ Request::is('admin/produk/create') ? 'mm-active' :'' }}"> <a href="{{ route('produk.create') }}"><i class="bx bx-radio-circle"></i>Tambah Produk</a>
+                    </li>
+                </ul>
+            </li>
+        @endif
+        @if (Auth::user()->role == 'admin' || Auth::user()->role == 'kurator')
+            <li class="{{ Request::is('admin/asesmen*') ? 'mm-active' :'' }}">
+                <a href="javascript:;" class="has-arrow">
+                    <div class="parent-icon"><i class="bx bx-list-check"></i>
+                    </div>
+                    <div class="menu-title">Asesmen Produk</div>
+                </a>
+                <ul>
+                    <li  class="{{ Request::is('admin/asesmen-original') ? 'mm-active' :'' }}"> <a href="{{ route('index.asesmen', 'original') }}"><i class="bx bx-radio-circle"></i>Produk Original</a>
+                    </li>
+                    <li  class="{{ Request::is('admin/asesmen-atm') ? 'mm-active' :'' }}"> <a href="{{ route('index.asesmen', 'atm') }}"><i class="bx bx-radio-circle"></i>Produk ATM</a>
                     </li>
                 </ul>
             </li>
