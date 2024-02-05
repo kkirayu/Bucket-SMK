@@ -162,7 +162,7 @@
                                     </div>
                                     <div class="row mb-3">
                                         <div class="col-sm-3">
-                                            <h6 class="mb-0">Tahun Produksi</h6>
+                                            <h6 class="mb-0">Tanggal Produksi</h6>
                                         </div>
                                         <div class="form-group col-sm-9 text-secondary">
                                             <input type="date" name="tahun_produksi" class="form-control"

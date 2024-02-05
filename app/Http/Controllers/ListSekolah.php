@@ -151,6 +151,6 @@ class ListSekolah extends Controller
         $nama_file = rand() . $file->getClientOriginalName();
         $file->move('userfile', $nama_file);
         Excel::import(new UsersImport, public_path('/userfile/' . $nama_file));
-        return redirect()->route('list.index');
+        return redirect()->route('users-sekolah.index');
     }
 }
