@@ -34,7 +34,7 @@
                                         <span aria-hidden="true">&times;</span>
                                     </button>
                                 </div>
-                                <form method="post" action="{{ route('import.jurusan') }}" enctype="multipart/form-data">
+                                <form method="post" action="{{ route('import.excel') }}" enctype="multipart/form-data">
                                     <div class="modal-body">
                                         {{ csrf_field() }}
                                         <label>Pilih file excel</label>
