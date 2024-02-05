@@ -4,42 +4,43 @@
     <div class="page-content">
 
         <div class="row row-cols-1 row-cols-md-2 row-cols-xl-4">
-            <div class="col">
-                <div class="card radius-10 bg-gradient-deepblue">
-                    <div class="card-body">
-                        <div class="d-flex align-items-center">
-                            <h5 class="mb-0 text-white">9526</h5>
-                            <div class="ms-auto">
-                                <i class='bx bx-cart fs-3 text-white'></i>
+            @if (Auth::user()->role != 'sekolah')
+                <div class="col">
+                    <div class="card radius-10 bg-gradient-deepblue">
+                        <div class="card-body">
+                            <div class="d-flex align-items-center">
+                                <h5 class="mb-0 text-white">{{ $getSekolah->count() }}</h5>
+                                <div class="ms-auto">
+                                    <i class='bx bx-buildings fs-3 text-white'></i>
+                                </div>
                             </div>
-                        </div>
-                        <div class="progress my-3 bg-light-transparent" style="height:3px;">
-                            <div class="progress-bar bg-white" role="progressbar" style="width: 55%" aria-valuenow="25"
-                                aria-valuemin="0" aria-valuemax="100"></div>
-                        </div>
-                        <div class="d-flex align-items-center text-white">
-                            <p class="mb-0">Total Orders</p>
-                            <p class="mb-0 ms-auto">+4.2%<span><i class='bx bx-up-arrow-alt'></i></span></p>
+                            <div class="progress my-3 bg-light-transparent" style="height:3px;">
+                                <div class="progress-bar bg-white" role="progressbar" style="width: 100%" aria-valuenow="25"
+                                    aria-valuemin="0" aria-valuemax="100"></div>
+                            </div>
+                            <div class="d-flex align-items-center text-white">
+                                <p class="mb-0">Total Sekolah</p>
+                            </div>
                         </div>
                     </div>
                 </div>
-            </div>
+            @endif
+
             <div class="col">
                 <div class="card radius-10 bg-gradient-orange">
                     <div class="card-body">
                         <div class="d-flex align-items-center">
-                            <h5 class="mb-0 text-white">$8323</h5>
+                            <h5 class="mb-0 text-white">{{ $getProduk->count() }}</h5>
                             <div class="ms-auto">
-                                <i class='bx bx-dollar fs-3 text-white'></i>
+                                <i class='bx bx-barcode fs-3 text-white'></i>
                             </div>
                         </div>
                         <div class="progress my-3 bg-light-transparent" style="height:3px;">
-                            <div class="progress-bar bg-white" role="progressbar" style="width: 55%" aria-valuenow="25"
+                            <div class="progress-bar bg-white" role="progressbar" style="width: 100%" aria-valuenow="25"
                                 aria-valuemin="0" aria-valuemax="100"></div>
                         </div>
                         <div class="d-flex align-items-center text-white">
-                            <p class="mb-0">Total Revenue</p>
-                            <p class="mb-0 ms-auto">+1.2%<span><i class='bx bx-up-arrow-alt'></i></span></p>
+                            <p class="mb-0">Total Produk</p>
                         </div>
                     </div>
                 </div>
@@ -48,18 +49,20 @@
                 <div class="card radius-10 bg-gradient-ohhappiness">
                     <div class="card-body">
                         <div class="d-flex align-items-center">
-                            <h5 class="mb-0 text-white">6200</h5>
+                            <h5 class="mb-0 text-white">{{ $getProduk->where('kategori', 'original')->count() }}</h5>
                             <div class="ms-auto">
-                                <i class='bx bx-group fs-3 text-white'></i>
+                                <i class='bx bx-diamond fs-3 text-white'></i>
                             </div>
                         </div>
+                        @php
+                            $persenOr = ($getProduk->where('kategori', 'original')->count() / $getProduk->count()) * 100;
+                        @endphp
                         <div class="progress my-3 bg-light-transparent" style="height:3px;">
-                            <div class="progress-bar bg-white" role="progressbar" style="width: 55%" aria-valuenow="25"
-                                aria-valuemin="0" aria-valuemax="100"></div>
+                            <div class="progress-bar bg-white" role="progressbar" style="width: {{ $persenOr }}%"
+                                aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
                         </div>
                         <div class="d-flex align-items-center text-white">
-                            <p class="mb-0">Visitors</p>
-                            <p class="mb-0 ms-auto">+5.2%<span><i class='bx bx-up-arrow-alt'></i></span></p>
+                            <p class="mb-0">Produk Original</p>
                         </div>
                     </div>
                 </div>
@@ -68,232 +71,206 @@
                 <div class="card radius-10 bg-gradient-ibiza">
                     <div class="card-body">
                         <div class="d-flex align-items-center">
-                            <h5 class="mb-0 text-white">5630</h5>
+                            <h5 class="mb-0 text-white">{{ $getProduk->where('kategori', 'atm')->count() }}</h5>
                             <div class="ms-auto">
-                                <i class='bx bx-envelope fs-3 text-white'></i>
+                                <i class='bx bx-recycle fs-3 text-white'></i>
                             </div>
                         </div>
+                        @php
+                            $persenAtm = ($getProduk->where('kategori', 'atm')->count() / $getProduk->count()) * 100;
+                        @endphp
                         <div class="progress my-3 bg-light-transparent" style="height:3px;">
-                            <div class="progress-bar bg-white" role="progressbar" style="width: 55%" aria-valuenow="25"
-                                aria-valuemin="0" aria-valuemax="100"></div>
+                            <div class="progress-bar bg-white" role="progressbar" style="width: {{ $persenAtm }}%"
+                                aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
                         </div>
                         <div class="d-flex align-items-center text-white">
-                            <p class="mb-0">Messages</p>
-                            <p class="mb-0 ms-auto">+2.2%<span><i class='bx bx-up-arrow-alt'></i></span></p>
+                            <p class="mb-0">Produk ATM</p>
                         </div>
                     </div>
                 </div>
             </div>
-        </div><!--end row-->
-
-        <div class="card radius-10">
-            <div class="card-body">
-                <div class="d-flex align-items-center">
-                    <div>
-                        <h5 class="mb-0">Orders Summary</h5>
-                    </div>
-                    <div class="font-22 ms-auto"><i class="bx bx-dots-horizontal-rounded"></i>
+            @if (Auth::user()->role == 'sekolah')
+                <div class="col">
+                    <div class="card radius-10 bg-gradient-deepblue">
+                        <div class="card-body">
+                            <div class="d-flex align-items-center">
+                                <h5 class="mb-0 text-white">{{ $komentars->count() }}</h5>
+                                <div class="ms-auto">
+                                    <i class='bx bx-message fs-3 text-white'></i>
+                                </div>
+                            </div>
+                            <div class="progress my-3 bg-light-transparent" style="height:3px;">
+                                <div class="progress-bar bg-white" role="progressbar" style="width: 100%" aria-valuenow="25"
+                                    aria-valuemin="0" aria-valuemax="100"></div>
+                            </div>
+                            <div class="d-flex align-items-center text-white">
+                                <p class="mb-0">Total Komentar</p>
+                            </div>
+                        </div>
                     </div>
                 </div>
-                <hr>
-                <div class="table-responsive">
-                    <table class="table align-middle mb-0">
-                        <thead class="table-light">
-                            <tr>
-                                <th>Order id</th>
-                                <th>Product</th>
-                                <th>Customer</th>
-                                <th>Date</th>
-                                <th>Price</th>
-                                <th>Status</th>
-                                <th>Action</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr>
-                                <td>#897656</td>
-                                <td>
-                                    <div class="d-flex align-items-center">
-                                        <div class="recent-product-img">
-                                            <img src="{{ asset('backadmin/assets/images/icons/chair.png') }}" alt="">
+            @endif
+        </div><!--end row-->
+
+        <div class="">
+            <div class="">
+                <div class="container py-2">
+                    <h2 class="font-weight-light text-center py-3">Amankan Data Anda!</h2>
+                    <!-- timeline item 1 -->
+                    <div class="row">
+                        <!-- timeline item 1 left dot -->
+                        <div class="col-auto text-center flex-column d-none d-sm-flex">
+                            <div class="row h-50">
+                                <div class="col">&nbsp;</div>
+                                <div class="col">&nbsp;</div>
+                            </div>
+                            <h5 class="m-2">
+                                <span class="badge rounded-pill bg-primary border">&nbsp;</span>
+                            </h5>
+                            <div class="row h-50">
+                                <div class="col border-end">&nbsp;</div>
+                                <div class="col">&nbsp;</div>
+                            </div>
+                        </div>
+                        <!-- timeline item 1 event content -->
+
+                        <div class="col py-2">
+                            <div class="card radius-15">
+                                <div class="card-body">
+                                    <h4 class="card-title">Ganti <a href="{{ route('admin.profile') }}">Password</a> Yang
+                                        Aman</h4>
+                                    <p class="card-text">Segera mengganti password awal Anda dengan yang baru demi keamanan
+                                        akun Anda. Penggantian Password dapat dilakukan
+                                        pada menu Profile atau bisa klik kata Password diatas. Buatlah Password yang kuat
+                                        dan gampang diingat.</p>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                    <!--/row-->
+                    <!-- timeline item 2 -->
+                    <div class="row">
+                        <div class="col-auto text-center flex-column d-none d-sm-flex">
+                            <div class="row h-50">
+                                <div class="col border-end">&nbsp;</div>
+                                <div class="col">&nbsp;</div>
+                            </div>
+                            <h5 class="m-2">
+                                <span class="badge rounded-pill bg-light border">&nbsp;</span>
+                            </h5>
+                            <div class="row h-50">
+                                <div class="col border-end">&nbsp;</div>
+                                <div class="col">&nbsp;</div>
+                            </div>
+                        </div>
+                        <div class="col py-2">
+                            <div class="card radius-15">
+                                <div class="card-body">
+                                    @if (Auth::user()->role == 'sekolah')
+                                        <h4 class="card-title">Lengkapi <a href="{{ route('admin.profile') }}">Profil</a>
+                                            Sekolah</h4>
+                                        <p class="card-text">Silahkan Lengkapi Profil Sekolah Sesuai dengan Detail Dibawah
+                                            ini. Profil sekolah dapat memudahkan Kurator dalam mengidentifikasi
+                                            sekolah Anda. Untuk melengkapi Profil Sekolah masuk ke menu Profile atau klik
+                                            kata Profile diatas.
+                                        </p>
+                                        <button class="btn btn-sm btn-outline-secondary" type="button"
+                                            data-bs-target="#t2_details" data-bs-toggle="collapse">Lihat Details
+                                            ▼</button>
+                                        <div class="collapse border" id="t2_details">
+                                            <div class="p-2 text-monospace">
+                                                <div>- Foto: Inputkan Logo Sekolah</div>
+                                                <div>- Alamat: Inputkan Alamat Lengkap Sekolah </div>
+                                                <div>- Email: Inputkan Email Valid Sekolah</div>
+                                                <div>- Nomor HP: Inputkan Nomor Sekolah Yang Dapat Dihubungi</div>
+                                                <div>- Info Sekolah: Inputkan Brand Sekolah, contoh "Sekolah Perhotelan"
+                                                </div>
+                                            </div>
                                         </div>
-                                        <div class="ms-2">
-                                            <h6 class="mb-1 font-14">Light Blue Chair</h6>
-                                        </div>
-                                    </div>
-                                </td>
-                                <td>Brooklyn Zeo</td>
-                                <td>12 Jul 2020</td>
-                                <td>$64.00</td>
-                                <td>
-                                    <div class="badge rounded-pill bg-light-info text-info w-100">In Progress
-                                    </div>
-                                </td>
-                                <td>
-                                    <div class="d-flex order-actions"> <a href="javascript:;" class=""><i
-                                                class="bx bx-cog"></i></a>
-                                        <a href="javascript:;" class="ms-4"><i class="bx bx-down-arrow-alt"></i></a>
-                                    </div>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>#987549</td>
-                                <td>
-                                    <div class="d-flex align-items-center">
-                                        <div class="recent-product-img">
-                                            <img src="{{ asset('backadmin/assets/images/icons/shoes.png') }}" alt="">
-                                        </div>
-                                        <div class="ms-2">
-                                            <h6 class="mb-1 font-14">Green Sport Shoes</h6>
-                                        </div>
-                                    </div>
-                                </td>
-                                <td>Martin Hughes</td>
-                                <td>14 Jul 2020</td>
-                                <td>$45.00</td>
-                                <td>
-                                    <div class="badge rounded-pill bg-light-success text-success w-100">
-                                        Completed</div>
-                                </td>
-                                <td>
-                                    <div class="d-flex order-actions"> <a href="javascript:;" class=""><i
-                                                class="bx bx-cog"></i></a>
-                                        <a href="javascript:;" class="ms-4"><i class="bx bx-down-arrow-alt"></i></a>
-                                    </div>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>#685749</td>
-                                <td>
-                                    <div class="d-flex align-items-center">
-                                        <div class="recent-product-img">
-                                            <img src="{{ asset('backadmin/assets/images/icons/headphones.png') }}" alt="">
-                                        </div>
-                                        <div class="ms-2">
-                                            <h6 class="mb-1 font-14">Red Headphone 07</h6>
-                                        </div>
-                                    </div>
-                                </td>
-                                <td>Shoan Stephen</td>
-                                <td>15 Jul 2020</td>
-                                <td>$67.00</td>
-                                <td>
-                                    <div class="badge rounded-pill bg-light-danger text-danger w-100">
-                                        Cancelled</div>
-                                </td>
-                                <td>
-                                    <div class="d-flex order-actions"> <a href="javascript:;" class=""><i
-                                                class="bx bx-cog"></i></a>
-                                        <a href="javascript:;" class="ms-4"><i class="bx bx-down-arrow-alt"></i></a>
-                                    </div>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>#887459</td>
-                                <td>
-                                    <div class="d-flex align-items-center">
-                                        <div class="recent-product-img">
-                                            <img src="{{ asset('backadmin/assets/images/icons/idea.png') }}" alt="">
-                                        </div>
-                                        <div class="ms-2">
-                                            <h6 class="mb-1 font-14">Mini Laptop Device</h6>
-                                        </div>
-                                    </div>
-                                </td>
-                                <td>Alister Campel</td>
-                                <td>18 Jul 2020</td>
-                                <td>$87.00</td>
-                                <td>
-                                    <div class="badge rounded-pill bg-light-success text-success w-100">
-                                        Completed</div>
-                                </td>
-                                <td>
-                                    <div class="d-flex order-actions"> <a href="javascript:;" class=""><i
-                                                class="bx bx-cog"></i></a>
-                                        <a href="javascript:;" class="ms-4"><i class="bx bx-down-arrow-alt"></i></a>
-                                    </div>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>#335428</td>
-                                <td>
-                                    <div class="d-flex align-items-center">
-                                        <div class="recent-product-img">
-                                            <img src="{{ asset('backadmin/assets/images/icons/user-interface.png') }}" alt="">
-                                        </div>
-                                        <div class="ms-2">
-                                            <h6 class="mb-1 font-14">Purple Mobile Phone</h6>
-                                        </div>
-                                    </div>
-                                </td>
-                                <td>Keate Medona</td>
-                                <td>20 Jul 2020</td>
-                                <td>$75.00</td>
-                                <td>
-                                    <div class="badge rounded-pill bg-light-info text-info w-100">In Progress
-                                    </div>
-                                </td>
-                                <td>
-                                    <div class="d-flex order-actions"> <a href="javascript:;" class=""><i
-                                                class="bx bx-cog"></i></a>
-                                        <a href="javascript:;" class="ms-4"><i class="bx bx-down-arrow-alt"></i></a>
-                                    </div>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>#224578</td>
-                                <td>
-                                    <div class="d-flex align-items-center">
-                                        <div class="recent-product-img">
-                                            <img src="{{ asset('backadmin/assets/images/icons/watch.png') }}" alt="">
-                                        </div>
-                                        <div class="ms-2">
-                                            <h6 class="mb-1 font-14">Smart Hand Watch</h6>
-                                        </div>
-                                    </div>
-                                </td>
-                                <td>Winslet Maya</td>
-                                <td>22 Jul 2020</td>
-                                <td>$80.00</td>
-                                <td>
-                                    <div class="badge rounded-pill bg-light-danger text-danger w-100">
-                                        Cancelled</div>
-                                </td>
-                                <td>
-                                    <div class="d-flex order-actions"> <a href="javascript:;" class=""><i
-                                                class="bx bx-cog"></i></a>
-                                        <a href="javascript:;" class="ms-4"><i class="bx bx-down-arrow-alt"></i></a>
-                                    </div>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>#447896</td>
-                                <td>
-                                    <div class="d-flex align-items-center">
-                                        <div class="recent-product-img">
-                                            <img src="{{ asset('backadmin/assets/images/icons/tshirt.png') }}" alt="">
-                                        </div>
-                                        <div class="ms-2">
-                                            <h6 class="mb-1 font-14">T-Shirt Blue</h6>
-                                        </div>
-                                    </div>
-                                </td>
-                                <td>Emy Jackson</td>
-                                <td>28 Jul 2020</td>
-                                <td>$96.00</td>
-                                <td>
-                                    <div class="badge rounded-pill bg-light-success text-success w-100">
-                                        Completed</div>
-                                </td>
-                                <td>
-                                    <div class="d-flex order-actions"> <a href="javascript:;" class=""><i
-                                                class="bx bx-cog"></i></a>
-                                        <a href="javascript:;" class="ms-4"><i class="bx bx-down-arrow-alt"></i></a>
-                                    </div>
-                                </td>
-                            </tr>
-                        </tbody>
-                    </table>
+                                    @elseif (Auth::user()->role == 'kurator')
+                                    <h4 class="card-title">Isi <a href="{{ route('admin.profile') }}">Biodata</a> Lengkap</h4>
+                                    <p class="card-text">Silahkan Lengkapi Profil Anda. Profil dapat memudahkan Sekolah dalam mengidentifikasi
+                                        Anda. Untuk melengkapi Profil Sekolah masuk ke menu Profile atau klik kata Biodata diatas.
+                                    </p>
+                                    @endif
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!--/row-->
+                    <!-- timeline item 3 -->
+                    <div class="row">
+                        <div class="col-auto text-center flex-column d-none d-sm-flex">
+                            <div class="row h-50">
+                                <div class="col border-end">&nbsp;</div>
+                                <div class="col">&nbsp;</div>
+                            </div>
+                            <h5 class="m-2">
+                                <span class="badge rounded-pill bg-light border">&nbsp;</span>
+                            </h5>
+                            <div class="row h-50">
+                                <div class="col border-end">&nbsp;</div>
+                                <div class="col">&nbsp;</div>
+                            </div>
+                        </div>
+                        <div class="col py-2">
+                            <div class="card radius-15">
+                                <div class="card-body">
+                                    @if (Auth::user()->role == 'sekolah')
+                                        <h4 class="card-title">Silahkan Tambahkan Produk</h4>
+                                        <p>Silahkan Uploadkan Produk-Produk Inovasi yang menjadi keunggulan Sekolah, Baik itu
+                                            Produk Original yang diciptakan baru dan terbarukan atau Produk ATM dengan
+                                            mencantumkan keterangan inovasi yang dilakukan terhadap Produk yang ada sebelumnya.
+                                            Produk yang di uploadkan oleh Sekolah boleh lebih dari 1.</p>
+                                    @elseif (Auth::user()->role == 'kurator')
+                                        <h4 class="card-title">Melakukan Asesmen Produk</h4>
+                                        <p class="card-text">Kurator Melakukan Asesmen terhadap produk yang di-Upload oleh Sekolah, Baik itu
+                                            Produk Original yang diciptakan baru dan terbarukan atau Produk ATM dengan
+                                            dengan keterangan inovasi yang dilakukan terhadap Produk yang ada sebelumnya.
+                                        </p>
+                                    @endif
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!--/row-->
+                    <!-- timeline item 4 -->
+                    <div class="row">
+                        <div class="col-auto text-center flex-column d-none d-sm-flex">
+                            <div class="row h-50">
+                                <div class="col border-end">&nbsp;</div>
+                                <div class="col">&nbsp;</div>
+                            </div>
+                            <h5 class="m-2">
+                                <span class="badge rounded-pill bg-light border">&nbsp;</span>
+                            </h5>
+                            <div class="row h-50">
+                                <div class="col">&nbsp;</div>
+                                <div class="col">&nbsp;</div>
+                            </div>
+                        </div>
+                        <div class="col py-2">
+                            <div class="card radius-15">
+                                <div class="card-body">
+                                    @if (Auth::user()->role == 'sekolah')
+                                        <h4 class="card-title">Tunggu Hasil Asesmen Produk Dari Kurator</h4>
+                                        <p>Hasil asesmen merupakan hasil kurasi dari para Kurator, sehingga bisa menyatakan jika
+                                            produk tersebut masuk kepada kategori Produk Original atau ATM dan layak untuk
+                                            dilakukan Kurasi Lanjutan Sebelum diumumkan menjadi Produk yang akan di tampilkan
+                                            pada Expo 2024.</p>
+                                    @elseif (Auth::user()->role == 'kurator')
+                                        <h4 class="card-title">Mengirimkan Hasil Asesmen Kepada Admin</h4>
+                                        <p class="card-text">Kurator melakukan Upload SK hasil Kurasi dari Produk-produk inovasi yang dikirimkan masing-masing sekolah untuk di Approve oleh Admin.
+                                            Peng-Upload-an dapat dilakukan pada menu Upload SK.
+
+                                        </p>
+                                    @endif
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!--/row-->
                 </div>
             </div>
         </div>

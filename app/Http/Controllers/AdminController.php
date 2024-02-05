@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Komentar;
 use App\Models\User;
+use App\Models\Produk;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
@@ -11,7 +13,18 @@ use Illuminate\Http\RedirectResponse;
 class AdminController extends Controller
 {
     public function adminDashboard(){
-        return view('admin.index');
+        $getSekolah = User::where('role','sekolah')->get();
+        if (Auth::user()->role == 'sekolah') {
+            $getProduk = Produk::where('status', '!=', 0)->where('user_id', Auth::user()->id)->get();
+            foreach ($getProduk as $key => $prod) {
+                $komentars = Komentar::where('produk_id', $prod->id)->get();
+            }
+        } else {
+            $getProduk = Produk::where('status', '!=', 0)->get();
+            $komentars = null;
+
+        }
+        return view('admin.index', compact('getSekolah', 'getProduk', 'komentars'));
     }
 
     public function adminLogin(){
