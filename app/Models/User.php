@@ -61,5 +61,6 @@ class User extends Authenticatable
         'password',
         'role',
         'status',
+        'sekolah_info',
     ];
 }

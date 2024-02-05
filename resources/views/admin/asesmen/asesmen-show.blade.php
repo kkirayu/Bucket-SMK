@@ -57,6 +57,19 @@
 
                                 <dt class="col-sm-3">Nama Tim</dt>
                                 <dd class="col-sm-9">{{ $show->nama_tim }}</dd>
+
+                                <dt class="col-sm-3">Link Vidio</dt>
+                                <dd class="col-sm-9">{{ $show->video_produk }}</dd>
+
+                                <dt class="col-sm-3">Merk Dagang</dt>
+                                <dd class="col-sm-9">{{ $show->merk_dagang }}</dd>
+
+                                <dt class="col-sm-3">Material</dt>
+                                <dd class="col-sm-9">{{ $show->material }}</dd>
+
+                                <dt class="col-sm-3">Tahun Rilis</dt>
+                                <dd class="col-sm-9">{{ $show->tahun_produksi }}</dd>
+
                             </dl>
                         </div>
                     </div>
