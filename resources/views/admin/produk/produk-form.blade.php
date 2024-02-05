@@ -45,7 +45,7 @@
                                                     id="kategori" value="atm"
                                                     {{ old('kategori', isset($edit) && $edit->kategori == 'atm' ? 'checked' : '') }}>
                                                 <label class="form-check-label" for="kategori">
-                                                    ATM
+                                                    ATM  (Amati Tiru Modifikasi)
                                                 </label>
                                             </div>
                                             <div class="form-check">
@@ -53,7 +53,7 @@
                                                     id="kategori" value="original"
                                                     {{ old('kategori', isset($edit) && $edit->kategori == 'original' ? 'checked' : '') }}>
                                                 <label class="form-check-label" for="kategori">
-                                                    Original
+                                                    Original 
                                                 </label>
                                             </div>
                                         </div>
@@ -98,6 +98,7 @@
                                         </div>
                                         <div class="col-sm-9 text-secondary">
                                             <input type="file" name="{{ isset($edit) ? 'photos' : 'photo' }}" class="form-control" id="photo1" />
+                                            <small class="text-muted">Accepted formats: PNG, JPG, JPEG.</small>
                                         </div>
                                     </div>
                                     <div class="row mb-3">
@@ -118,6 +119,7 @@
                                             <input type="text" name="vidio_produk" class="form-control"
                                                 value="{{ old('vidio_produk', isset($edit) ? $edit->vidio_produk : '') }}"
                                                 placeholder="Link vidio produk" />
+                                                <small class="text-muted">Accepted formats: Link vidio yang sudah di upload ke platform seperti Youtube dll.</small>
                                         </div>
                                     </div>
                                     <div class="row mb-3">
@@ -126,6 +128,7 @@
                                         </div>
                                         <div class="form-group col-sm-9 text-secondary">
                                             <textarea name="nama_tim" class="form-control" placeholder="Nama Tim">{{ old('nama_tim', isset($edit) ? $edit->nama_tim : '') }}</textarea>
+                                            <small class="text-muted">Accepted formats: Nama Tim Project dan Nama Orang yang termasuk ke dalam TIM.</small>
                                         </div>
                                     </div>
                                     <div class="row mb-3">
@@ -187,6 +190,7 @@
                                         <div class="col-sm-9 text-secondary">
                                             <input type="file" name="sertifikasi_haki" class="form-control"
                                                 id="photoHaki" />
+                                                <small class="text-muted">Accepted formats: PNG, JPG, JPEG.</small>
                                         </div>
                                     </div>
                                     <div class="row mb-3">
@@ -206,6 +210,7 @@
                                         <div class="col-sm-9 text-secondary">
                                             <input type="file" name="sertifikasi_halal" class="form-control"
                                                 id="photoHalal" />
+                                                <small class="text-muted">Accepted formats: PNG, JPG, JPEG.</small>
                                         </div>
                                     </div>
                                     <div class="row mb-3">
@@ -224,6 +229,7 @@
                                         </div>
                                         <div class="col-sm-9 text-secondary">
                                             <input type="file" name="sni" class="form-control" id="photoSNI" />
+                                            <small class="text-muted">Accepted formats: PNG, JPG, JPEG.</small>
                                         </div>
                                     </div>
                                     <div class="row mb-3">

@@ -29,7 +29,7 @@ class UserController extends Controller
         $getUser->phone = $request->phone;
         $getUser->alamat = $request->alamat;
         $getUser->sekolah_join_date = $request->join;
-        $getUser->sekolah_info = $request->info;
+        $getUser->sekolah_info = $request->sekolah_info;
 
         if ($request->file('photo')) {
             $file = $request->file('photo');

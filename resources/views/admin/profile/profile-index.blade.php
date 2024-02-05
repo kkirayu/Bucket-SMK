@@ -4,13 +4,24 @@
     <div class="page-content">
         <!--breadcrumb-->
         <div class="page-breadcrumb d-none d-sm-flex align-items-center mb-3">
+            @if (Auth::user()->role == 'sekolah')
+            <div class="breadcrumb-title pe-3">Sekolah Profile</div>
+            @endif
+            @if (Auth::user()->role == 'admin')
             <div class="breadcrumb-title pe-3">Admin Profile</div>
+            @endif
             <div class="ps-3">
                 <nav aria-label="breadcrumb">
                     <ol class="breadcrumb mb-0 p-0">
                         <li class="breadcrumb-item"><a href="javascript:;"><i class="bx bx-user"></i></a>
                         </li>
+                        @if (Auth::user()->role == 'sekolah')
+                        <li class="breadcrumb-item active" aria-current="page">Sekolah Profile</li>
+                        @endif
+                        @if (Auth::user()->role == 'admin')
                         <li class="breadcrumb-item active" aria-current="page">Admin Profile</li>
+                        @endif
+                        
                     </ol>
                 </nav>
             </div>
@@ -66,9 +77,8 @@
                                         <li
                                             class="list-group-item d-flex justify-content-between align-items-center flex-wrap">
                                             <h6 class="mb-0"><svg xmlns="http://www.w3.org/2000/svg" width="24"
-                                                    height="24" viewBox="0 0 24 24" fill="none"
-                                                    stroke="currentColor" stroke-width="2" stroke-linecap="round"
-                                                    stroke-linejoin="round"
+                                                    height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                                    stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
                                                     class="feather feather-facebook me-2 icon-inline text-primary">
                                                     <path
                                                         d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z">
@@ -87,18 +97,22 @@
                                 </div>
                                 <div class="card-body">
                                     <form action="{{ route('admin.profile.updatePassword') }}" method="POST"
-                                    enctype="multipart/form-data">
-                                    @csrf
+                                        enctype="multipart/form-data">
+                                        @csrf
 
                                         @if (session('status'))
-                                            <div class="alert alert-success border-0 bg-success alert-dismissible fade show" role="alert">
+                                            <div class="alert alert-success border-0 bg-success alert-dismissible fade show"
+                                                role="alert">
                                                 <div class="text-white">{{ session('status') }}</div>
-                                                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                                                <button type="button" class="btn-close" data-bs-dismiss="alert"
+                                                    aria-label="Close"></button>
                                             </div>
                                         @elseif (session('error'))
-                                            <div class="alert alert-danger border-0 bg-danger alert-dismissible fade show" role="alert">
+                                            <div class="alert alert-danger border-0 bg-danger alert-dismissible fade show"
+                                                role="alert">
                                                 <div class="text-white">{{ session('error') }}</div>
-                                                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                                                <button type="button" class="btn-close" data-bs-dismiss="alert"
+                                                    aria-label="Close"></button>
                                             </div>
                                         @endif
 
@@ -107,7 +121,10 @@
                                                 <h6 class="mb-0">Password Lama</h6>
                                             </div>
                                             <div class="col-sm-8 text-secondary">
-                                                <input id="current_password" type="password" name="passwordLama" class="form-control @error('passwordLama') is-invalid @enderror" placeholder="Password Lama"/>
+                                                <input id="current_password" type="password" name="passwordLama"
+                                                    class="form-control @error('passwordLama') is-invalid @enderror"
+                                                    placeholder="Password Lama" />
+                                                    <small class="text-muted">Masukkan Password lama.</small>
                                                 @error('passwordLama')
                                                     <span class="text-danger">{{ $message }}</span>
                                                 @enderror
@@ -118,10 +135,13 @@
                                                 <h6 class="mb-0">Password Baru</h6>
                                             </div>
                                             <div class="col-sm-8 text-secondary">
-                                                <input id="new_password" type="password" name="passwordBaru" class="form-control @error('passwordBaru') is-invalid @enderror" placeholder="Password Baru"/>
+                                                <input id="new_password" type="password" name="passwordBaru"
+                                                    class="form-control @error('passwordBaru') is-invalid @enderror"
+                                                    placeholder="Password Baru" />
                                                 @error('passwordBaru')
                                                     <span class="text-danger">{{ $message }}</span>
                                                 @enderror
+                                                <small class="text-muted">Buatlah password yang susah ditebak dengan kombinasi huruf dan angka.</small>
                                             </div>
                                         </div>
                                         <div class="row mb-3">
@@ -129,13 +149,17 @@
                                                 <h6 class="mb-0">Konfirmasi Password</h6>
                                             </div>
                                             <div class="col-sm-8 text-secondary">
-                                                <input id="new_password_confirmation" type="password" name="new_password_confirmation" class="form-control" placeholder="Konfirmasi Password Baru"/>
+                                                <input id="new_password_confirmation" type="password"
+                                                    name="new_password_confirmation" class="form-control"
+                                                    placeholder="Konfirmasi Password Baru" />
+                                                    <small class="text-muted">Ulangi pasword baru</small>
                                             </div>
                                         </div>
                                         <div class="row">
                                             <div class="col-sm-3"></div>
                                             <div class="col-sm-8 text-secondary">
-                                                <input type="submit" class="btn btn-success px-4" value="Ubah Password" />
+                                                <input type="submit" class="btn btn-success px-4"
+                                                    value="Ubah Password" />
                                             </div>
                                         </div>
                                     </form>
@@ -147,7 +171,15 @@
                     <div class="col-lg-7">
                         <div class="card">
                             <div class="card-header">
-                                <h3>Data Admin</h3>
+                                @if (Auth::user()->role == 'sekolah')
+                                    <h3>Data Sekolah</h3>
+                                @endif
+                                @if (Auth::user()->role == 'admin')
+                                    <h3>Data Admin</h3>
+                                @endif
+
+                                <p class="text-rose-600" >*Silahkan lengkapi data dibawah</p>
+
                             </div>
                             <div class="card-body">
                                 <form action="{{ route('admin.profile.update') }}" method="POST"
@@ -155,7 +187,7 @@
                                     @csrf
                                     <div class="row mb-3">
                                         <div class="col-sm-3">
-                                            <h6 class="mb-0">Username</h6>
+                                            <h6 class="mb-0">NPSN</h6>
                                         </div>
                                         <div class="col-sm-9 text-secondary">
                                             <input type="text" class="form-control" value="{{ $getUser->username }}"
@@ -187,6 +219,7 @@
                                         <div class="col-sm-9 text-secondary">
                                             <input type="text" name="phone" class="form-control"
                                                 value="{{ $getUser->phone }}" />
+                                                <small class="text-muted">Tidak menggunakan kode negara *cth 082237943100</small>
                                         </div>
                                     </div>
                                     <div class="row mb-3">
@@ -203,7 +236,7 @@
                                         </div>
                                         <div class="col-sm-9 text-secondary">
                                             <input type="text" name="sekolah_info" class="form-control"
-                                                value="{{ $getUser->sekolah_info}}" />
+                                                value="{{ $getUser->sekolah_info }}" />
                                         </div>
                                     </div>
                                     <div class="row mb-3">
@@ -212,6 +245,7 @@
                                         </div>
                                         <div class="col-sm-9 text-secondary">
                                             <input type="file" name="photo" class="form-control" id="photo" />
+                                            <small class="text-muted">Accepted formats: PNG, JPEG, JPG.</small>
                                         </div>
                                     </div>
                                     <div class="row mb-3">
