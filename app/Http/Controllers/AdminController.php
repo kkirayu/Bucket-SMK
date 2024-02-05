@@ -44,6 +44,7 @@ class AdminController extends Controller
         $getUser->email = $request->email;
         $getUser->phone = $request->phone;
         $getUser->alamat = $request->alamat;
+        $getUser->sekolah_info = $request->sekolah_info;
 
         if ($request->file('photo')) {
             $file = $request->file('photo');

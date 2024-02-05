@@ -17,6 +17,8 @@ use App\Http\Controllers\Backend\KaryaController;
 use App\Http\Controllers\JurusanController;
 use App\Http\Controllers\KomentarController;
 use App\Http\Controllers\ProdukController;
+use App\Http\Controllers\SkController;
+use App\Models\Sk;
 
 /*
 |--------------------------------------------------------------------------
@@ -81,7 +83,6 @@ Route::group(['middleware' => ['auth', 'role:admin']], function () {
 
     Route::post('/admin/import_excel', [ListSekolah::class, 'import_excel'])->name('import.excel');
     Route::post('/admin/import_excel/jurusan', [JurusanController::class, 'import_excel'])->name('import.jurusan');
-
 });
 
 // Role untuk admin dan sekolah
@@ -98,4 +99,5 @@ Route::group(['middleware' => ['auth', 'role:admin,kurator']], function () {
     Route::get('/admin/asesmen-{id}', [AsesmenController::class, 'indexAsesmen'])->name('index.asesmen');
     Route::get('/admin/asesmen-approve/{id}', [AsesmenController::class, 'approveAsesmen'])->name('approve.asesmen');
     Route::resource('/admin/komentar', KomentarController::class);
+    Route::resource('/admin/sk', SkController::class);
 });
