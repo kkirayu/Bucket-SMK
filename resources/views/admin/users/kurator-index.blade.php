@@ -19,39 +19,38 @@
                     <a href="{{ route('users-kurator.create') }}" class="btn btn-primary">Tambah Kurator</a>
                 </div>
                 <div class="btn-group">
-                    <button type="button" class="btn btn-primary" id="importButton">
-                        Import Excel
-                    </button>
-                
-                    <form method="post" action="{{ route('import.excel') }}" enctype="multipart/form-data" style="display: none;" id="importForm">
-                        <div class="modal-content">
-                            <div class="modal-header">
-                                <h5 class="modal-title" id="exampleModalLabel">Import Excel</h5>
-                            </div>
-                            <div class="modal-body">
-                                {{ csrf_field() }}
-                                <label for="fileInput">Pilih file excel</label>
-                                <div class="form-group">
-                                    <input type="file" name="file" id="fileInput" required="required">
+
+                    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#importModal">Import
+                        Excel</button>
+
+                    <!-- Modal -->
+                    <div class="modal fade" id="importModal" tabindex="-1" role="dialog"
+                        aria-labelledby="importModalLabel" aria-hidden="true">
+                        <div class="modal-dialog" role="document">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5 class="modal-title" id="importModalLabel">Import Excel</h5>
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                        <span aria-hidden="true">&times;</span>
+                                    </button>
                                 </div>
-                            </div>
-                            <div class="modal-footer">
-                                <button type="button" class="btn btn-secondary" data-dismiss="modal" onclick="resetFileInput()">Close</button>
-                                <button type="submit" class="btn btn-primary">Import</button>
+                                <form method="post" action="{{ route('import.jurusan') }}" enctype="multipart/form-data">
+                                    <div class="modal-body">
+                                        {{ csrf_field() }}
+                                        <label>Pilih file excel</label>
+                                        <div class="form-group">
+                                            <input type="file" name="file" required="required">
+                                        </div>
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                        <button type="submit" class="btn btn-primary">Import</button>
+                                    </div>
+                                </form>
                             </div>
                         </div>
-                    </form>
+                    </div>
                 </div>
-                
-                <script>
-                    document.getElementById('importButton').addEventListener('click', function () {
-                        document.getElementById('fileInput').click();
-                    });
-                
-                    function resetFileInput() {
-                        document.getElementById('importForm').reset();
-                    }
-                </script>
             </div>
         </div>
         <!--end breadcrumb-->
@@ -80,8 +79,8 @@
                                     <td>
                                         <a href="{{ route('users-kurator.edit', encrypt($user->id)) }}"
                                             class="btn btn-info">Edit</a>
-                                        <a href="{{ route('users-kurator.destroy', encrypt($user->id)) }}" class="btn btn-danger"
-                                            id="delete">Delete</a>
+                                        <a href="{{ route('users-kurator.destroy', encrypt($user->id)) }}"
+                                            class="btn btn-danger" id="delete">Delete</a>
                                     </td>
                                 </tr>
                             @endforeach
@@ -99,4 +98,14 @@
             </div>
         </div>
     </div>
+
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+        integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous">
+    </script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+        integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous">
+    </script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+        integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous">
+    </script>
 @endsection

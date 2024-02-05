@@ -117,7 +117,7 @@ class JurusanController extends Controller
         $nama_file = rand() . $file->getClientOriginalName();
         $file->move('userfile', $nama_file);
         Excel::import(new JurusanImport, public_path('/userfile/' . $nama_file));
-        return redirect()->route('list.index');
+        return redirect()->route('jurusan.index');
     }
 
 }

@@ -13,4 +13,10 @@ class Jurusan extends Model
     {
         return $this->belongsTo(Produk::class);
     }
+
+    protected $fillable = [
+        'nama_jurusan',
+        'kode_jurusan',
+        'deskripsi_jurusan',
+    ];
 }
