@@ -20,8 +20,6 @@
                         @endif
                         @if (Auth::user()->role == 'admin')
                         <li class="breadcrumb-item active" aria-current="page">Admin Profile</li>
-                        @endif
-                        
                     </ol>
                 </nav>
             </div>
@@ -43,50 +41,6 @@
                                             <p class="text-muted font-size-sm">{{ $getUser->alamat }}</p>
                                         </div>
                                     </div>
-                                    <hr class="my-4" />
-                                    <ul class="list-group list-group-flush">
-                                        <li
-                                            class="list-group-item d-flex justify-content-between align-items-center flex-wrap">
-                                            <h6 class="mb-0"><svg xmlns="http://www.w3.org/2000/svg" width="24"
-                                                    height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor"
-                                                    stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
-                                                    class="feather feather-globe me-2 icon-inline">
-                                                    <circle cx="12" cy="12" r="10"></circle>
-                                                    <line x1="2" y1="12" x2="22" y2="12">
-                                                    </line>
-                                                    <path
-                                                        d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z">
-                                                    </path>
-                                                </svg>Website</h6>
-                                            <span class="text-secondary">https://codervent.com</span>
-                                        </li>
-                                        <li
-                                            class="list-group-item d-flex justify-content-between align-items-center flex-wrap">
-                                            <h6 class="mb-0"><svg xmlns="http://www.w3.org/2000/svg" width="24"
-                                                    height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor"
-                                                    stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
-                                                    class="feather feather-instagram me-2 icon-inline text-danger">
-                                                    <rect x="2" y="2" width="20" height="20" rx="5"
-                                                        ry="5"></rect>
-                                                    <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path>
-                                                    <line x1="17.5" y1="6.5" x2="17.51" y2="6.5">
-                                                    </line>
-                                                </svg>Instagram</h6>
-                                            <span class="text-secondary">codervent</span>
-                                        </li>
-                                        <li
-                                            class="list-group-item d-flex justify-content-between align-items-center flex-wrap">
-                                            <h6 class="mb-0"><svg xmlns="http://www.w3.org/2000/svg" width="24"
-                                                    height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor"
-                                                    stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
-                                                    class="feather feather-facebook me-2 icon-inline text-primary">
-                                                    <path
-                                                        d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z">
-                                                    </path>
-                                                </svg>Facebook</h6>
-                                            <span class="text-secondary">codervent</span>
-                                        </li>
-                                    </ul>
                                 </div>
                             </div>
                         </div>
@@ -230,15 +184,17 @@
                                             <textarea class="form-control" name="alamat">{{ $getUser->alamat }}</textarea>
                                         </div>
                                     </div>
-                                    <div class="row mb-3">
-                                        <div class="col-sm-3">
-                                            <h6 class="mb-0">Info Sekolah</h6>
+                                    @if (Auth::user()->role == 'sekolah')
+                                        <div class="row mb-3">
+                                            <div class="col-sm-3">
+                                                <h6 class="mb-0">Info Sekolah</h6>
+                                            </div>
+                                            <div class="col-sm-9 text-secondary">
+                                                <input type="text" name="sekolah_info" class="form-control"
+                                                    value="{{ $getUser->sekolah_info}}" />
+                                            </div>
                                         </div>
-                                        <div class="col-sm-9 text-secondary">
-                                            <input type="text" name="sekolah_info" class="form-control"
-                                                value="{{ $getUser->sekolah_info }}" />
-                                        </div>
-                                    </div>
+                                    @endif
                                     <div class="row mb-3">
                                         <div class="col-sm-3">
                                             <h6 class="mb-0">Photo</h6>
