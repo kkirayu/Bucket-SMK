@@ -56,7 +56,7 @@
                     <li class="{{ Request::is('admin/users-user') ? 'mm-active' :'' }}"> <a href="{{ route('users-user.index') }}"><i class="bx bx-radio-circle"></i>Semua Users</a>
                     </li>
 
-                    <li class="{{ Request::is('admin/users-kurator') ? 'mm-active' :'' }}"> <a href="{{ route('users-kurator.index') }}"><i class="bx bx-radio-circle"></i>Semua Dinas</a>
+                    <li class="{{ Request::is('admin/users-kurator') ? 'mm-active' :'' }}"> <a href="{{ route('users-kurator.index') }}"><i class="bx bx-radio-circle"></i>Semua Kurator</a>
                     </li>
                     <li class="{{ Request::is('admin/users-sekolah') ? 'mm-active' :'' }}"> <a href="{{ route('users-sekolah.index') }}"><i class="bx bx-radio-circle"></i>Semua Sekolah</a>
                     </li>

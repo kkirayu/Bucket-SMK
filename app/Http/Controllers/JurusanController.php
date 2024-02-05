@@ -2,8 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Imports\JurusanImport;
 use App\Models\Jurusan;
 use Illuminate\Http\Request;
+use Maatwebsite\Excel\Facades\Excel;
 
 class JurusanController extends Controller
 {
@@ -104,6 +106,18 @@ class JurusanController extends Controller
             'alert-type' => 'success'
         );
         return redirect()->route('jurusan.index')->with($notif);
+    }
+
+    public function import_excel(Request $request)
+    {
+        $this->validate($request, [
+            'file' => 'required|mimes:csv,xls,xlsx'
+        ]);
+        $file = $request->file('file');
+        $nama_file = rand() . $file->getClientOriginalName();
+        $file->move('userfile', $nama_file);
+        Excel::import(new JurusanImport, public_path('/userfile/' . $nama_file));
+        return redirect()->route('list.index');
     }
 
 }

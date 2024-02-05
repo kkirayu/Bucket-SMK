@@ -16,7 +16,7 @@
             </div>
             <div class="ms-auto">
                 <div class="btn-group">
-                    <a href="{{ route('kurator.create') }}" class="btn btn-primary">Tambah Kurator</a>
+                    <a href="{{ route('users-kurator.create') }}" class="btn btn-primary">Tambah Kurator</a>
                 </div>
                 <div class="btn-group">
                     <button type="button" class="btn btn-primary" id="importButton">
@@ -78,9 +78,9 @@
                                     <td>{{ $user->username }}</td>
                                     <td>{{ $user->alamat }}</td>
                                     <td>
-                                        <a href="{{ route('list.edit', encrypt($user->id)) }}"
+                                        <a href="{{ route('users-kurator.edit', encrypt($user->id)) }}"
                                             class="btn btn-info">Edit</a>
-                                        <a href="{{ route('list.destroy', encrypt($user->id)) }}" class="btn btn-danger"
+                                        <a href="{{ route('users-kurator.destroy', encrypt($user->id)) }}" class="btn btn-danger"
                                             id="delete">Delete</a>
                                     </td>
                                 </tr>

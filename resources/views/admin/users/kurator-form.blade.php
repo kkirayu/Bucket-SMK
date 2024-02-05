@@ -26,7 +26,7 @@
                             </div>
                             <div class="card-body">
                                 <form id="myForm"
-                                    action="{{ isset($edit) ? route('kurator.update', $edit->id) : route('kurator.store') }}"
+                                    action="{{ isset($edit) ? route('users-kurator.update', $edit->id) : route('users-kurator.store') }}"
                                     method="POST" enctype="multipart/form-data">
                                     @csrf
                                     @if (isset($edit))

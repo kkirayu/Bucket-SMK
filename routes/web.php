@@ -80,6 +80,7 @@ Route::group(['middleware' => ['auth', 'role:admin']], function () {
     Route::get('/admin/users/destroy/{id}', [ListSekolah::class, 'destroy'])->name('list.destroy');
 
     Route::post('/admin/import_excel', [ListSekolah::class, 'import_excel'])->name('import.excel');
+    Route::post('/admin/import_excel/jurusan', [JurusanController::class, 'import_excel'])->name('import.jurusan');
 
 });
 
