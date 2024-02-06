@@ -50,15 +50,17 @@
                                     <td width="50%">{{ $sk->file }}</td>
                                     <td width="10%">
                                         <div class="d-flex order-actions">
-                                            <a href="{{ route('sk.edit', encrypt($sk->id)) }}"
-                                                class="ms-1 text-white" style="background: #0d6efd" data-toggle="tooltip"
-                                                title="Edit"><i class="bx bx-edit"></i></a>
-                                            <a href="{{ route('sk.destroy', encrypt($sk->id)) }}"
-                                                class="ms-1 text-white" style="background: #0d6efd" data-toggle="tooltip"
-                                                title="Delete"><i class="bx bx-trash"></i></a>
-                                                @if($sk->file)
-                                                <a href="{{ asset('upload/' . $sk->file) }}" class="ms-1 text-white" style="background: #0d6efd" data-toggle="tooltip" title="Download" download><i class="bx bx-download"></i></a>
-                                                @endif
+                                            <a href="{{ route('sk.edit', encrypt($sk->id)) }}" class="ms-1 text-white"
+                                                style="background: #0d6efd" data-toggle="tooltip" title="Edit"><i
+                                                    class="bx bx-edit"></i></a>
+                                            <a href="{{ route('sk.destroy', encrypt($sk->id)) }}" class="ms-1 text-white"
+                                                style="background: #0d6efd" data-toggle="tooltip" title="Delete"><i
+                                                    class="bx bx-trash"></i></a>
+                                            @if ($sk->file)
+                                                <a href="{{ asset('upload/' . $sk->file) }}" class="ms-1 text-white"
+                                                    style="background: #0d6efd" data-toggle="tooltip" title="Download"
+                                                    download><i class="bx bx-download"></i></a>
+                                            @endif
                                         </div>
                                     </td>
                                 </tr>

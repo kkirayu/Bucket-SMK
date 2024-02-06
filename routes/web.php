@@ -100,4 +100,5 @@ Route::group(['middleware' => ['auth', 'role:admin,kurator']], function () {
     Route::get('/admin/asesmen-approve/{id}', [AsesmenController::class, 'approveAsesmen'])->name('approve.asesmen');
     Route::resource('/admin/komentar', KomentarController::class);
     Route::resource('/admin/sk', SkController::class);
+    Route::get('/admin/sk/destroy/{id}', [SkController::class, 'destroy'])->name('sk.destroy');
 });

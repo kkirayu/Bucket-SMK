@@ -115,9 +115,11 @@ class SkController extends Controller
             unlink(public_path('upload/' . $sk->file));
         }
         $sk->delete();
-    
-        // Redirect kembali ke halaman sebelumnya atau ke halaman yang sesuai
-        return redirect()->back()->with('success', 'Data SKS berhasil dihapus.');
+        $notif = array(
+            'message' => 'Category Telah Berhasil Dihapus',
+            'alert-type' => 'success'
+        );
+        return redirect()->back()->with($notif);
     }
     
 }
