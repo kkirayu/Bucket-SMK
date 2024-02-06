@@ -16,18 +16,18 @@
 
     <div class="page-content">
         <!--breadcrumb-->
-        <x-breadcrumb sub="Jurusan" icon="bx bx-dna" subsub="Index" />
+        <x-breadcrumb sub="SK" icon="bx bx-dna" subsub="Index" />
 
         <div class="card radius-10">
             <div class="card-body">
                 <div class="d-flex align-items-center">
                     <div>
-                        <h5 class="mb-0">List Jurusan</h5>
+                        <h5 class="mb-0">List SK</h5>
                     </div>
                     <div class="font-22 ms-auto">
                         <div class="btn-group">
                             <button type="button" onclick="window.location.href='{{ route('jurusan.create') }}'"
-                                class="btn btn-primary">Tambah Jurusan</button>
+                                class="btn btn-primary">Tambah SK</button>
                         </div>
                         <div class="btn-group">
 
@@ -45,21 +45,6 @@
                                                 <span aria-hidden="true">&times;</span>
                                             </button>
                                         </div>
-                                        <form method="post" action="{{ route('import.jurusan') }}"
-                                            enctype="multipart/form-data">
-                                            <div class="modal-body">
-                                                {{ csrf_field() }}
-                                                <label>Pilih file excel</label>
-                                                <div class="form-group">
-                                                    <input type="file" name="file" required="required">
-                                                </div>
-                                            </div>
-                                            <div class="modal-footer">
-                                                <button type="button" class="btn btn-secondary"
-                                                    data-dismiss="modal">Close</button>
-                                                <button type="submit" class="btn btn-primary">Import</button>
-                                            </div>
-                                        </form>
                                     </div>
                                 </div>
                             </div>
