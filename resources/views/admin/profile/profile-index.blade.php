@@ -5,10 +5,13 @@
         <!--breadcrumb-->
         <div class="page-breadcrumb d-none d-sm-flex align-items-center mb-3">
             @if (Auth::user()->role == 'sekolah')
-            <div class="breadcrumb-title pe-3">Sekolah Profile</div>
+                <div class="breadcrumb-title pe-3">Sekolah Profile</div>
             @endif
             @if (Auth::user()->role == 'admin')
-            <div class="breadcrumb-title pe-3">Admin Profile</div>
+                <div class="breadcrumb-title pe-3">Admin Profile</div>
+            @endif
+            @if (Auth::user()->role == 'kurator')
+                <div class="breadcrumb-title pe-3">Kurator Profile</div>
             @endif
             <div class="ps-3">
                 <nav aria-label="breadcrumb">
@@ -16,10 +19,14 @@
                         <li class="breadcrumb-item"><a href="javascript:;"><i class="bx bx-user"></i></a>
                         </li>
                         @if (Auth::user()->role == 'sekolah')
-                        <li class="breadcrumb-item active" aria-current="page">Sekolah Profile</li>
+                            <li class="breadcrumb-item active" aria-current="page">Sekolah Profile</li>
                         @endif
                         @if (Auth::user()->role == 'admin')
-                        <li class="breadcrumb-item active" aria-current="page">Admin Profile</li>
+                            <li class="breadcrumb-item active" aria-current="page">Admin Profile</li>
+                        @endif
+                        @if (Auth::user()->role == 'kurator')
+                            <li class="breadcrumb-item active" aria-current="page">Kurator Profile</li>
+                        @endif
                     </ol>
                 </nav>
             </div>
@@ -78,7 +85,7 @@
                                                 <input id="current_password" type="password" name="passwordLama"
                                                     class="form-control @error('passwordLama') is-invalid @enderror"
                                                     placeholder="Password Lama" />
-                                                    <small class="text-muted">Masukkan Password lama.</small>
+                                                <small class="text-muted">Masukkan Password lama.</small>
                                                 @error('passwordLama')
                                                     <span class="text-danger">{{ $message }}</span>
                                                 @enderror
@@ -95,7 +102,8 @@
                                                 @error('passwordBaru')
                                                     <span class="text-danger">{{ $message }}</span>
                                                 @enderror
-                                                <small class="text-muted">Buatlah password yang susah ditebak dengan kombinasi huruf dan angka.</small>
+                                                <small class="text-muted">Buatlah password yang susah ditebak dengan
+                                                    kombinasi huruf dan angka.</small>
                                             </div>
                                         </div>
                                         <div class="row mb-3">
@@ -106,14 +114,13 @@
                                                 <input id="new_password_confirmation" type="password"
                                                     name="new_password_confirmation" class="form-control"
                                                     placeholder="Konfirmasi Password Baru" />
-                                                    <small class="text-muted">Ulangi pasword baru</small>
+                                                <small class="text-muted">Ulangi pasword baru</small>
                                             </div>
                                         </div>
                                         <div class="row">
                                             <div class="col-sm-3"></div>
-                                            <div class="col-sm-8 text-secondary">
-                                                <input type="submit" class="btn btn-success px-4"
-                                                    value="Ubah Password" />
+                                            <div class="col-sm-8 text-secondary" style="text-align: right">
+                                                <input type="submit" class="btn btn-success px-4" value="Ubah Password" />
                                             </div>
                                         </div>
                                     </form>
@@ -131,8 +138,11 @@
                                 @if (Auth::user()->role == 'admin')
                                     <h3>Data Admin</h3>
                                 @endif
+                                @if (Auth::user()->role == 'kurator')
+                                    <h3>Data Kurator</h3>
+                                @endif
 
-                                <p class="text-rose-600" >*Silahkan lengkapi data dibawah</p>
+                                <p class="text-rose-600">*Silahkan lengkapi data dibawah</p>
 
                             </div>
                             <div class="card-body">
@@ -140,9 +150,15 @@
                                     enctype="multipart/form-data">
                                     @csrf
                                     <div class="row mb-3">
-                                        <div class="col-sm-3">
-                                            <h6 class="mb-0">NPSN</h6>
-                                        </div>
+                                        @if (Auth::user()->role == 'admin' || Auth::user()->role == 'kurator')
+                                            <div class="col-sm-3">
+                                                <h6 class="mb-0">Username</h6>
+                                            </div>
+                                        @else
+                                            <div class="col-sm-3">
+                                                <h6 class="mb-0">NPSN</h6>
+                                            </div>
+                                        @endif
                                         <div class="col-sm-9 text-secondary">
                                             <input type="text" class="form-control" value="{{ $getUser->username }}"
                                                 disabled />
@@ -173,7 +189,8 @@
                                         <div class="col-sm-9 text-secondary">
                                             <input type="text" name="phone" class="form-control"
                                                 value="{{ $getUser->phone }}" />
-                                                <small class="text-muted">Tidak menggunakan kode negara *cth 082237943100</small>
+                                            <small class="text-muted">Tidak menggunakan kode negara *cth
+                                                082237943100</small>
                                         </div>
                                     </div>
                                     <div class="row mb-3">
@@ -191,7 +208,7 @@
                                             </div>
                                             <div class="col-sm-9 text-secondary">
                                                 <input type="text" name="sekolah_info" class="form-control"
-                                                    value="{{ $getUser->sekolah_info}}" />
+                                                    value="{{ $getUser->sekolah_info }}" />
                                             </div>
                                         </div>
                                     @endif
@@ -216,7 +233,7 @@
                                     </div>
                                     <div class="row">
                                         <div class="col-sm-3"></div>
-                                        <div class="col-sm-9 text-secondary">
+                                        <div class="col-sm-9 text-secondary" style="text-align: right">
                                             <input type="submit" class="btn btn-success px-4" value="Ubah Data" />
                                         </div>
                                     </div>

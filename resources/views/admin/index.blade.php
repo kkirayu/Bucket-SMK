@@ -36,7 +36,7 @@
                             </div>
                         </div>
                         <div class="progress my-3 bg-light-transparent" style="height:3px;">
-                            <div class="progress-bar bg-white" role="progressbar" style="width: 100%" aria-valuenow="25"
+                            <div class="progress-bar bg-white" role="progressbar" style="width: {{ $getProduk->count() == 0 ? 0 : 100 }}%" aria-valuenow="25"
                                 aria-valuemin="0" aria-valuemax="100"></div>
                         </div>
                         <div class="d-flex align-items-center text-white">
@@ -49,13 +49,17 @@
                 <div class="card radius-10 bg-gradient-ohhappiness">
                     <div class="card-body">
                         <div class="d-flex align-items-center">
-                            <h5 class="mb-0 text-white">{{ $getProduk->where('kategori', 'original')->count() }}</h5>
+                            <h5 class="mb-0 text-white">{{ $getProduk->where('kategori', 'original')->count()  }}</h5>
                             <div class="ms-auto">
                                 <i class='bx bx-diamond fs-3 text-white'></i>
                             </div>
                         </div>
                         @php
-                            $persenOr = ($getProduk->where('kategori', 'original')->count() / $getProduk->count()) * 100;
+                            if ($getProduk->count() != 0) {
+                                $persenOr = ($getProduk->where('kategori', 'original')->count() / $getProduk->count()) * 100;
+                            } else {
+                                $persenOr = 0;
+                            }
                         @endphp
                         <div class="progress my-3 bg-light-transparent" style="height:3px;">
                             <div class="progress-bar bg-white" role="progressbar" style="width: {{ $persenOr }}%"
@@ -77,7 +81,11 @@
                             </div>
                         </div>
                         @php
-                            $persenAtm = ($getProduk->where('kategori', 'atm')->count() / $getProduk->count()) * 100;
+                            if ($getProduk->count() != 0) {
+                                $persenAtm = ($getProduk->where('kategori', 'atm')->count() / $getProduk->count()) * 100;
+                            } else {
+                                $persenAtm = 0;
+                            }
                         @endphp
                         <div class="progress my-3 bg-light-transparent" style="height:3px;">
                             <div class="progress-bar bg-white" role="progressbar" style="width: {{ $persenAtm }}%"
@@ -94,7 +102,7 @@
                     <div class="card radius-10 bg-gradient-deepblue">
                         <div class="card-body">
                             <div class="d-flex align-items-center">
-                                <h5 class="mb-0 text-white">{{ $komentars->count() }}</h5>
+                                <h5 class="mb-0 text-white">{{ $komentars == 0 ? 0 : $komentars->count() }}</h5>
                                 <div class="ms-auto">
                                     <i class='bx bx-message fs-3 text-white'></i>
                                 </div>

@@ -16,14 +16,20 @@ class AdminController extends Controller
         $getSekolah = User::where('role','sekolah')->get();
         if (Auth::user()->role == 'sekolah') {
             $getProduk = Produk::where('status', '!=', 0)->where('user_id', Auth::user()->id)->get();
-            foreach ($getProduk as $key => $prod) {
-                $komentars = Komentar::where('produk_id', $prod->id)->get();
+            if($getProduk->count() != 0) {
+
+                foreach ($getProduk as $key => $prod) {
+                    $komentars = Komentar::where('produk_id', $prod->id)->get();
+                }
+            } else {
+                $komentars = 0;
             }
         } else {
             $getProduk = Produk::where('status', '!=', 0)->get();
             $komentars = null;
 
         }
+        // dd($getProduk);
         return view('admin.index', compact('getSekolah', 'getProduk', 'komentars'));
     }
 
