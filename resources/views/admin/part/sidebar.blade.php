@@ -113,9 +113,8 @@
                     <div class="parent-icon"><i class='bx bx-user'></i>
                     </div>
                     <div class="menu-title">Profile</div>
+                </a>
             </li>
-        @endif
-        @if (Auth::user()->role == 'sekolah')
             <li class="{{ Request::is('admin/produk*') ? 'mm-active' : '' }}">
                 <a href="javascript:;">
                     <div class="parent-icon"><i class="bx bx-barcode"></i></div>
