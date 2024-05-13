@@ -60,7 +60,7 @@
                                         <span>Rp. {{ number_format($produk->harga, 0,",",".") }},-</span>
                                     </div>
                                 </div>
-                                <a href="#" class="btn w-100 hover-up"><i
+                                <a href="{{ route('product.show', ['id' => $produk->id]) }}" class="btn w-100 hover-up"><i
                                     class="fi-rs-eye mr-5"></i>View Produk</a>
                             </div>
                         </div>
