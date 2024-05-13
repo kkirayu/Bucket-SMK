@@ -18,21 +18,13 @@
                             data-wow-delay=".1s">
                             <div class="product-img-action-wrap">
                                 <div class="product-img product-img-zoom">
-                                    <a href="shop-product-right.html">
+                                    <a href="{{ route('product.show', ['id' => encrypt($produk->id)]) }}">
                                         <img class="default-img" src="{{ asset($produk->photo) }}"
                                             alt="" />
                                         <img class="hover-img" src="{{ asset($produk->photo) }}"
                                             alt="" />
                                     </a>
                                 </div>
-                                {{-- <div class="product-action-1">
-                                    <a aria-label="Add To Wishlist" class="action-btn"
-                                        href="#"><i class="fi-rs-heart"></i></a>
-                                    <a aria-label="Compare" class="action-btn" href="#"><i
-                                            class="fi-rs-shuffle"></i></a>
-                                    <a aria-label="Quick view" class="action-btn" data-bs-toggle="modal"
-                                        data-bs-target="#"><i class="fi-rs-eye"></i></a>
-                                </div> --}}
                                 <div class="product-badges product-badges-position product-badges-mrg">
                                     <span class="hot">Hot</span>
                                 </div>
@@ -60,7 +52,7 @@
                                         <span>Rp. {{ number_format($produk->harga, 0,",",".") }},-</span>
                                     </div>
                                 </div>
-                                <a href="{{ route('product.show', ['id' => $produk->id]) }}" class="btn w-100 hover-up"><i
+                                <a href="{{ route('product.show', ['id' => encrypt($produk->id)]) }}" class="btn w-100 hover-up"><i
                                     class="fi-rs-eye mr-5"></i>View Produk</a>
                             </div>
                         </div>

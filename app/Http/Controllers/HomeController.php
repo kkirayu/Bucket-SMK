@@ -14,8 +14,10 @@ class HomeController extends Controller
     public function index()
     {
         $categoris = Category::all();
-        $popProduct = Produk::orderBy('created_at', 'desc')->paginate(5);
-        return view('frontend.index', compact('categoris','popProduct'));
+        $popProduct = Produk::orderBy('created_at', 'desc')->paginate(10);
+        $newProduct = Produk::orderBy('created_at', 'desc')->paginate(7);
+        $allProduct = Produk::all();
+        return view('frontend.index', compact('categoris','popProduct', 'newProduct', 'allProduct'));
     }
 
     /**
@@ -39,10 +41,12 @@ class HomeController extends Controller
      */
     public function show($id)
     {
-        $product = Produk::find($id);
+        $dId = decrypt($id);
+        $product = Produk::findOrFail($dId);
+        // dd($product);
         return view('frontend.home.home-detail', compact('product'));
     }
-    
+
 
     /**
      * Show the form for editing the specified resource.

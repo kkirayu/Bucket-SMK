@@ -8,12 +8,16 @@
             <div class="card-body">
                 <div class="d-flex align-items-center">
                     <div>
-                        <h5 class="mb-0">Show Produk {{ $show->kategori == 'atm' ? Str::upper($show->kategori) : Str::ucfirst($show->kategori) }}</h5>
+                        <h5 class="mb-0">Show Produk
+                            {{ $show->kategori == 'atm' ? Str::upper($show->kategori) : Str::ucfirst($show->kategori) }}
+                        </h5>
                     </div>
                     @if (Auth::user()->role == 'admin' && $show->status == 1)
                         <div class="font-22 ms-auto">
                             <div class="btn-group">
-                                <button type="button" onclick="window.location.href='{{ route('approve.asesmen', $show->id) }}'" class="btn btn-primary">Approve
+                                <button type="button"
+                                    onclick="window.location.href='{{ route('approve.asesmen', $show->id) }}'"
+                                    class="btn btn-primary">Approve
                                     Produk</button>
                             </div>
                         </div>
@@ -26,39 +30,50 @@
                     <div class="col-md-4 border-end">
                         <div id="carouselExampleCaptions" class="carousel slide" data-bs-ride="carousel">
                             <div class="carousel-indicators">
-                              <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
-                              <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="1" aria-label="Slide 2"></button>
-                              <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="2" aria-label="Slide 3"></button>
+                                <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="0"
+                                    class="active" aria-current="true" aria-label="Slide 1"></button>
+                                <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="1"
+                                    aria-label="Slide 2"></button>
+                                <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="2"
+                                    aria-label="Slide 3"></button>
                             </div>
                             <div class="carousel-inner">
-                              <div class="carousel-item active">
-                                <img src="{{ asset($show->photo) }}" class="d-block w-100" alt="...">
-                                <div class="carousel-caption d-none d-md-block">
-                                  <h5 class="text-white">Produk</h5>
+                                <div class="carousel-item active">
+                                    <img src="{{ $show->photo != '' ? asset($show->photo) : asset('upload/no_image.jpg') }}" class="d-block w-100" alt="...">
+                                    <div class="carousel-caption d-none d-md-block">
+                                        <h5 class="text-white">Produk</h5>
+                                    </div>
                                 </div>
-                              </div>
-                              <div class="carousel-item">
-                                <img src="{{ asset($show->sertifikasi_haki) }}" class="d-block w-100" alt="...">
-                                <div class="carousel-caption d-none d-md-block">
-                                  <h5 class="text-white">Sertifikasi Haki</h5>
+                                <div class="carousel-item">
+                                    <img src="{{ $show->sertifikasi_haki != '' ? asset($show->sertifikasi_haki) : asset('upload/sertif/haki.png') }}" class="d-block w-100" alt="...">
+                                    <div class="carousel-caption d-none d-md-block">
+                                        <h5 class="text-white">Sertifikasi Haki</h5>
+                                    </div>
                                 </div>
-                              </div>
-                              <div class="carousel-item">
-                                <img src="{{ asset($show->sertifikasi_halal) }}" class="d-block w-100" alt="...">
-                                <div class="carousel-caption d-none d-md-block">
-                                  <h5 class="text-white">Sertifikasi Halal</h5>
+                                <div class="carousel-item">
+                                    <img src="{{ $show->sertifikasi_halal != '' ? asset($show->sertifikasi_halal) : asset('upload/sertif/halal.png') }}" class="d-block w-100" alt="...">
+                                    <div class="carousel-caption d-none d-md-block">
+                                        <h5 class="text-white">Sertifikasi Halal</h5>
+                                    </div>
                                 </div>
-                              </div>
+                                <div class="carousel-item">
+                                    <img src="{{ $show->sertifikasi_sni != '' ? asset($show->sertifikasi_sni) : asset('upload/sertif/sni.png') }}" class="d-block w-100" alt="...">
+                                    <div class="carousel-caption d-none d-md-block">
+                                        <h5 class="text-white">Sertifikasi SNI</h5>
+                                    </div>
+                                </div>
                             </div>
-                            <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide="prev" style="background: 0%; border:0;">
-                              <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                              <span class="visually-hidden">Previous</span>
+                            <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleCaptions"
+                                data-bs-slide="prev" style="background: 0%; border:0;">
+                                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                                <span class="visually-hidden">Previous</span>
                             </button>
-                            <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide="next" style="background: 0%; border:0;">
-                              <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                              <span class="visually-hidden">Next</span>
+                            <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleCaptions"
+                                data-bs-slide="next" style="background: 0%; border:0;">
+                                <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                                <span class="visually-hidden">Next</span>
                             </button>
-                          </div>
+                        </div>
                     </div>
                     <div class="col-md-8">
                         <div class="card-body">
@@ -74,7 +89,7 @@
                                 <div>{{ $komentars->count() }} reviews</div>
                             </div>
                             <div class="mb-3">
-                                <span class="price h4">RP. {{ number_format($show->harga, 0, ",", ".") }}</span>
+                                <span class="price h4">RP. {{ number_format($show->harga, 0, ',', '.') }}</span>
                                 {{-- <span class="text-muted">/unit </span> --}}
                             </div>
                             <p class="card-text fs-6 mb-0"><b>Deskripsi</b></p>
@@ -123,22 +138,24 @@
                         <div class="tab-pane fade show active" id="review" role="tabpanel">
                             <p>
                                 @foreach ($komentars as $komentar)
-                                <div class="card">
-                                    <div class="card-body">
-                                        <div class="col-12">
-                                            <label for="user" class="form-label d-flex align-items-center">
-                                                <div class="recent-product-img">
-                                                    <img src="{{ !empty($komentar->user->photo) ? asset('upload/admin-image/' . $komentar->user->photo) : asset('upload/no_image.jpg') }}" alt="">
-                                                </div>
-                                                <div class="ms-2">
-                                                    <h6 class="mb-1 font-14"><b>{{ $komentar->user->name }}</b></h6>
-                                                    <h6 class="mb-1" style="font-size: 10px ">{{ ucFirst($komentar->user->role) }}</h6>
-                                                </div>
-                                            </label>
-                                            <p>{{ $komentar->komentar }}</p>
+                                    <div class="card">
+                                        <div class="card-body">
+                                            <div class="col-12">
+                                                <label for="user" class="form-label d-flex align-items-center">
+                                                    <div class="recent-product-img">
+                                                        <img src="{{ !empty($komentar->user->photo) ? asset('upload/admin-image/' . $komentar->user->photo) : asset('upload/no_image.jpg') }}"
+                                                            alt="">
+                                                    </div>
+                                                    <div class="ms-2">
+                                                        <h6 class="mb-1 font-14"><b>{{ $komentar->user->name }}</b></h6>
+                                                        <h6 class="mb-1" style="font-size: 10px ">
+                                                            {{ ucFirst($komentar->user->role) }}</h6>
+                                                    </div>
+                                                </label>
+                                                <p>{{ $komentar->komentar }}</p>
+                                            </div>
                                         </div>
                                     </div>
-                                </div>
                                 @endforeach
                             </p>
                             <p>
@@ -171,27 +188,27 @@
         </div>
     </div>
     <script type="text/javascript">
-        $(document).ready(function(){
+        $(document).ready(function() {
             $('#myForm').validate({
                 rules: {
                     komentar: {
-                        required : true,
+                        required: true,
                     },
                 },
                 messages: {
                     komentar: {
-                        required : 'Masukkan Komentar',
+                        required: 'Masukkan Komentar',
                     },
                 },
                 errorElement: 'span',
-                errorPlacement: function(error,element){
+                errorPlacement: function(error, element) {
                     error.addClass('invalid-feedback');
                     element.closest('.form-group').append(error);
                 },
-                highlight: function(element, errorClass, validClass){
+                highlight: function(element, errorClass, validClass) {
                     $(element).addClass('is-invalid');
                 },
-                unhighlight: function(element, errorClass, validClass){
+                unhighlight: function(element, errorClass, validClass) {
                     $(element).removeClass('is-invalid');
                 },
             });
