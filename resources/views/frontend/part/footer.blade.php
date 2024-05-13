@@ -10,10 +10,10 @@
                                 Karena SMK Bisa - SMK Hebat
                             </h2>
                             <p class="mb-45">Temukan produk SMK berkualitas hanya di <span class="text-brand">BucketSMK</span></p>
-                            <form class="form-subcriber d-flex">
+                            {{-- <form class="form-subcriber d-flex">
                                 <input type="email" placeholder="Your emaill address" />
                                 <button class="btn" type="submit">Subscribe</button>
-                            </form>
+                            </form> --}}
                         </div>
                         <img src="{{ asset('frontend/assets/imgs/banner/banner-9.png') }}" alt="newsletter" />
                     </div>

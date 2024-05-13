@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Category;
+use App\Models\Produk;
 use Illuminate\Http\Request;
 
 class HomeController extends Controller
@@ -13,7 +14,8 @@ class HomeController extends Controller
     public function index()
     {
         $categoris = Category::all();
-        return view('frontend.index', compact('categoris'));
+        $popProduct = Produk::orderBy('created_at', 'desc')->paginate(5);
+        return view('frontend.index', compact('categoris','popProduct'));
     }
 
     /**
