@@ -37,10 +37,12 @@ class HomeController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(string $id)
+    public function show($id)
     {
-        //
+        $product = Produk::find($id);
+        return view('frontend.home.home-detail', compact('product'));
     }
+    
 
     /**
      * Show the form for editing the specified resource.

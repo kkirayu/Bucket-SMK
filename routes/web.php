@@ -32,6 +32,7 @@ use App\Models\Sk;
 */
 
 Route::get('/', [HomeController::class, 'index'])->name('home.index');
+Route::get('/product/{id}', [HomeController::class, 'show'])->name('product.show');
 Route::get('/home', [AdminController::class, 'adminLogin'])->name('home.index');
 Route::get('/admin/login', [AdminController::class, 'adminLogin'])->name('admin.login');
 require __DIR__.'/auth.php';
