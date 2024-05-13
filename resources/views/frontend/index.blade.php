@@ -4,7 +4,7 @@
 
 @include('frontend.home.home-slider')
 <!--End hero slider-->
-    @include('frontend.home.home-feature-category')
+    {{-- @include('frontend.home.home-feature-category') --}}
     <!--End category slider-->
     {{-- @include('frontend.home.home-banner') --}}
     <!--End banners-->
@@ -28,6 +28,6 @@
 
     <!--Vendor List -->
 
-    @include('frontend.home.home-sekolah-list')
+    {{-- @include('frontend.home.home-sekolah-list') --}}
     <!--End Vendor List -->
 @endsection
