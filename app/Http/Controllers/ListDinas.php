@@ -29,13 +29,14 @@ class ListDinas extends Controller
      */
     public function store(Request $request)
     {
+       
         // Validasi data yang masuk
         $validatedData = $request->validate([
             'name' => 'required|string|max:255',
             'username' => 'nullable|string|max:255',
             'email' => 'required|email|unique:users,email',
             'password' => 'required|string|min:8',
-            'role' => 'required|in:admin,dinas,sekolah,user',
+            'role' => 'required|in:admin,kurator,sekolah,user',
         ]);
 
         $user = new User();
@@ -67,7 +68,6 @@ class ListDinas extends Controller
         $dId = decrypt($id);
         $edit = User::findOrFail($dId);
         return view('admin.users.kurator-form', compact('edit', 'user'));
->>>>>>> 39a8616f08e10d452114779760517a811181d84a
     }
 
     /**
@@ -98,9 +98,6 @@ class ListDinas extends Controller
         $user->save();
 
         return redirect()->route('users-kurator.index')->with('success', 'User update successfully');
-
-
->>>>>>> 39a8616f08e10d452114779760517a811181d84a
     }
 
     public function destroy($id)
