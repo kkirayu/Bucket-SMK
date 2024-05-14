@@ -51,7 +51,7 @@ class ListSekolah extends Controller
 
         $user->save();
 
-        return redirect()->route('users-user.index')->with('success', 'User created successfully');
+        return redirect()->route('users-sekolah.index')->with('success', 'User created successfully');
     }
 
 
@@ -85,8 +85,7 @@ class ListSekolah extends Controller
             'username' => 'nullable|string|max:255',
             'email' => 'required|email|unique:users,email,' . $id,
             'password' => 'nullable|string|min:8',
-            'photo' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048', // Ubah sesuai kebutuhan
-            'phone' => 'nullable|string|max:20',
+            'photo' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
             'alamat' => 'nullable|string',
             'role' => 'required|in:admin,dinas,sekolah,user',
             'status' => 'required|in:aktif,nonaktif',
@@ -116,14 +115,13 @@ class ListSekolah extends Controller
         if (!empty($validatedData['password'])) {
             $user->password = Hash::make($validatedData['password']);
         }
-        $user->phone = $validatedData['phone'];
         $user->alamat = $validatedData['alamat'];
         $user->role = $validatedData['role'];
         $user->status = $validatedData['status'];
         $user->sekolah_info = $validatedData['sekolah_info'];
 
         $user->save();
-        return redirect()->route('list.index')->with('success', 'User updated successfully');
+        return redirect()->route('users-sekolah.index')->with('success', 'User updated successfully');
     }
 
     public function destroy($id)

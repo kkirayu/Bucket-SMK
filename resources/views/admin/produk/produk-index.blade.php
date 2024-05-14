@@ -21,6 +21,8 @@
                             <button type="button" onclick="window.location.href='{{ route('produk.create') }}'"
                                 class="btn btn-primary">Tambah Produk</button>
                         </div>
+                        <a href="{{ route('download.template') }}" class="btn btn-primary">Download Template Plan</a>
+
                     </div>
                 </div>
                 <hr>
@@ -78,6 +80,11 @@
                                             <a href="{{ route('produk.destroy', encrypt($produk->id)) }}"
                                                 class="ms-1 text-white" style="background: #0d6efd" data-toggle="tooltip"
                                                     title="Delete"><i class="bx bx-trash"></i></a>
+                                                    @if ($produk->file)
+                                                <a href="{{ asset('upload/' . $produk->file) }}" class="ms-1 text-white"
+                                                    style="background: #0d6efd" data-toggle="tooltip" title="Download"
+                                                    download><i class="bx bx-download"></i></a>
+                                            @endif
                                         </div>
                                     </td>
                                 </tr>
