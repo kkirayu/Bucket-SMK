@@ -234,7 +234,7 @@
                                     </div>
                                     <div class="row mb-3">
                                         <div class="col-sm-3">
-                                            <h6 class="mb-0">Volume/bulan<i style="color: red">*</i></h6>
+                                            <h6 class="mb-0">Volume produksi per bulan<i style="color: red">*</i></h6>
                                         </div>
                                         <div class="form-group col-sm-9 text-secondary">
                                             <input type="number" name="volume" class="form-control" placeholder="volume">{{ old('volume', isset($edit) ? $edit->volume: '') }}</input>

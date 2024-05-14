@@ -81,6 +81,8 @@ Route::group(['middleware' => ['auth', 'role:admin']], function () {
     Route::resource('/admin/users-sekolah', ListSekolah::class);
     Route::resource('/admin/users-kurator', ListDinas::class);
     Route::resource('/admin/users-user', ListUser::class);
+    Route::post('/admin/users/kurator/create', [ListSekolah::class, 'store'])->name('list.store');
+    Route::post('/admin/users/kurator/create', [ListSekolah::class, 'update'])->name('list.update');
     Route::get('/admin/users/destroy/{id}', [ListSekolah::class, 'destroy'])->name('list.destroy');
 
     Route::post('/admin/import_excel', [ListSekolah::class, 'import_excel'])->name('import.excel');
