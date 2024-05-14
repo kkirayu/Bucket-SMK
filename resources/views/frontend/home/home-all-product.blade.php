@@ -23,8 +23,9 @@
                 <div class="row product-grid-4">
                     @if ($allProduct->count() != 0)
                         @foreach ($allProduct as $all)
-                    <div class="col-lg-1-5 col-md-4 col-12 col-sm-6">
-                        <div class="product-cart-wrap mb-30 wow animate__animated animate__fadeIn" data-wow-delay=".1s">
+                            <div class="col-lg-1-5 col-md-4 col-12 col-sm-6">
+                                <div class="product-cart-wrap mb-30 wow animate__animated animate__fadeIn"
+                                    data-wow-delay=".1s">
                                     <div class="product-cart-wrap">
                                         <div class="product-img-action-wrap">
                                             <div class="product-img product-img-zoom">
@@ -68,20 +69,20 @@
                                     </div>
                                 </div>
                             </div>
-                            @endforeach
-                        @else
-                            <div class="col-lg-1-5 col-md-4 col-12 col-sm-6">
-                                <div class="product-cart-wrap mb-30 wow animate__animated animate__fadeIn"
-                                    data-wow-delay=".1s">
-                                    <div class="product-img-action-wrap">
-                                    </div>
-                                    <div class="product-content-wrap">
-                                        <h2><a href="shop-product-right.html">{{ '-- Tidak Ada Data --' }}
-                                            </a></h2>
-                                    </div>
+                        @endforeach
+                    @else
+                        <div class="col-lg-1-5 col-md-4 col-12 col-sm-6">
+                            <div class="product-cart-wrap mb-30 wow animate__animated animate__fadeIn"
+                                data-wow-delay=".1s">
+                                <div class="product-img-action-wrap">
+                                </div>
+                                <div class="product-content-wrap">
+                                    <h2><a href="shop-product-right.html">{{ '-- Tidak Ada Data --' }}
+                                        </a></h2>
                                 </div>
                             </div>
-                        @endif
+                        </div>
+                    @endif
                     <!--end product card-->
                 </div>
                 <!--End product-grid-4-->

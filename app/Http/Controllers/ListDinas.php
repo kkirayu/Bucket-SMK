@@ -46,8 +46,7 @@ class ListDinas extends Controller
         $user->role = $validatedData['role'];
 
         $user->save();
-
-        return redirect()->route('users-sekolah.index')->with('success', 'User created successfully');
+        return redirect()->route('users-kurator.index')->with('success', 'User created successfully');
     }
 
 
@@ -67,7 +66,8 @@ class ListDinas extends Controller
         $user = User::all();
         $dId = decrypt($id);
         $edit = User::findOrFail($dId);
-        return view('admin.users.users-form', compact('edit', 'user'));
+        return view('admin.users.kurator-form', compact('edit', 'user'));
+>>>>>>> 39a8616f08e10d452114779760517a811181d84a
     }
 
     /**
@@ -79,45 +79,28 @@ class ListDinas extends Controller
         $validatedData = $request->validate([
             'name' => 'required|string|max:255',
             'username' => 'nullable|string|max:255',
-            'email' => 'required|email|unique:users,email,' . $id,
-            'password' => 'nullable|string|min:8',
-            'photo' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
-            'alamat' => 'nullable|string',
-            'role' => 'required|in:admin,dinas,sekolah,user',
-            'status' => 'required|in:aktif,nonaktif',
-            'sekolah_info' => 'nullable|string',
+
+            'email' => 'required|email|unique:users,email',
+            'password' => 'required|string|min:8',
+            'role' => 'required|in:admin,kurator,sekolah,user',
         ]);
 
         // Dapatkan data user yang akan diupdate
-        $user = User::findOrFail($id);
+        $users = User::findOrFail($id);
 
-        // Proses penyimpanan foto jika ada perubahan foto
-        if ($request->hasFile('photo')) {
-            $photo = $request->file('photo');
-            $genNama = hexdec(uniqid()) . '.' . $photo->getClientOriginalExtension();
-            $photo->move('upload/users/', $genNama);
-            $save_url = 'upload/users/' . $genNama;
-
-            if (file_exists($user->photo)) {
-                unlink($user->photo);
-            }
-
-            $user->photo = $save_url;
-        }
-
+        $user = new $users;
         $user->name = $validatedData['name'];
         $user->username = $validatedData['username'];
         $user->email = $validatedData['email'];
-        if (!empty($validatedData['password'])) {
-            $user->password = Hash::make($validatedData['password']);
-        }
-        $user->alamat = $validatedData['alamat'];
+        $user->password = Hash::make($validatedData['password']);
         $user->role = $validatedData['role'];
-        $user->status = $validatedData['status'];
-        $user->sekolah_info = $validatedData['sekolah_info'];
 
         $user->save();
-        return redirect()->route('users-sekolah.index')->with('success', 'User updated successfully');
+
+        return redirect()->route('users-kurator.index')->with('success', 'User update successfully');
+
+
+>>>>>>> 39a8616f08e10d452114779760517a811181d84a
     }
 
     public function destroy($id)
