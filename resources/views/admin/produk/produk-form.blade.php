@@ -27,6 +27,29 @@
                                     @endif
                                     <div class="row mb-3">
                                         <div class="col-sm-3">
+                                            <h6 class="mb-0">Jenis<i style="color: red">*</i></h6>
+                                        </div>
+                                        <div class="form-group col-sm-9 text-secondary">
+                                            <div class="form-check">
+                                                <input class="form-check-input" type="radio" name="jenis"
+                                                    id="jenis" value="Jasa"
+                                                    {{ old('jenis', isset($edit) && $edit->kategori == 'Jasa' ? 'checked' : '') }}>
+                                                <label class="form-check-label" for="jenis">
+                                                    Jasa
+                                                </label>
+                                            </div>
+                                            <div class="form-check">
+                                                <input class="form-check-input" type="radio" name="jenis"
+                                                    id="jenis" value="Original"
+                                                    {{ old('jenis', isset($edit) && $edit->kategori == 'Barang' ? 'checked' : '') }}>
+                                                <label class="form-check-label" for="jenis">
+                                                    Barang
+                                                </label>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row mb-3">
+                                        <div class="col-sm-3">
                                             <h6 class="mb-0">Nama Produk<i style="color: red">*</i></h6>
                                         </div>
                                         <div class="form-group col-sm-9 text-secondary">

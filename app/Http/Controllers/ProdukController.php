@@ -68,6 +68,7 @@ class ProdukController extends Controller
         $produk->kategori = $request->kategori;
         $produk->descripsi = $request->descripsi;
         $produk->inovasi = $request->inovasi;
+        $produk->jenis = $request->jenis;
         $produk->start_date = $request->start_date;
         $produk->volume = $request->volume;
         $produk->jumlah_tim = $request->jumlah_tim;
@@ -260,5 +261,19 @@ class ProdukController extends Controller
             'alert-type' => 'success'
         );
         return redirect()->back()->with($notif);
+    }
+
+    public function downloadTemplatePlan()
+    {
+        $filePath = public_path('upload/TemplatePlan.pdf');
+    
+        // Memeriksa apakah file ada
+        if (file_exists($filePath)) {
+            // Mengirimkan file untuk diunduh
+            return response()->download($filePath, 'TemplatePlan.pdf');
+        } else {
+            // Jika file tidak ditemukan, tampilkan pesan atau redirect ke halaman lain
+            return redirect()->back()->with('error', 'File tidak ditemukan.');
+        }
     }
 }
