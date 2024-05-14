@@ -217,7 +217,7 @@
                                             <h6 class="mb-0">Photo</h6>
                                         </div>
                                         <div class="col-sm-9 text-secondary">
-                                            <input type="file" name="photo" class="form-control" id="photo" />
+                                            <input type="file" name="photo" accept="image/*" class="form-control" id="photo" />
                                             <small class="text-muted">Accepted formats: PNG, JPEG, JPG.</small>
                                         </div>
                                     </div>

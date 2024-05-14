@@ -110,7 +110,7 @@
                                         </div>
                                         <div class="col-sm-9 text-secondary">
                                             <input type="file" name="{{ isset($edit) ? 'photos' : 'photo' }}"
-                                                class="form-control" id="photo1" />
+                                                class="form-control" id="photo1" accept="image/*" />
                                             <small class="text-muted">Accepted formats: PNG, JPG, JPEG.</small>
                                         </div>
                                     </div>
@@ -232,10 +232,14 @@
                                                 </select>
                                             </div>
                                         </div>
-                                  
+                                    @elseif (Auth::user()->role == 'sekolah')
+                                        <input type="hidden" name="sekolah" value="{{ Auth::user()->id }}">
+                                    @endif
+
                                     <div class="row mb-3">
                                         <div class="col-sm-3">
-                                            <h6 class="mb-0">Volume produksi per bulan<i style="color: red">*</i></h6>
+                                            <h6 class="mb-0">Volume produksi per bulan<i style="color: red">*</i>
+                                            </h6>
                                         </div>
                                         <div class="form-group col-sm-9 text-secondary">
                                             <input type="number" name="volume" class="form-control"
@@ -247,18 +251,23 @@
                                         <div class="col-sm-3">
                                             <h6 class="mb-0">File BMC</h6>
                                         </div>
-                                        <div class="form-group col-sm-9 text-secondary">
-                                            <input type="file" name="file" class="form-control-file" />
+                                        <div class="col-sm-7 text-secondary">
+                                            <input type="file" name="file" accept=".pdf,.doc" class="form-control"/>
+                                            <small class="text-muted">Accepted formats: PDF, DOC.</small>
+                                        </div>
+                                        <div class="col-sm-2 text-secondary">
+                                            <a href="{{ route('download.template') }}" class="btn btn-primary">Template BMC</a>
+                                            <small class="text-muted">Download template BMC</small>
                                         </div>
                                     </div>
-                                    
+
                                     <div class="row mb-3">
                                         <div class="col-sm-3">
                                             <h6 class="mb-0">Photo Halal</h6>
                                         </div>
                                         <div class="col-sm-9 text-secondary">
-                                            <input type="file" name="sertifikasi_halal" class="form-control"
-                                                id="photoHalal" />
+                                            <input type="file" name="sertifikasi_halal" accept="image/*"
+                                                class="form-control" id="photoHalal" />
                                             <small class="text-muted">Accepted formats: PNG, JPG, JPEG.</small>
                                         </div>
                                     </div>
@@ -277,7 +286,8 @@
                                             <h6 class="mb-0">Photo SNI</h6>
                                         </div>
                                         <div class="col-sm-9 text-secondary">
-                                            <input type="file" name="sni" class="form-control" id="photoSNI" />
+                                            <input type="file" name="sni" accept="image/*" class="form-control"
+                                                id="photoSNI" />
                                             <small class="text-muted">Accepted formats: PNG, JPG, JPEG.</small>
                                         </div>
                                     </div>
@@ -297,8 +307,8 @@
                                             <h6 class="mb-0">Photo HAKI</h6>
                                         </div>
                                         <div class="col-sm-9 text-secondary">
-                                            <input type="file" name="sertifikasi_haki" class="form-control"
-                                                id="photoHaki" />
+                                            <input type="file" name="sertifikasi_haki" accept="image/*"
+                                                class="form-control" id="photoHaki" />
                                             <small class="text-muted">Accepted formats: PNG, JPG, JPEG.</small>
                                         </div>
                                     </div>
@@ -312,19 +322,6 @@
                                                 style="width: 100px; height: 100px;">
                                         </div>
                                     </div>
-                                    @elseif (Auth::user()->role == 'sekolah')
-                                    <input type="hidden" name="sekolah" value="{{ Auth::user()->id }}">
-                                @endif
-                                <div class="row mb-3">
-                                    <div class="col-sm-3">
-                                        <h6 class="mb-0"></h6>
-                                    </div>
-                                    <div class="col-sm-9 text-secondary">
-                                        <img id="showPhoto1"
-                                            src="{{ isset($edit) ? asset($edit->photo) : asset('upload/no_image.jpg') }}"
-                                            style="width: 100px; height: 100px;">
-                                    </div>
-                                </div>
 
 
                                     <div class="row">
@@ -357,9 +354,11 @@
                     },
                     descripsi: {
                         required: true,
+                        minlength: 500
                     },
                     inovasi: {
                         required: true,
+                        minlength: 150
                     },
                     sekolah: {
                         required: true,
@@ -389,9 +388,11 @@
                     },
                     descripsi: {
                         required: 'Masukkan Deskripsi',
+                        minlength: 'Minimal 200 kata'
                     },
                     inovasi: {
                         required: 'Masukkan Inovasi',
+                        minlength: 'Minimal 100 kata'
                     },
                     sekolah: {
                         required: 'Pilih Sekolah',

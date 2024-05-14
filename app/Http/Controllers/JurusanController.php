@@ -44,7 +44,7 @@ class JurusanController extends Controller
 
         $jurusan->save();
         $notif = array(
-            'message' => 'Category Berhasil Ditambah',
+            'message' => 'Jurusan Berhasil Ditambah',
             'alert-type' => 'success'
         );
         return redirect()->route('jurusan.index')->with($notif);
@@ -87,7 +87,7 @@ class JurusanController extends Controller
         $jurusan->save();
 
         $notif = array(
-            'message' => 'Nama Category Berhasil Diubah',
+            'message' => 'Jurusan Berhasil Diubah',
             'alert-type' => 'success'
         );
         return redirect()->route('jurusan.index')->with($notif);
@@ -102,7 +102,7 @@ class JurusanController extends Controller
         $jurusan = Jurusan::findOrFail($dId);
         $jurusan->delete();
         $notif = array(
-            'message' => 'Category Telah Berhasil Dihapus',
+            'message' => 'Jurusan Telah Berhasil Dihapus',
             'alert-type' => 'success'
         );
         return redirect()->route('jurusan.index')->with($notif);

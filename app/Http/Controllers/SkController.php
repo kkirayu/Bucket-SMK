@@ -46,7 +46,7 @@ class SkController extends Controller
 
         $sk->save();
         $notif = array(
-            'message' => 'Nama Category Berhasil Diubah',
+            'message' => 'SK Berhasil Diubah',
             'alert-type' => 'success'
         );
 
@@ -97,7 +97,7 @@ class SkController extends Controller
 
         $sk->save();
         $notif = array(
-            'message' => 'Nama Category Berhasil Diubah',
+            'message' => 'SK Berhasil Diubah',
             'alert-type' => 'success'
         );
 
@@ -109,17 +109,18 @@ class SkController extends Controller
      */
     public function destroy($id)
     {
-        $sk = Sk::findOrFail($id);
-    
+        $dId = decrypt($id);
+        $sk = Sk::findOrFail($dId);
+
         if ($sk->file) {
             unlink(public_path('upload/' . $sk->file));
         }
         $sk->delete();
         $notif = array(
-            'message' => 'Category Telah Berhasil Dihapus',
+            'message' => 'SK Telah Berhasil Dihapus',
             'alert-type' => 'success'
         );
         return redirect()->back()->with($notif);
     }
-    
+
 }

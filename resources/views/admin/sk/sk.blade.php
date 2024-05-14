@@ -26,7 +26,7 @@
                     </div>
                     <div class="font-22 ms-auto">
                         <div class="btn-group">
-                            <button type="button" onclick="window.location.href='{{ route('jurusan.create') }}'"
+                            <button type="button" onclick="window.location.href='{{ route('sk.create') }}'"
                                 class="btn btn-primary">Tambah SK</button>
                         </div>
                     </div>

@@ -88,7 +88,7 @@ class AsesmenController extends Controller
         ]);
 
         $notif = array(
-            'message' => 'Produk Berhasil DiACC',
+            'message' => 'Produk Berhasil Di Setujui',
             'alert-type' => 'success'
         );
         return redirect()->back()->with($notif);

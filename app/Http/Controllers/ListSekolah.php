@@ -134,7 +134,7 @@ class ListSekolah extends Controller
         $user->delete();
 
         $notif = array(
-            'message' => 'Category Telah Berhasil Dihapus',
+            'message' => 'User Telah Berhasil Dihapus',
             'alert-type' => 'success'
         );
         return redirect()->back()->with($notif);

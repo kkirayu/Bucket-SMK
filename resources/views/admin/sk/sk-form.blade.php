@@ -31,10 +31,11 @@
                                     </div>
                                     <div class="row mb-3">
                                         <div class="col-sm-3">
-                                            <h6 class="mb-0">File</h6>
+                                            <h6 class="mb-0">File SK</h6>
                                         </div>
                                         <div class="form-group col-sm-9 text-secondary">
-                                            <input type="file" name="file" class="form-control-file" />
+                                            <input type="file" name="file" accept=".pdf,.doc" class="form-control" />
+                                            <small class="text-muted">Accepted formats: PDF, DOC.</small>
                                         </div>
                                     </div>
                                     <div class="row">

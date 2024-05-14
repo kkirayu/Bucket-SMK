@@ -29,7 +29,7 @@ class ListDinas extends Controller
      */
     public function store(Request $request)
     {
-       
+
         // Validasi data yang masuk
         $validatedData = $request->validate([
             'name' => 'required|string|max:255',
@@ -110,7 +110,7 @@ class ListDinas extends Controller
         $user->delete();
 
         $notif = array(
-            'message' => 'Category Telah Berhasil Dihapus',
+            'message' => 'User Telah Berhasil Dihapus',
             'alert-type' => 'success'
         );
         return redirect()->back()->with($notif);
