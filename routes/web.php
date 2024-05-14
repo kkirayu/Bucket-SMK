@@ -35,7 +35,6 @@ Route::get('/', [HomeController::class, 'index'])->name('home.index');
 Route::get('/product/{id}', [HomeController::class, 'show'])->name('product.show');
 Route::get('/home', [AdminController::class, 'adminLogin'])->name('home.index');
 Route::get('/admin/login', [AdminController::class, 'adminLogin'])->name('admin.login');
-Route::get('/download/template', [ProdukController::class, 'downloadTemplatePlan'])->name('download.template');
 require __DIR__.'/auth.php';
 
 
@@ -105,4 +104,7 @@ Route::group(['middleware' => ['auth', 'role:admin,kurator']], function () {
     Route::resource('/admin/komentar', KomentarController::class);
     Route::resource('/admin/sk', SkController::class);
     Route::get('/admin/sk/destroy/{id}', [SkController::class, 'destroy'])->name('sk.destroy');
+    Route::get('/download/template', [ProdukController::class, 'downloadTemplatePlan'])->name('download.template');
+    Route::get('/download/bmc/{id}', [ProdukController::class, 'downloadBmc'])->name('download.bmc');
+
 });

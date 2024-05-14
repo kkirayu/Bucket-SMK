@@ -25,6 +25,7 @@
                                         <input type="hidden" value="{{ $edit->sertifikasi_haki }}" name="photoHaki" />
                                         <input type="hidden" value="{{ $edit->sertifikasi_halal }}" name="photoHalal" />
                                         <input type="hidden" value="{{ $edit->sertifikasi_sni }}" name="photoSni" />
+                                        <input type="hidden" value="{{ $edit->file }}" name="fileFile" />
                                     @endif
                                     <div class="row mb-3">
                                         <div class="col-sm-3">
@@ -34,7 +35,7 @@
                                             <div class="form-check">
                                                 <input class="form-check-input" type="radio" name="jenis" id="jenis"
                                                     value="Jasa"
-                                                    {{ old('jenis', isset($edit) && $edit->kategori == 'Jasa' ? 'checked' : '') }}>
+                                                    {{ old('jenis', isset($edit) && $edit->jenis == 'Jasa' ? 'checked' : '') }}>
                                                 <label class="form-check-label" for="jenis">
                                                     Jasa
                                                 </label>
@@ -42,7 +43,7 @@
                                             <div class="form-check">
                                                 <input class="form-check-input" type="radio" name="jenis" id="jenis"
                                                     value="Original"
-                                                    {{ old('jenis', isset($edit) && $edit->kategori == 'Barang' ? 'checked' : '') }}>
+                                                    {{ old('jenis', isset($edit) && $edit->jenis == 'Barang' ? 'checked' : '') }}>
                                                 <label class="form-check-label" for="jenis">
                                                     Barang
                                                 </label>
@@ -113,6 +114,17 @@
                                                 class="form-control" id="photo1" accept="image/*" />
                                             <small class="text-muted">Accepted formats: PNG, JPG, JPEG.</small>
                                         </div>
+
+                                    </div>
+                                    <div class="row mb-3">
+                                        <div class="col-sm-3">
+                                            <h6 class="mb-0"></h6>
+                                        </div>
+                                        <div class="col-sm-9 text-secondary">
+                                            <img id="showPhoto1"
+                                                src="{{ isset($edit) ? asset($edit->sertifikasi_sni) : asset('upload/no_image.jpg') }}"
+                                                style="width: 100px; height: 100px;">
+                                        </div>
                                     </div>
                                     <div class="row mb-3">
                                         <div class="col-sm-3">
@@ -120,7 +132,7 @@
                                         </div>
                                         <div class="form-group col-sm-9 text-secondary">
                                             <input type="text" name="vidio_produk" class="form-control"
-                                                value="{{ old('vidio_produk', isset($edit) ? $edit->vidio_produk : '') }}"
+                                                value="{{ old('vidio_produk', isset($edit) ? $edit->video_produk : '') }}"
                                                 placeholder="Link vidio produk" />
                                             <small class="text-muted">Accepted formats: Link vidio yang sudah di upload ke
                                                 platform seperti Youtube dll.</small>
@@ -133,7 +145,7 @@
                                         </div>
                                         <div class="form-group col-sm-9 text-secondary">
                                             <input type="number" name="jumlah_tim" class="form-control"
-                                                placeholder="Jumlah Tim">{{ old('jumlah_tim', isset($edit) ? $edit->jumlah_tim : '') }}</input>
+                                                placeholder="Jumlah Tim" value="{{ old('jumlah_tim', isset($edit) ? $edit->jumlah_tim : '') }}" />
                                             <small class="text-muted">Accepted formats: Dalam data angka.</small>
                                         </div>
                                     </div>
@@ -243,7 +255,7 @@
                                         </div>
                                         <div class="form-group col-sm-9 text-secondary">
                                             <input type="number" name="volume" class="form-control"
-                                                placeholder="volume">{{ old('volume', isset($edit) ? $edit->volume : '') }}</input>
+                                                placeholder="volume" value="{{ old('volume', isset($edit) ? $edit->volume : '') }}" />
                                             <small class="text-muted">Accepted formats: Dalam data angka.</small>
                                         </div>
                                     </div>

@@ -11,24 +11,26 @@ class Produk extends Model
 {
     use HasFactory;
 
-    protected $fillable = [
-        'nama',
-        'kategori',
-        'descripsi',
-        'inovasi',
-        'user_id',
-        'photo',
-        'nama_tim',
-        'jurusan_id',
-        'material',
-        'harga',
-        'tahun_produksi',
-        'merk_dagang',
-        'sertifikasi_haki',
-        'sertifikasi_halal',
-        'sertifikasi_sni',
-        'status'
-    ];
+    protected $guarded = [];
+
+    // protected $fillable = [
+    //     'nama',
+    //     'kategori',
+    //     'descripsi',
+    //     'inovasi',
+    //     'user_id',
+    //     'photo',
+    //     'nama_tim',
+    //     'jurusan_id',
+    //     'material',
+    //     'harga',
+    //     'tahun_produksi',
+    //     'merk_dagang',
+    //     'sertifikasi_haki',
+    //     'sertifikasi_halal',
+    //     'sertifikasi_sni',
+    //     'status'
+    // ];
 
     // public function jurusans()
     // {
