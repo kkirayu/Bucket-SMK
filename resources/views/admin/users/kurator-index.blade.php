@@ -79,7 +79,7 @@
                                     <td>
                                         <a href="{{ route('users-kurator.edit', encrypt($user->id)) }}"
                                             class="btn btn-info">Edit</a>
-                                        <a href="{{ route('users-kurator.destroy', encrypt($user->id)) }}"
+                                        <a href="{{ route('list.destroy', encrypt($user->id)) }}"
                                             class="btn btn-danger" id="delete">Delete</a>
                                     </td>
                                 </tr>

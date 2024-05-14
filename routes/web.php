@@ -79,12 +79,13 @@ Route::group(['middleware' => ['auth', 'role:admin']], function () {
 
 
     Route::resource('/admin/users-sekolah', ListSekolah::class);
-    Route::resource('/admin/users-kurator', ListSekolah::class);
+    Route::resource('/admin/users-kurator', ListDinas::class);
     Route::resource('/admin/users-user', ListUser::class);
     Route::get('/admin/users/destroy/{id}', [ListSekolah::class, 'destroy'])->name('list.destroy');
 
     Route::post('/admin/import_excel', [ListSekolah::class, 'import_excel'])->name('import.excel');
-    Route::post('/admin/kurator/create', [ListDinas::class, 'create'])->name('kurator.create');
+    Route::get('/admin/kurator/create', [ListDinas::class, 'create'])->name('kurator.create');
+    Route::post('/admin/kurator/create', [ListDinas::class, 'store'])->name('kura.store');
     Route::post('/admin/import_excel/jurusan', [JurusanController::class, 'import_excel'])->name('import.jurusan');
 });
 
