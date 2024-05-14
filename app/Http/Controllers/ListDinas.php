@@ -46,7 +46,7 @@ class ListDinas extends Controller
 
         $user->save();
 
-        return redirect()->route('kurator.index')->with('success', 'User created successfully');
+        return redirect()->route('users-kurator.index')->with('success', 'User created successfully');
     }
 
     /**
@@ -62,7 +62,10 @@ class ListDinas extends Controller
      */
     public function edit(string $id)
     {
-        //
+        $user = User::all();
+        $dId = decrypt($id);
+        $edit = User::findOrFail($dId);
+        return view('admin.users.kurator-form', compact('edit', 'user'));
     }
 
     /**
@@ -70,7 +73,30 @@ class ListDinas extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
+        // Validasi data yang masuk
+        $validatedData = $request->validate([
+            'name' => 'required|string|max:255',
+            'username' => 'nullable|string|max:255',
+            'email' => 'required|email|unique:users,email',
+            'password' => 'required|string|min:8',
+            'role' => 'required|in:admin,kurator,sekolah,user',
+        ]);
+
+        // Dapatkan data user yang akan diupdate
+        $users = User::findOrFail($id);
+
+        $user = new $users;
+        $user->name = $validatedData['name'];
+        $user->username = $validatedData['username'];
+        $user->email = $validatedData['email'];
+        $user->password = Hash::make($validatedData['password']);
+        $user->role = $validatedData['role'];
+
+        $user->save();
+
+        return redirect()->route('users-kurator.index')->with('success', 'User update successfully');
+
+
     }
 
     /**
