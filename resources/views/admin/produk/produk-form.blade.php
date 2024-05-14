@@ -60,10 +60,14 @@
                                     </div>
                                     <div class="row mb-3">
                                         <div class="col-sm-3">
-                                            <h6 class="mb-0">Deskripsi<i style="color: red">*</i></h6>
+                                            <h6 class="mb-0">Deskripsi Produk/Jasa<i style="color: red">*</i></h6>
                                         </div>
                                         <div class="form-group col-sm-9 text-secondary">
-                                            <textarea name="descripsi" class="form-control" placeholder="Deskripsi">{{ old('descripsi', isset($edit) ? $edit->descripsi : '') }}</textarea>
+                                            <textarea name="descripsi" class="form-control" id="descripsi" rows="5" 
+                                                placeholder="Deskripsi Produk">{{ old('descripsi', isset($edit) ? $edit->descripsi : '') }}</textarea>
+                                            <small id="descripsiHelp" class="form-text text-muted">
+                                                Deskripsi harus memiliki minimal 200 kata.
+                                            </small>
                                         </div>
                                     </div>
                                     <div class="row mb-3">
@@ -72,6 +76,9 @@
                                         </div>
                                         <div class="form-group col-sm-9 text-secondary">
                                             <textarea name="inovasi" class="form-control" placeholder="inovasi">{{ old('inovasi', isset($edit) ? $edit->inovasi : '') }}</textarea>
+                                            <small id="descripsiHelp" class="form-text text-muted">
+                                                Deskripsi harus memiliki minimal 100 kata.
+                                            </small>
                                         </div>
                                     </div>
                                     @if (Auth::user()->role == 'admin')
@@ -133,6 +140,15 @@
                                     </div>
                                     <div class="row mb-3">
                                         <div class="col-sm-3">
+                                            <h6 class="mb-0">Jumlah Tim<i style="color: red">*</i></h6>
+                                        </div>
+                                        <div class="form-group col-sm-9 text-secondary">
+                                            <input type="number" name="jumlah_tim" class="form-control" placeholder="Jumlah Tim">{{ old('jumlah_tim', isset($edit) ? $edit->jumlah_tim : '') }}</input>
+                                            <small class="text-muted">Accepted formats: Dalam data angka.</small>
+                                        </div>
+                                    </div>
+                                    <div class="row mb-3">
+                                        <div class="col-sm-3">
                                             <h6 class="mb-0">Jurusan<i style="color: red">*</i></h6>
                                         </div>
                                         <div class="form-group col-sm-9 text-secondary">
@@ -175,12 +191,39 @@
                                     </div>
                                     <div class="row mb-3">
                                         <div class="col-sm-3">
+                                            <h6 class="mb-0">Tanggal Mulai Produksi</h6>
+                                        </div>
+                                        <div class="form-group col-sm-9 text-secondary">
+                                            <input type="date" name="start_date" class="form-control"
+                                                value="{{ old('start_date', isset($edit) ? $edit->start_date : '') }}"
+                                                placeholder="start_date" />
+                                        </div>
+                                    </div>
+                                    <div class="row mb-3">
+                                        <div class="col-sm-3">
                                             <h6 class="mb-0">Merk Dagang</h6>
                                         </div>
                                         <div class="form-group col-sm-9 text-secondary">
                                             <input type="text" name="merk_dagang" class="form-control"
                                                 value="{{ old('merk_dagang', isset($edit) ? $edit->merk_dagang : '') }}"
                                                 placeholder="merk dagang" />
+                                        </div>
+                                    </div>
+                                    <div class="row mb-3">
+                                        <div class="col-sm-3">
+                                            <h6 class="mb-0">Volume/bulan<i style="color: red">*</i></h6>
+                                        </div>
+                                        <div class="form-group col-sm-9 text-secondary">
+                                            <input type="number" name="volume" class="form-control" placeholder="volume">{{ old('volume', isset($edit) ? $edit->volume: '') }}</input>
+                                            <small class="text-muted">Accepted formats: Dalam data angka.</small>
+                                        </div>
+                                    </div>
+                                    <div class="row mb-3">
+                                        <div class="col-sm-3">
+                                            <h6 class="mb-0">File BMC</h6>
+                                        </div>
+                                        <div class="form-group col-sm-9 text-secondary">
+                                            <input type="file" name="file" class="form-control-file" />
                                         </div>
                                     </div>
                                     <div class="row mb-3">
@@ -247,7 +290,7 @@
                                         <div class="col-sm-3"></div>
                                         <div class="col-sm-9 text-secondary" style="text-align: right;">
                                             <input type="submit" class="btn btn-success px-4"
-                                                value="{{ isset($edit) ? 'Ubah Produk' : 'Tambah Produk' }}" />
+                                                value="{{ isset($edit) ? 'Ubah Produk' : 'Tambah Produk' }}"  onclick="return validateDescription()" />
                                         </div>
                                     </div>
                                 </form>
@@ -258,6 +301,7 @@
             </div>
         </div>
     </div>
+
 
     <script type="text/javascript">
         $(document).ready(function(){
