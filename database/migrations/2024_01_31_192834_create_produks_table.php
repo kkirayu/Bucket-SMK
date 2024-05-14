@@ -17,7 +17,8 @@ return new class extends Migration
             $table->string('kategori');
             $table->text('descripsi');
             $table->text('inovasi');
-            $table->string('bmc');
+            $table->string('file');
+            $table->string('jenis');
             $table->unsignedBigInteger('user_id');
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
             $table->string('photo');
