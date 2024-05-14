@@ -16,7 +16,7 @@
             </div>
             <div class="ms-auto">
                 <div class="btn-group">
-                    <a href="{{ route('users-kurator.create') }}" class="btn btn-primary">Tambah Kurator</a>
+                    <a href="{{ route('kurator.create') }}" class="btn btn-primary">Tambah Kurator</a>
                 </div>
                 <div class="btn-group">
 
