@@ -29,35 +29,45 @@
                                     @endif
                                     <div class="row mb-3">
                                         <div class="col-sm-3">
-                                            <h6 class="mb-0">Jenis<i style="color: red">*</i></h6>
-                                        </div>
-                                        <div class="form-group col-sm-9 text-secondary">
-                                            <div class="form-check">
-                                                <input class="form-check-input" type="radio" name="jenis" id="jenis"
-                                                    value="Jasa"
-                                                    {{ old('jenis', isset($edit) && $edit->jenis == 'Jasa' ? 'checked' : '') }}>
-                                                <label class="form-check-label" for="jenis">
-                                                    Jasa
-                                                </label>
-                                            </div>
-                                            <div class="form-check">
-                                                <input class="form-check-input" type="radio" name="jenis" id="jenis"
-                                                    value="Original"
-                                                    {{ old('jenis', isset($edit) && $edit->jenis == 'Barang' ? 'checked' : '') }}>
-                                                <label class="form-check-label" for="jenis">
-                                                    Barang
-                                                </label>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="row mb-3">
-                                        <div class="col-sm-3">
                                             <h6 class="mb-0">Nama Produk<i style="color: red">*</i></h6>
                                         </div>
                                         <div class="form-group col-sm-9 text-secondary">
                                             <input type="text" name="nama" class="form-control"
                                                 value="{{ old('nama', isset($edit) ? $edit->nama : '') }}"
-                                                placeholder="Nama Produk" />
+                                                placeholder="Nama Produk" required />
+                                                @error('nama')
+                                                <small id="namaProduk" class="form-text text-danger">
+                                                {{ 'Wajib Isi' }}
+                                            </small>
+                                            @enderror
+                                        </div>
+                                    </div>
+                                    <div class="row mb-3">
+                                        <div class="col-sm-3">
+                                            <h6 class="mb-0">Jenis Produk<i style="color: red">*</i></h6>
+                                        </div>
+                                        <div class="form-group col-sm-9 text-secondary">
+                                            <div class="form-check">
+                                                <input class="form-check-input" type="radio" name="jenis" id="jenis"
+                                                    value="Barang"
+                                                    {{ old('jenis', isset($edit) && $edit->jenis == 'Barang' ? 'checked' : '') }} required>
+                                                <label class="form-check-label" for="jenis">
+                                                    Barang
+                                                </label>
+                                            </div>
+                                            <div class="form-check">
+                                                <input class="form-check-input" type="radio" name="jenis" id="jenis"
+                                                    value="Jasa"
+                                                    {{ old('jenis', isset($edit) && $edit->jenis == 'Jasa' ? 'checked' : '') }} required>
+                                                <label class="form-check-label" for="jenis">
+                                                    Jasa
+                                                </label>
+                                            </div>
+                                            @error('jenis')
+                                                <small id="namaProduk" class="form-text text-danger">
+                                                {{ 'Wajib Pilih' }}
+                                            </small>
+                                            @enderror
                                         </div>
                                     </div>
                                     <div class="row mb-3">
@@ -67,20 +77,25 @@
                                         <div class="form-group col-sm-9 text-secondary">
                                             <div class="form-check">
                                                 <input class="form-check-input" type="radio" name="kategori"
-                                                    id="kategori" value="atm"
-                                                    {{ old('kategori', isset($edit) && $edit->kategori == 'atm' ? 'checked' : '') }}>
-                                                <label class="form-check-label" for="kategori">
-                                                    ATM (Amati Tiru Modifikasi)
-                                                </label>
-                                            </div>
-                                            <div class="form-check">
-                                                <input class="form-check-input" type="radio" name="kategori"
                                                     id="kategori" value="original"
                                                     {{ old('kategori', isset($edit) && $edit->kategori == 'original' ? 'checked' : '') }}>
                                                 <label class="form-check-label" for="kategori">
                                                     Original
                                                 </label>
                                             </div>
+                                            <div class="form-check">
+                                                <input class="form-check-input" type="radio" name="kategori"
+                                                    id="kategori" value="atm"
+                                                    {{ old('kategori', isset($edit) && $edit->kategori == 'atm' ? 'checked' : '') }}>
+                                                <label class="form-check-label" for="kategori">
+                                                    ATM (Amati Tiru Modifikasi)
+                                                </label>
+                                            </div>
+                                            @error('kategori')
+                                                <small id="namaProduk" class="form-text text-danger">
+                                                {{ 'Wajib Pilih' }}
+                                            </small>
+                                            @enderror
                                         </div>
                                     </div>
                                     <div class="row mb-3">
@@ -92,18 +107,30 @@
                                             <small id="descripsiHelp" class="form-text text-muted">
                                                 Deskripsi harus memiliki minimal 200 kata.
                                             </small>
+                                             @error('descripsi')
+                                                <small id="namaProduk" class="form-text text-danger">
+                                                {{ 'Wajib Isi' }}
+                                            </small>
+                                            @enderror
                                         </div>
+                                       
                                     </div>
                                     <div class="row mb-3">
                                         <div class="col-sm-3">
-                                            <h6 class="mb-0">Inovasi<i style="color: red">*</i></h6>
+                                            <h6 class="mb-0">Inovasi Barang/Jasa<i style="color: red">*</i></h6>
                                         </div>
                                         <div class="form-group col-sm-9 text-secondary">
                                             <textarea name="inovasi" class="form-control" placeholder="inovasi">{{ old('inovasi', isset($edit) ? $edit->inovasi : '') }}</textarea>
                                             <small id="descripsiHelp" class="form-text text-muted">
-                                                Deskripsi harus memiliki minimal 100 kata.
+                                                Inovasi harus memiliki minimal 50 kata.
                                             </small>
+                                            @error('inovasi')
+                                                <small id="namaProduk" class="form-text text-danger">
+                                                {{ 'Wajib Isi' }}
+                                            </small>
+                                            @enderror
                                         </div>
+                                        
                                     </div>
                                     <div class="row mb-3">
                                         <div class="col-sm-3">
@@ -113,8 +140,13 @@
                                             <input type="file" name="{{ isset($edit) ? 'photos' : 'photo' }}"
                                                 class="form-control" id="photo1" accept="image/*" />
                                             <small class="text-muted">Accepted formats: PNG, JPG, JPEG.</small>
+                                            @error('photo')
+                                                <small id="namaProduk" class="form-text text-danger">
+                                                {{ 'Wajib Isi' }}
+                                            </small>
+                                            @enderror
                                         </div>
-
+                                        
                                     </div>
                                     <div class="row mb-3">
                                         <div class="col-sm-3">
@@ -144,10 +176,16 @@
                                             <h6 class="mb-0">Jumlah Tim<i style="color: red">*</i></h6>
                                         </div>
                                         <div class="form-group col-sm-9 text-secondary">
-                                            <input type="number" name="jumlah_tim" class="form-control"
+                                            <input type="number" name="jumlah_tim" class="form-control" min="0"
                                                 placeholder="Jumlah Tim" value="{{ old('jumlah_tim', isset($edit) ? $edit->jumlah_tim : '') }}" />
                                             <small class="text-muted">Accepted formats: Dalam data angka.</small>
+                                            @error('jumlah_tim')
+                                                <small id="namaProduk" class="form-text text-danger">
+                                                {{ 'Wajib Isi' }}
+                                            </small>
+                                            @enderror
                                         </div>
+                                        
                                     </div>
 
                                     <div class="row mb-3">
@@ -158,7 +196,13 @@
                                             <textarea name="nama_tim" class="form-control" placeholder="Nama Tim">{{ old('nama_tim', isset($edit) ? $edit->nama_tim : '') }}</textarea>
                                             <small class="text-muted">Accepted formats: Nama Tim Project dan Nama Orang
                                                 yang termasuk ke dalam TIM.</small>
+                                                @error('nama_tim')
+                                                <small id="namaProduk" class="form-text text-danger">
+                                                {{ 'Wajib Isi' }}
+                                            </small>
+                                            @enderror
                                         </div>
+                                        
                                     </div>
                                     <div class="row mb-3">
                                         <div class="col-sm-3">
@@ -169,11 +213,16 @@
                                                 <option value="" selected disabled>--- Pilih Jurusan ---</option>
                                                 @foreach ($jurusans as $jurusan)
                                                     <option value="{{ $jurusan->id }}"
-                                                        {{ old('jurusan', isset($edit) ? ($edit->jurusan_id == $jurusan->id ? 'selected' : '') : '') }}>
+                                                        {{ old('jurusan', isset($edit) ? ($edit->jurusan_id == $jurusan->id ? 'selected' : '') : old('jurusan')) }}>
                                                         {{ $jurusan->nama_jurusan }}
                                                     </option>
                                                 @endforeach
                                             </select>
+                                            @error('jurusan')
+                                                <small id="namaProduk" class="form-text text-danger">
+                                                {{ 'Wajib Isi' }}
+                                            </small>
+                                            @enderror
                                         </div>
                                     </div>
                                     <div class="row mb-3">
@@ -182,7 +231,13 @@
                                         </div>
                                         <div class="form-group col-sm-9 text-secondary">
                                             <textarea name="material" class="form-control" placeholder="material">{{ old('material', isset($edit) ? $edit->material : '') }}</textarea>
+                                        @error('material')
+                                                <small id="namaProduk" class="form-text text-danger">
+                                                {{ 'Wajib Isi' }}
+                                            </small>
+                                            @enderror
                                         </div>
+                                        
                                     </div>
 
                                     <div class="row mb-3">
@@ -190,7 +245,7 @@
                                             <h6 class="mb-0">Harga</h6>
                                         </div>
                                         <div class="form-group col-sm-9 text-secondary">
-                                            <input type="number" name="harga" class="form-control"
+                                            <input type="number" name="harga" class="form-control" min="0"
                                                 value="{{ old('harga', isset($edit) ? $edit->harga : '') }}"
                                                 placeholder="harga" />
                                         </div>
@@ -234,7 +289,7 @@
                                             </div>
                                             <div class="form-group col-sm-9 text-secondary">
                                                 <select name="sekolah" class="form-control">
-                                                    <option value="" selected disabled>--- Pilih Sekolah ---</option>
+                                                    <option value="{{ old('sekolah', isset($edit) ? $edit->sekolah : '') }}" selected disabled>--- Pilih Sekolah ---</option>
                                                     @foreach ($sekolah as $s)
                                                         <option value="{{ $s->id }}"
                                                             {{ old('sekolah', isset($edit) ? ($edit->user_id == $s->id ? 'selected' : '') : '') }}>
@@ -254,18 +309,24 @@
                                             </h6>
                                         </div>
                                         <div class="form-group col-sm-9 text-secondary">
-                                            <input type="number" name="volume" class="form-control"
+                                            <input type="number" name="volume" class="form-control" min="0"
                                                 placeholder="volume" value="{{ old('volume', isset($edit) ? $edit->volume : '') }}" />
                                             <small class="text-muted">Accepted formats: Dalam data angka.</small>
+                                             @error('volume')
+                                                <small id="namaProduk" class="form-text text-danger">
+                                                {{ 'Wajib Isi' }}
+                                            </small>
+                                            @enderror
                                         </div>
+                                       
                                     </div>
                                     <div class="row mb-3">
                                         <div class="col-sm-3">
-                                            <h6 class="mb-0">File BMC</h6>
+                                            <h6 class="mb-0">Bussiness Plan atau BMC</h6>
                                         </div>
                                         <div class="col-sm-7 text-secondary">
-                                            <input type="file" name="file" accept=".pdf,.doc" class="form-control"/>
-                                            <small class="text-muted">Accepted formats: PDF, DOC.</small>
+                                            <input type="file" name="file" accept=".pdf,.doc" class="form-control" id="file"/>
+                                            <small class="text-muted">Accepted formats: PDF, DOC. File kecil dari 100KB</small>
                                         </div>
                                         <div class="col-sm-2 text-secondary">
                                             <a href="{{ route('download.template') }}" class="btn btn-primary">Template BMC</a>
@@ -275,7 +336,7 @@
 
                                     <div class="row mb-3">
                                         <div class="col-sm-3">
-                                            <h6 class="mb-0">Photo Halal</h6>
+                                            <h6 class="mb-0">Sertifikat Halal</h6>
                                         </div>
                                         <div class="col-sm-9 text-secondary">
                                             <input type="file" name="sertifikasi_halal" accept="image/*"
@@ -295,7 +356,7 @@
                                     </div>
                                     <div class="row mb-3">
                                         <div class="col-sm-3">
-                                            <h6 class="mb-0">Photo SNI</h6>
+                                            <h6 class="mb-0">Sertifikat SNI</h6>
                                         </div>
                                         <div class="col-sm-9 text-secondary">
                                             <input type="file" name="sni" accept="image/*" class="form-control"
@@ -316,7 +377,7 @@
 
                                     <div class="row mb-3">
                                         <div class="col-sm-3">
-                                            <h6 class="mb-0">Photo HAKI</h6>
+                                            <h6 class="mb-0">Sertifikat HAKI</h6>
                                         </div>
                                         <div class="col-sm-9 text-secondary">
                                             <input type="file" name="sertifikasi_haki" accept="image/*"
@@ -360,22 +421,26 @@
                 rules: {
                     nama: {
                         required: true,
+                        minlength: 2
                     },
                     kategori: {
                         required: true,
                     },
                     descripsi: {
                         required: true,
-                        minlength: 500
+                        minlength: 150
                     },
                     inovasi: {
                         required: true,
-                        minlength: 150
+                        minlength: 50
                     },
                     sekolah: {
                         required: true,
                     },
                     photo: {
+                        required: true,
+                    },
+                    jumlah_tim: {
                         required: true,
                     },
                     nama_tim: {
@@ -389,28 +454,35 @@
                     },
                     tahun_produksi: {
                         required: true,
+                    },
+                    file: {
+                        size: 100,
                     }
                 },
                 messages: {
                     nama: {
                         required: 'Masukkan Nama Produk',
+                        minlength: 'Wajib Isi'
                     },
                     kategori: {
                         required: 'Pilih Kategori',
                     },
                     descripsi: {
                         required: 'Masukkan Deskripsi',
-                        minlength: 'Minimal 200 kata'
+                        minlength: 'Minimal 100 kata'
                     },
                     inovasi: {
                         required: 'Masukkan Inovasi',
-                        minlength: 'Minimal 100 kata'
+                        minlength: 'Minimal 30 kata'
                     },
                     sekolah: {
                         required: 'Pilih Sekolah',
                     },
                     photo: {
                         required: 'Pilih Photo',
+                    },
+                    jumlah_tim: {
+                        required: 'Masukkan Jumlah Tim Tim',
                     },
                     nama_tim: {
                         required: 'Masukkan Nama Tim',
@@ -423,6 +495,9 @@
                     },
                     tahun_produksi: {
                         required: 'Masukkan Tahun Produksi',
+                    },
+                    file: {
+                        size: 'File harus kecil dari 100KB',
                     }
                 },
                 errorElement: 'span',

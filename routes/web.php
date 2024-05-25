@@ -59,6 +59,9 @@ Route::group(['middleware' => ['auth', 'role:admin,kurator,sekolah']], function 
     Route::get('/admin/profile',[AdminController::class,'adminProfile'])->name('admin.profile');
     Route::post('/admin/profile/update',[AdminController::class,'adminProfileUpdate'])->name('admin.profile.update');
     Route::post('/admin/profile/update-password',[AdminController::class,'adminProfileUpdatepassword'])->name('admin.profile.updatePassword');
+    Route::get('/download/template', [ProdukController::class, 'downloadTemplatePlan'])->name('download.template');
+    Route::get('/download/bmc/{id}', [ProdukController::class, 'downloadBmc'])->name('download.bmc');
+
 });
 
 // Role untuk admin
@@ -104,7 +107,4 @@ Route::group(['middleware' => ['auth', 'role:admin,kurator']], function () {
     Route::resource('/admin/komentar', KomentarController::class);
     Route::resource('/admin/sk', SkController::class);
     Route::get('/admin/sk/destroy/{id}', [SkController::class, 'destroy'])->name('sk.destroy');
-    Route::get('/download/template', [ProdukController::class, 'downloadTemplatePlan'])->name('download.template');
-    Route::get('/download/bmc/{id}', [ProdukController::class, 'downloadBmc'])->name('download.bmc');
-
 });

@@ -43,81 +43,89 @@ class ProdukController extends Controller
      */
     public function store(Request $request)
     {
+        $request->validate([
+            'jenis' => 'required',
+            'nama' => 'required|string|max:255',
+            'kategori' => 'required',
+            'descripsi' => 'required',
+            'inovasi' => 'required',
+            'photo' => 'required',
+            'jumlah_tim' => 'required',
+            'nama_tim' => 'required',
+            'jurusan' => 'required',
+            'material' => 'required',
+            'sekolah' => 'required'
+        ]);
 
-        // $validator = Validator::make($request->all(), [
-        //     'descripsi' => 'required|string|min:200',
-        //     'inovasi' => 'required|string|min:100',
-        //     'photo' => 'required|image|mimes:jpeg,png,jpg,gif|max:307200',
-        //     'sertifikasi_haki' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:300',
-        //     'sertifikasi_halal' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:300',
-        //     'sni' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:300',
-        // ]);
-
-        // if ($validator->fails()) {
-        //     return redirect()->back()
-        //         ->withErrors($validator)
-        //         ->withInput();
-        // }
-
-
-        $produk = new Produk();
-        $produk->nama = $request->nama;
-        $produk->kategori = $request->kategori;
-        $produk->descripsi = $request->descripsi;
-        $produk->inovasi = $request->inovasi;
-        $produk->jenis = $request->jenis;
-        $produk->start_date = $request->start_date;
-        $produk->volume = $request->volume;
-        $produk->jumlah_tim = $request->jumlah_tim;
-        $produk->user_id = $request->sekolah;
-        $produk->video_produk = $request->vidio_produk;
-        $produk->nama_tim = $request->nama_tim;
-        $produk->jurusan_id = $request->jurusan;
-        $produk->material = $request->material;
-        $produk->harga = $request->harga;
-        $produk->tahun_produksi = $request->tahun_produksi;
-        $produk->merk_dagang = $request->merk_dagang;
-
-        // Proses penyimpanan file gambar
         if ($request->hasFile('photo')) {
             $photo = $request->file('photo');
             $genNama = hexdec(uniqid()) . '.' . $photo->getClientOriginalExtension();
             Image::make($photo)->resize(300, 300)->save(public_path('upload/produk/' . $genNama));
-            $produk->photo = 'upload/produk/' . $genNama;
+            $produkPhoto = 'upload/produk/' . $genNama;
+        } else {
+            $produkPhoto = '';
         }
 
         if ($request->hasFile('sertifikasi_haki')) {
             $sertifikasi_haki = $request->file('sertifikasi_haki');
             $genNamaHaki = hexdec(uniqid()) . '.' . $sertifikasi_haki->getClientOriginalExtension();
             Image::make($sertifikasi_haki)->resize(300, 300)->save(public_path('upload/produk/' . $genNamaHaki));
-            $produk->sertifikasi_haki = 'upload/produk/' . $genNamaHaki;
+            $produkSertifikasi_haki = 'upload/produk/' . $genNamaHaki;
+        } else {
+            $produkSertifikasi_haki = '';
         }
 
         if ($request->hasFile('sertifikasi_halal')) {
             $sertifikasi_halal = $request->file('sertifikasi_halal');
             $genNamaHalal = hexdec(uniqid()) . '.' . $sertifikasi_halal->getClientOriginalExtension();
             Image::make($sertifikasi_halal)->resize(300, 300)->save(public_path('upload/produk/' . $genNamaHalal));
-            $produk->sertifikasi_halal = 'upload/produk/' . $genNamaHalal;
+            $produkSertifikasi_halal = 'upload/produk/' . $genNamaHalal;
+        } else {
+            $produkSertifikasi_halal = '';
         }
 
         if ($request->hasFile('sni')) {
             $sni = $request->file('sni');
             $genNamaSNI = hexdec(uniqid()) . '.' . $sni->getClientOriginalExtension();
             Image::make($sni)->resize(300, 300)->save(public_path('upload/produk/' . $genNamaSNI));
-            $produk->sertifikasi_sni = 'upload/produk/' . $genNamaSNI;
+            $produkSertifikasi_sni = 'upload/produk/' . $genNamaSNI;
+        } else {
+            $produkSertifikasi_sni = '';
         }
 
-        // Proses penyimpanan file tambahan
         if ($request->hasFile('file')) {
             $file = $request->file('file');
             $filename = time() . '_' . $file->getClientOriginalName();
             $file->move(public_path('upload'), $filename);
-            $produk->file = $filename;
+            $produkFile = $filename;
+        } else {
+            $produkFile = '';
         }
 
-        // Simpan data produk ke database
-        $produk->save();
 
+        Produk::insert([
+            'jenis' => $request->jenis,
+            'nama' => $request->nama,
+            'kategori' => $request->kategori,
+            'descripsi' => $request->descripsi,
+            'inovasi' => $request->inovasi,
+            'user_id' => $request->sekolah,
+            'photo' => $produkPhoto,
+            'video_produk' => $request->vidio_produk,
+            'jumlah_tim' => $request->jumlah_tim,
+            'nama_tim' => $request->nama_tim,
+            'jurusan_id' => $request->jurusan,
+            'material' => $request->material,
+            'harga' => $request->harga,
+            'tahun_produksi' => $request->tahun_produksi,
+            'start_date' => $request->start_date,
+            'merk_dagang' => $request->merk_dagang,
+            'volume' => $request->volume,
+            'file' => $produkFile,
+            'sertifikasi_haki' => $produkSertifikasi_haki,
+            'sertifikasi_halal' => $produkSertifikasi_halal,
+            'sertifikasi_sni' => $produkSertifikasi_sni,
+        ]);
 
         $notif = array(
             'message' => 'Produk Berhasil Ditambah',
@@ -216,9 +224,9 @@ class ProdukController extends Controller
             $file = $request->file('file');
             @unlink(public_path($fileFile));
             $filename = time() . '_' . $file->getClientOriginalName();
-            $file->move(public_path('upload'), $filename);
+            $file->move(public_path('upload/bmc/'), $filename);
             $produk->file = $filename;
-            $save_urlfile = 'upload/'.$filename;
+            $save_urlfile = 'upload/bmc/'.$filename;
         } else {
             $save_urlfile = $fileFile;
         }
@@ -294,7 +302,7 @@ class ProdukController extends Controller
     {
         $dId = decrypt($id);
         $file = Produk::findOrFail($dId);
-        $filePath = public_path('upload/'.$file->file);
+        $filePath = public_path('upload/bmc/'.$file->file);
 
         // Memeriksa apakah file ada
         if (file_exists($filePath)) {

@@ -97,12 +97,21 @@
                             <dl class="row">
                                 <dt class="col-sm-3">Inovasi</dt>
                                 <dd class="col-sm-9">{{ $show->inovasi }}</dd>
+                                
+                                <dt class="col-sm-3">Jenis Produk</dt>
+                                <dd class="col-sm-9">{{ $show->jenis }}</dd>
+
+                                <dt class="col-sm-3">BMC</dt>
+                                <dd class="col-sm-9"><a href="{{ route('download.bmc', encrypt($show->id)) }}">Download File BMC</a></a></dd>
 
                                 <dt class="col-sm-3">Karya Sekolah</dt>
                                 <dd class="col-sm-9">{{ $show->user->name }}</dd>
 
                                 <dt class="col-sm-3">Jurusan</dt>
                                 <dd class="col-sm-9">{{ $show->jurusan->nama_jurusan }}</dd>
+
+                                <dt class="col-sm-3">Jumlah Tim</dt>
+                                <dd class="col-sm-9">{{ $show->jumlah_tim }}</dd>
 
                                 <dt class="col-sm-3">Nama Tim</dt>
                                 <dd class="col-sm-9">{{ $show->nama_tim }}</dd>
@@ -116,8 +125,14 @@
                                 <dt class="col-sm-3">Material</dt>
                                 <dd class="col-sm-9">{{ $show->material }}</dd>
 
-                                <dt class="col-sm-3">Tahun Rilis</dt>
+                                <dt class="col-sm-3">Volume Produksi</dt>
+                                <dd class="col-sm-9">{{ $show->volume }}</dd>
+
+                                <dt class="col-sm-3">Tahun Produksi</dt>
                                 <dd class="col-sm-9">{{ $show->tahun_produksi }}</dd>
+
+                                <dt class="col-sm-3">Tanggal Mulai Usaha</dt>
+                                <dd class="col-sm-9">{{ $show->start_date }}</dd>
 
                             </dl>
                         </div>

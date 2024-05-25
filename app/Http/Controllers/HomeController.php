@@ -14,9 +14,9 @@ class HomeController extends Controller
     public function index()
     {
         $categoris = Category::all();
-        $popProduct = Produk::orderBy('created_at', 'desc')->paginate(10);
-        $newProduct = Produk::orderBy('created_at', 'desc')->paginate(7);
-        $allProduct = Produk::all();
+        $popProduct = Produk::orderBy('created_at', 'desc')->where('status', 2)->paginate(10);
+        $newProduct = Produk::orderBy('created_at', 'desc')->where('status', 2)->paginate(7);
+        $allProduct = Produk::where('status', 2)->get();
         return view('frontend.index', compact('categoris','popProduct', 'newProduct', 'allProduct'));
     }
 

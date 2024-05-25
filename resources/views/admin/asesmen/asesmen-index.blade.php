@@ -37,7 +37,7 @@
                             @foreach ($show as $index => $produk)
                                 <tr>
                                     <td width="2%">{{ $index + 1 }}</td>
-                                    <td width="3%">{{ $produk->kategori }}</td>
+                                    <td width="3%">{{ $produk->jenis . ' / ' . ucfirst($produk->kategori) }}</td>
                                     <td width="20%">
                                         <div class="d-flex align-items-center">
                                             <div class="recent-product-img">
