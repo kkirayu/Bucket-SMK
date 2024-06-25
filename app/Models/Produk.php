@@ -49,4 +49,9 @@ class Produk extends Model
     {
         return $this->hasMany(Komentar::class);
     }
+
+    public function carts()
+    {
+        return $this->hasMany(Cart::class, 'produk_id');
+    }
 }

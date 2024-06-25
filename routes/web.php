@@ -14,6 +14,7 @@ use App\Http\Controllers\Backend\CategoryController;
 use App\Http\Controllers\Backend\SubCategoryController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\Backend\KaryaController;
+use App\Http\Controllers\CartController;
 use App\Http\Controllers\JurusanController;
 use App\Http\Controllers\KomentarController;
 use App\Http\Controllers\ProdukController;
@@ -36,7 +37,8 @@ Route::get('/product/{id}', [HomeController::class, 'show'])->name('product.show
 Route::get('/home', [AdminController::class, 'adminLogin'])->name('home.index');
 Route::get('/admin/login', [AdminController::class, 'adminLogin'])->name('admin.login');
 require __DIR__.'/auth.php';
-
+Route::post('/cart', [CartController::class, 'store'])->name('cart.store');
+Route::get('/carts', [CartController::class, 'index'])->name('cart.index');
 
 // Role untuk user
 Route::middleware(['auth', 'role:user'])->group(function () {
