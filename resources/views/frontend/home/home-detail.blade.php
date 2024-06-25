@@ -1,6 +1,17 @@
 @extends('frontend.app')
 
 @section('content')
+    <script src="{{ asset('js/app.js') }}" defer></script>
+
+    <!-- Fonts -->
+    <link rel="dns-prefetch" href="//fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css?family=Nunito" rel="stylesheet">
+
+    <!-- Styles -->
+    <link href="{{ asset('css/app.css') }}" rel="stylesheet">
+
+    <!-- Bootstrap CSS (tambahkan ini) -->
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
     <div class="col-xl-10 col-lg-12 m-auto">
         <div class="product-detail accordion-detail">
             <div class="row mb-50 mt-30">
@@ -133,6 +144,87 @@
                                 <dt class="col-sm-3">Tahun Rilis</dt>
                                 <dd class="col-sm-9">{{ $product->tahun_produksi }}</dd>
                             </dl>
+                            <br>
+                            <button type="button" class="btn btn-success openModalButton"
+                                data-produk-id="{{ $product->id }}" data-toggle="modal" data-target="#cartModal">
+                                Tambahkan ke Keranjang
+                            </button>
+
+                            <!-- Modal -->
+                            <div class="modal fade" id="cartModal" tabindex="-1" role="dialog"
+                                aria-labelledby="cartModalLabel" aria-hidden="true">
+                                <div class="modal-dialog" role="document">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <h5 class="modal-title" id="cartModalLabel">Tambahkan ke Keranjang</h5>
+                                            <button type="button" class="close" data-dismiss="modal"
+                                                aria-label="Close">
+                                                <span aria-hidden="true">&times;</span>
+                                            </button>
+                                        </div>
+                                        <div class="modal-body">
+                                            <form action="{{ route('cart.store') }}" method="POST" id="cartForm">
+                                                @csrf
+                                                <input type="hidden" name="produk_id" id="produk_id" value="{{ $product->id }}">
+                                                <div class="form-group">
+                                                    <label for="kuantitas">Kuantitas</label>
+                                                    <div class="input-group">
+                                                        <input type="number" name="kuantitas" id="kuantitas" class="form-control text-center" value="1" min="1" required onchange="updateHargaLast()">
+                                                        <div class="input-group-append">
+                                                            <button type="button" class="btn btn-success" onclick="increaseQuantity()">+</button>
+                                                        </div>
+                                                        <div class="input-group-prepend">
+                                                            <button type="button" class="btn btn-outline-danger" onclick="decreaseQuantity()">-</button>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="form-group">
+                                                    <label for="harga">Harga/1PCS</label>
+                                                    <input type="number" name="harga" id="harga" class="form-control" min="1" value="{{ $product->harga }}" readonly>
+                                                </div>
+                                                {{-- <div class="form-group">
+                                                    <label for="hargalast">Total</label>
+                                                    <input type="number" id="hargalast" class="form-control" readonly placeholder="Total Harga akan ditampilkan di sini">
+                                                </div> --}}
+                                                <input type="hidden" name="total_harga" id="total_harga"> <!-- Input hidden untuk menyimpan total harga -->
+                                                <button type="submit" class="btn btn-success">Tambahkan ke Cart</button>
+                                            </form>
+                                            <script>
+                                                function decreaseQuantity() {
+                                                    var quantityInput = document.getElementById('kuantitas');
+                                                    var currentValue = parseInt(quantityInput.value);
+                                                    if (currentValue > 1) {
+                                                        quantityInput.value = currentValue - 1;
+                                                        updateHargaLast();
+                                                    }
+                                                }
+                                            
+                                                function increaseQuantity() {
+                                                    var quantityInput = document.getElementById('kuantitas');
+                                                    quantityInput.value = parseInt(quantityInput.value) + 1;
+                                                    updateHargaLast();
+                                                }
+                                            
+                                                function updateHargaLast() {
+                                                    var kuantitas = document.getElementById('kuantitas').value;
+                                                    var harga = document.getElementById('harga').value;
+                                                    var hargalast = kuantitas * harga;
+                                                    document.getElementById('hargalast').value = hargalast;
+                                                    document.getElementById('total_harga').value = hargalast; // Menyimpan total harga di input hidden
+                                                }
+                                            
+                                                // Update total harga ketika kuantitas berubah secara manual
+                                                document.getElementById('kuantitas').addEventListener('input', updateHargaLast);
+                                            
+                                                // Inisialisasi nilai total harga saat halaman dimuat
+                                                document.addEventListener('DOMContentLoaded', updateHargaLast);
+                                            </script>
+                                            
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
                         </div>
                     </div>
                     <!-- Detail Info -->
@@ -164,4 +256,104 @@
             </div>
         </div>
     </div>
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', (event) => {
+            const openModalButton = document.getElementById('openModalButton');
+            const closeModalButton = document.getElementById('closeModalButton');
+            const cartModal = document.getElementById('cartModal');
+
+            openModalButton.addEventListener('click', () => {
+                cartModal.classList.add('show');
+                cartModal.style.display = 'block';
+                cartModal.setAttribute('aria-modal', 'true');
+                cartModal.setAttribute('role', 'dialog');
+            });
+
+            closeModalButton.addEventListener('click', () => {
+                cartModal.classList.remove('show');
+                cartModal.style.display = 'none';
+                cartModal.removeAttribute('aria-modal');
+                cartModal.removeAttribute('role');
+            });
+
+            window.addEventListener('click', (event) => {
+                if (event.target === cartModal) {
+                    cartModal.classList.remove('show');
+                    cartModal.style.display = 'none';
+                    cartModal.removeAttribute('aria-modal');
+                    cartModal.removeAttribute('role');
+                }
+            });
+        });
+    </script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script>
+        $(document).ready(function() {
+            $('#kuantitas').on('input', function() {
+                var kuantitas = $(this).val();
+                var harga = $('#harga').val();
+                var total = kuantitas * harga;
+                $('#total_harga').val(total);
+            });
+        });
+    </script>
+    <script>
+        function updateHargaLast() {
+            var kuantitas = document.getElementById('kuantitas').value;
+            var harga = document.getElementById('harga').value;
+            var hargalast = kuantitas * harga;
+            document.getElementById('total_harga').value = hargalast;
+        }
+    </script>
+
+    {{-- <script>
+        document.addEventListener('DOMContentLoaded', (event) => {
+            const openModalButtons = document.querySelectorAll('.openModalButton');
+            const closeModalButton = document.getElementById('closeModalButton');
+            const cartModal = document.getElementById('cartModal');
+            const produkIdInput = document.getElementById('produk_id');
+            const kuantitasInput = document.getElementById('kuantitas');
+            const totalHargaInput = document.getElementById('total_harga');
+    
+            openModalButtons.forEach(button => {
+                button.addEventListener('click', () => {
+                    const produkId = button.getAttribute('data-produk-id');
+                    const produkHarga = button.getAttribute('data-produk-harga');
+                    produkIdInput.value = produkId;
+                    kuantitasInput.value = 1;
+                    totalHargaInput.value = produkHarga;
+    
+                    cartModal.classList.add('show');
+                    cartModal.style.display = 'block';
+                    cartModal.setAttribute('aria-modal', 'true');
+                    cartModal.setAttribute('role', 'dialog');
+    
+                    kuantitasInput.addEventListener('input', () => {
+                        const kuantitas = kuantitasInput.value;
+                        const totalHarga = produkHarga * kuantitas;
+                        totalHargaInput.value = totalHarga.toFixed(2);
+                    });
+                });
+            });
+    
+            closeModalButton.addEventListener('click', () => {
+                cartModal.classList.remove('show');
+                cartModal.style.display = 'none';
+                cartModal.removeAttribute('aria-modal');
+                cartModal.removeAttribute('role');
+            });
+    
+            window.addEventListener('click', (event) => {
+                if (event.target === cartModal) {
+                    cartModal.classList.remove('show');
+                    cartModal.style.display = 'none';
+                    cartModal.removeAttribute('aria-modal');
+                    cartModal.removeAttribute('role');
+                }
+            });
+        });
+    </script> --}}
 @endsection
